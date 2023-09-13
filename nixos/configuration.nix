@@ -99,6 +99,10 @@
   # Set the bootloader
   boot.loader.systemd-boot.enable = true;
 
+  # Create a config user group for users who can edit /nix-config
+  # Note: You will have to grant permissions to the config folder to the config group if installing on a new system
+  users.groups.config = {};
+
   # Configure system-wide user settings (groups, etc)
   users.users = {
     carson = {
@@ -111,7 +115,7 @@
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = [ "wheel", "config" ];
+      extraGroups = [ "wheel" "config" ];
     };
   };
 
