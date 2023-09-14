@@ -25,7 +25,7 @@
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
-      (import inputs.emacs-overlay)
+      #(import inputs.emacs-overlay)
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
@@ -81,15 +81,16 @@
     zsh
 
     # Emacs setup auto installing packages from use package in init.el
-    (emacsWithPackagesFromUsePackage {
-    #extraPackages = epkgs: with epkgs; [
-     # use-package
-    #];
-    config = ./emacs-init.el;
-    defaultInitFile = true;
-    package = emacs-pgtk;
-    alwaysEnsure = true;
-  })
+  #   (emacsWithPackagesFromUsePackage {
+  #   extraEmacsPackages = epkgs: with epkgs; [
+  #     use-package
+  #     gruvbox-theme
+  #   ];
+  #   config = ./emacs-init.el;
+  #   defaultInitFile = true;
+  #   package = emacs-pgtk;
+  #   alwaysEnsure = true;
+  # })
 
     # Boring utilities
     pipewire
@@ -101,16 +102,34 @@
   # Configure packages ##################################
 
   
-
-   # programs.emacs = {
-  #   enable = true;
-  #   package = pkgs.emacs29-pgtk;
-  #   extraPackages = epkgs: with epkgs; [
-  #     use-package
-  #     gruvbox-theme
-  #   ];
-  #   extraConfig = builtins.readFile ./emacs-init.el;
-  # };
+  # Configure emacs version & packages, point to init.el
+   programs.emacs = {
+    enable = true;
+    package = pkgs.emacs29-pgtk;
+    extraPackages = epkgs: with epkgs; [
+      use-package
+      gruvbox-theme
+      ledger-mode
+      nix-mode
+      which-key
+      magit
+      beacon
+      indent-guide
+      vundo
+      smart-hungry-delete
+      all-the-icons
+      aggressive-indent
+      vertico
+      orderless
+      marginalia
+      consult
+      embark
+      embark-consult
+      corfu
+      #emacs
+    ];
+    extraConfig = builtins.readFile ./emacs-init.el;
+  };
   
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
