@@ -46,16 +46,36 @@
 (use-package nix-mode)
 
 ;; Install some basic helper packages
-(use-package which-key)
+(use-package which-key
+  :init
+  (which-key-mode))
+
 (use-package magit)
-(use-package beacon)
-(use-package indent-guide)
-(use-package vundo)
 
-(use-package smart-hungry-delete)
-(use-package all-the-icons)
-(use-package aggressive-indent)
+(use-package beacon
+  :init
+  (beacon-mode))
 
+(use-package indent-guide
+  :init
+  (indent-guide-global-mode))
+
+(use-package smart-hungry-delete
+  :bind (([remap backward-delete-char-untabify] . smart-hungry-delete-backward-char)
+	 ([remap delete-backward-char] . smart-hungry-delete-backward-char)
+	 ([remap delete-char] . smart-hungry-delete-forward-char))
+  :init (smart-hungry-delete-add-default-hooks))
+
+(use-package smooth-scrolling
+  :init (smooth-scrolling-mode))
+
+(use-package all-the-icons
+  :if (display-graphic-p))
+
+(use-package aggressive-indent
+  :init
+  (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+  (add-hook 'nix-mode-hook #'aggressive-indent-mode))
 
 ;; Install vertico & friends packages #########################
 (use-package vertico
@@ -63,8 +83,6 @@
   (vertico-mode)
   (savehist-mode)
   )
-
-;; Persist history over Emacs restarts. Vertico sorts by history position.
 
 ;; Searching without order mattering
 (use-package orderless
@@ -78,8 +96,8 @@
   :bind
   (:map minibuffer-local-map
         ("M-A" . marginalia-cycle))
-  ;;(:map completion-list-mode-map
-    ;;     ("M-A" . marginalia-cycle))
+  (:map completion-list-mode-map
+         ("M-A" . marginalia-cycle))
   :init
   (marginalia-mode))
 
@@ -105,12 +123,12 @@
 ;; Better searching with consult
 (use-package consult
   :bind (;; C-c bindings in `mode-specific-map'
-
+	 	 
 	 ;; Bindings I actually use
-         ("C-s" . consult-find)	 
          ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer	 
          ("C-c i" . consult-info)
          ("M-y" . consult-yank-pop)                ;; orig. yank-pop	 
+
 	 ;; Bindings for things I may want to use someday
          ("C-c M-x" . consult-mode-command)
          ("C-c h" . consult-history)
@@ -140,36 +158,26 @@
          ("M-s L" . consult-line-multi)
          ("M-s k" . consult-keep-lines)
          ("M-s u" . consult-focus-lines)
-
+	 
   ;; Enable automatic preview at point in the *Completions* buffer.
   ;; Relevant when you use the default completion UI.
   :hook (completion-list-mode . consult-preview-at-point-mode)
+  )
 )
+
+;; Replace isearch with consult-line on C-s
+(global-set-key "\C-s" 'consult-line)
 
 (use-package embark-consult
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
-;; Corfu Auto completion example
+;; Corfu Auto completion
 (use-package corfu
   :custom
   (corfu-auto t)          ;; Enable auto completion
-  (corfu-separator ?_) ;; Set to orderless separator, if not using space
-  ;;:bind
-  ;; Another key binding can be used, such as S-SPC.
-  ;; (:map corfu-map ("M-SPC" . corfu-insert-separator))
   :init
   (global-corfu-mode))
-
-;; Corfu Manual completion example
-;; (use-package corfu
-;;   :custom
-;;   ;; (corfu-separator ?_) ;; Set to orderless separator, if not using space
-;;   :bind
-;;   ;; Configure SPC for separator insertion
-;;   (:map corfu-map ("SPC" . corfu-insert-separator))
-;;   :init
-;;   (global-corfu-mode))
 
 ;; A few more useful configurations...
 (use-package emacs
@@ -179,8 +187,8 @@
 
   ;; Emacs 28: Hide commands in M-x which do not apply to the current mode.
   ;; Corfu commands are hidden, since they are not supposed to be used via M-x.
-  ;; (setq read-extended-command-predicate
-  ;;       #'command-completion-default-include-p)
+  (setq read-extended-command-predicate
+         #'command-completion-default-include-p)
 
   ;; Enable indentation+completion using the TAB key.
   ;; `completion-at-point' is often bound to M-TAB.

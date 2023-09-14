@@ -33,9 +33,6 @@
     # Hyprland setup
     hyprland.url = "github:hyprwm/Hyprland";
 
-    # Emacs overlay
-    #emacs-overlay.url = "github:nix-community/emacs-overlay";
-
     # TODO: Add any other flake you might need
     # hardware.url = "github:nixos/nixos-hardware";
 

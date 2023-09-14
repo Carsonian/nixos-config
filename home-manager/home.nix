@@ -25,7 +25,6 @@
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
-      #(import inputs.emacs-overlay)
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
@@ -80,18 +79,6 @@
     # Shell
     zsh
 
-    # Emacs setup auto installing packages from use package in init.el
-  #   (emacsWithPackagesFromUsePackage {
-  #   extraEmacsPackages = epkgs: with epkgs; [
-  #     use-package
-  #     gruvbox-theme
-  #   ];
-  #   config = ./emacs-init.el;
-  #   defaultInitFile = true;
-  #   package = emacs-pgtk;
-  #   alwaysEnsure = true;
-  # })
-
     # Boring utilities
     pipewire
     xdg-desktop-portal
@@ -101,7 +88,6 @@
 
   # Configure packages ##################################
 
-  
   # Configure emacs version & packages, point to init.el
    programs.emacs = {
     enable = true;
@@ -115,8 +101,8 @@
       magit
       beacon
       indent-guide
-      vundo
       smart-hungry-delete
+      smooth-scrolling
       all-the-icons
       aggressive-indent
       vertico
@@ -126,7 +112,6 @@
       embark
       embark-consult
       corfu
-      #emacs
     ];
     extraConfig = builtins.readFile ./emacs-init.el;
   };
