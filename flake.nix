@@ -1,6 +1,23 @@
 {
   description = "Carson Moore's Nix Config for general home usage.";
 
+  # Setup Cachix
+  nixConfig = {
+    substituters = [
+      # Replace the official cache with a mirror located in China (not working
+      #"https://mirrors.ustc.edu.cn/nix-channels/store"
+      "https://cache.nixos.org/"
+    ];
+
+    extra-substituters = [
+      # Nix community's cache server
+      "https://nix-community.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+  };
+
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
@@ -15,6 +32,9 @@
 
     # Hyprland setup
     hyprland.url = "github:hyprwm/Hyprland";
+
+    # Emacs overlay
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
 
     # TODO: Add any other flake you might need
     # hardware.url = "github:nixos/nixos-hardware";

@@ -25,6 +25,7 @@
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
+      (import inputs.emacs-overlay)
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
@@ -79,6 +80,17 @@
     # Shell
     zsh
 
+    # Emacs setup auto installing packages from use package in init.el
+    (emacsWithPackagesFromUsePackage {
+    #extraPackages = epkgs: with epkgs; [
+     # use-package
+    #];
+    config = ./emacs-init.el;
+    defaultInitFile = true;
+    package = emacs-pgtk;
+    alwaysEnsure = true;
+  })
+
     # Boring utilities
     pipewire
     xdg-desktop-portal
@@ -88,14 +100,17 @@
 
   # Configure packages ##################################
 
-   programs.emacs = {
-    enable = true;
-    package = pkgs.emacs29-pgtk;
-    extraPackages = epkgs: with epkgs; [
-      use-package
-    ];
-    extraConfig = builtins.readFile ./emacs-init.el;
-  };
+  
+
+   # programs.emacs = {
+  #   enable = true;
+  #   package = pkgs.emacs29-pgtk;
+  #   extraPackages = epkgs: with epkgs; [
+  #     use-package
+  #     gruvbox-theme
+  #   ];
+  #   extraConfig = builtins.readFile ./emacs-init.el;
+  # };
   
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
