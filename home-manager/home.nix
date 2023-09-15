@@ -14,7 +14,7 @@
     # You can also split up your configuration and import pieces of it here:
     
     # Hyprland config 
-    ./hyprland.nix
+    #./hyprland.nix
     
     #./firefox.nix
     
@@ -96,10 +96,18 @@
 
   # Configure packages ##################################
 
-  # wayland.windowManager.hyprland = {
-  #   enable = true;
-  #   extraConfig = builtins.readFile ./hyprland.conf;
-  # };
+  wayland.windowManager.hyprland = {
+     enable = true;
+     extraConfig = builtins.readFile ./hyprland.conf;
+     settings = {
+       decoration = {
+         shadow_offset = "0 5";
+         "col.shadow" = "rgba(00000099)";
+       };
+
+       #col.inactive_border = "#${config.colorScheme.colors.base05}";
+     };
+  };
 
   programs = {
     kitty = {
@@ -110,36 +118,36 @@
         # ...
       };
     };
-  };
     
-  # Configure emacs version & packages, point to init.el
-  emacs = {
-    enable = true;
-    package = pkgs.emacs29-pgtk;
-    extraPackages = epkgs: with epkgs; [
-      use-package
-      gruvbox-theme
-      ledger-mode
-      nix-mode
-      which-key
-      magit
-      flycheck
-      sudo-edit
-      beacon
-      indent-guide
-      smart-hungry-delete
-      smooth-scrolling
-      all-the-icons
-      aggressive-indent
-      vertico
-      orderless
-      marginalia
-      consult
-      embark
-      embark-consult
-      corfu
-    ];
-    extraConfig = builtins.readFile ./emacs-init.el;
+    # Configure emacs version & packages, point to init.el
+    emacs = {
+      enable = true;
+      package = pkgs.emacs29-pgtk;
+      extraPackages = epkgs: with epkgs; [
+        use-package
+        gruvbox-theme
+        ledger-mode
+        nix-mode
+        which-key
+        magit
+        flycheck
+        sudo-edit
+        beacon
+        indent-guide
+        smart-hungry-delete
+        smooth-scrolling
+        all-the-icons
+        aggressive-indent
+        vertico
+        orderless
+        marginalia
+        consult
+        embark
+        embark-consult
+        corfu
+      ];
+      extraConfig = builtins.readFile ./emacs-init.el;
+    };
   };
 
   # Nicely reload system units when changing configs

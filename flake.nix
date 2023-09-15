@@ -31,7 +31,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Hyprland setup
-    hyprland.url = "github:hyprwm/Hyprland";
+    #hyprland.url = "github:hyprwm/Hyprland";
 
     # Nix colors 
     nix-colors.url = "github:misterio77/nix-colors";
@@ -65,8 +65,8 @@
 
       modules = [
         # Hyprland setup
-        hyprland.homeManagerModules.default
-        {wayland.windowManager.hyprland.enable = true;}
+        #hyprland.homeManagerModules.default
+        #{wayland.windowManager.hyprland.enable = true;}
         nix-colors.homeManagerModules.default
       ];
 
