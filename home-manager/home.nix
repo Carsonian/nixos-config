@@ -1,19 +1,20 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 
-{ inputs, outputs, lib, config, pkgs, ... }: {
+{ inputs, outputs, lib, config, pkgs, nix-colors, ... }: {
   # You can import other home-manager modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/home-manager):
     # outputs.homeManagerModules.example
 
     # Or modules exported from other flakes (such as nix-colors):
-    # inputs.nix-colors.homeManagerModules.default
+    inputs.nix-colors.homeManagerModules.default
     inputs.hyprland.homeManagerModules.default
 
     # You can also split up your configuration and import pieces of it here:
-    #./hyprland.nix
+    
     # Hyprland config 
+    ./hyprland.nix
     
     #./firefox.nix
     
@@ -60,6 +61,10 @@
     userEmail = "carson2477@live.com";
   };
 
+  # Set nix-colors colorscheme
+  #colorScheme = nix-colors.colorSchemes.dracula;
+  colorScheme = import ./colors-greendarkish.nix;
+
   # Add packages #############################################
 
   home.packages = with pkgs; [
@@ -91,13 +96,24 @@
 
   # Configure packages ##################################
 
-  wayland.windowManager.hyprland = {
-    enable = true;
-    extraConfig = builtins.readFile ./hyprland.conf;
+  # wayland.windowManager.hyprland = {
+  #   enable = true;
+  #   extraConfig = builtins.readFile ./hyprland.conf;
+  # };
+
+  programs = {
+    kitty = {
+      enable = true;
+      settings = {
+        foreground = "#${config.colorScheme.colors.base05}";
+        background = "#${config.colorScheme.colors.base00}";
+        # ...
+      };
+    };
   };
-  
+    
   # Configure emacs version & packages, point to init.el
-  programs.emacs = {
+  emacs = {
     enable = true;
     package = pkgs.emacs29-pgtk;
     extraPackages = epkgs: with epkgs; [
@@ -134,7 +150,6 @@
 
   # Let home manager install ans manage itself.
   programs.home-manager.enable = true;
-
 
 }
 

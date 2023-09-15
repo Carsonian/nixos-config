@@ -33,15 +33,11 @@
     # Hyprland setup
     hyprland.url = "github:hyprwm/Hyprland";
 
-    # TODO: Add any other flake you might need
-    # hardware.url = "github:nixos/nixos-hardware";
-
-    # Shameless plug: looking for a way to nixify your themes and make
-    # everything match nicely? Try nix-colors!
-    # nix-colors.url = "github:misterio77/nix-colors";
+    # Nix colors 
+    nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { self, nixpkgs, home-manager, hyprland, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, hyprland, nix-colors, ... }@inputs:
     let
       inherit (self) outputs;
       forAllSystems = nixpkgs.lib.genAttrs [
@@ -71,6 +67,7 @@
         # Hyprland setup
         hyprland.homeManagerModules.default
         {wayland.windowManager.hyprland.enable = true;}
+        nix-colors.homeManagerModules.default
       ];
 
       # Your custom packages and modifications, exported as overlays
@@ -88,7 +85,7 @@
       nixosConfigurations = {
         # FIXME replace with your hostname
         angkor = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = { inherit inputs outputs nix-colors; };
           modules = [
             # > Our main nixos configuration file <
             ./nixos/configuration.nix
