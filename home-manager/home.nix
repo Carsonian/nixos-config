@@ -1,21 +1,21 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 
-{ inputs, outputs, lib, config, pkgs, nix-colors, ... }: {
+{ inputs, outputs, lib, config, pkgs, ... }: {
   # You can import other home-manager modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/home-manager):
     # outputs.homeManagerModules.example
 
-    # Or modules exported from other flakes (such as nix-colors):
-    inputs.nix-colors.homeManagerModules.default
-    inputs.hyprland.homeManagerModules.default
+    # Or modules exported from other flakes:
+    #inputs.hyprland.homeManagerModules.default
 
     # You can also split up your configuration and import pieces of it here:
     
-    # Hyprland config 
-    #./hyprland.nix
-    
+    # Hyprland config
+    ./hyprland.nix
+
+    #TODO Firefox config 
     #./firefox.nix
     
   ];
@@ -61,17 +61,13 @@
     userEmail = "carson2477@live.com";
   };
 
-  # Set nix-colors colorscheme
-  #colorScheme = nix-colors.colorSchemes.dracula;
-  colorScheme = import ./colors-greendarkish.nix;
-
-  # Add packages #############################################
+    # Add packages #############################################
 
   home.packages = with pkgs; [
     # Add programs here to install them via home-modules
 
     # Terminal
-    kitty
+    #kitty
 
     # Programs
     firefox
@@ -96,26 +92,14 @@
 
   # Configure packages ##################################
 
-  wayland.windowManager.hyprland = {
-     enable = true;
-     extraConfig = builtins.readFile ./hyprland.conf;
-     settings = {
-       decoration = {
-         shadow_offset = "0 5";
-         "col.shadow" = "rgba(00000099)";
-       };
-
-       #col.inactive_border = "#${config.colorScheme.colors.base05}";
-     };
-  };
-
   programs = {
+    
     kitty = {
       enable = true;
       settings = {
-        foreground = "#${config.colorScheme.colors.base05}";
-        background = "#${config.colorScheme.colors.base00}";
-        # ...
+        foreground = "f4d06f";
+        background = "1e2d24";
+        confirm_os_window_close = 0;
       };
     };
     

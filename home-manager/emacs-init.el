@@ -21,6 +21,7 @@
 ;; Turn off some unneeded UI elements
 (menu-bar-mode -1)
 (tool-bar-mode -1)
+(scroll-bar-mode -1)
 
 ;; Switch to the help window when it opens
 (setq help-window-select t)
