@@ -14,9 +14,10 @@
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
     ./hyprland.nix
+    #./firefox.nix
     
   ];
-
+  
   nixpkgs = {
 
     # You can add overlays here
@@ -68,6 +69,7 @@
 
     # Programs
     firefox
+    ledger
 
     # Wayland/Hyprland stuff
     waybar
@@ -89,7 +91,7 @@
   # Configure packages ##################################
 
   # Configure emacs version & packages, point to init.el
-   programs.emacs = {
+  programs.emacs = {
     enable = true;
     package = pkgs.emacs29-pgtk;
     extraPackages = epkgs: with epkgs; [
@@ -99,6 +101,7 @@
       nix-mode
       which-key
       magit
+      flycheck
       beacon
       indent-guide
       smart-hungry-delete

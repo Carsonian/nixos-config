@@ -43,12 +43,12 @@
   ];
 
   home-manager = {
-	extraSpecialArgs = { inherit inputs outputs; };
-	users = {
-	  #Importing my home manager config
-	  carson = import ../home-manager/home.nix;
-	};
-      };
+	  extraSpecialArgs = { inherit inputs outputs; };
+	  users = {
+	    #Importing my home manager config
+	    carson = import ../home-manager/home.nix;
+	  };
+  };
 
   nixpkgs = {
     # You can add overlays here
@@ -109,7 +109,7 @@
       isNormalUser = true;
       packages = with pkgs; [
         # I use home manager to install packages so no user specific packages go here
-	#hyprland
+	      #hyprland
       ];
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect

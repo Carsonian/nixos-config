@@ -19,7 +19,7 @@
 ;;      use-package-expand-minimally t))
 
 ;; Turn off some unneeded UI elements
-(menu-bar-mode -1) 
+(menu-bar-mode -1)
 (tool-bar-mode -1)
 
 ;; Switch to the help window when it opens
@@ -51,6 +51,10 @@
   (which-key-mode))
 
 (use-package magit)
+
+(use-package flycheck
+  :init
+  (add-hook 'after-init-hook #'global-flycheck-mode))
 
 (use-package beacon
   :init
@@ -103,7 +107,7 @@
 
 (use-package embark
   :bind
-  (("C-." . embark-act)  
+  (("C-." . embark-act)
    ("C-;" . embark-dwim) 
    ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
   :init
@@ -225,3 +229,33 @@
       kept-old-versions 2)   ; and some old ones, too
 
 
+;; Setup to make C-a & C-e move to indentation first
+;;; C-a move-beginning-of-line-or-indentation
+(defun at-or-before-indentation-p ()
+  (save-excursion
+    (let ((old-point (point)))
+      (back-to-indentation)
+      (<= old-point (point)))))
+(defun move-beginning-of-line-or-indentation () (interactive)
+       "If at the begining of line go to previous line.
+ If at the indention go to begining of line.
+ Go to indention otherwise."
+       (cond ((bolp) (forward-line -1))
+             ((at-or-before-indentation-p) (move-beginning-of-line nil))
+             (t (back-to-indentation))))
+(global-set-key (kbd "C-a") #'move-beginning-of-line-or-indentation)
+
+;;; C-e move-end-of-line-or-indentation
+(defun at-or-after-indentation-p ()
+  (save-excursion
+    (let ((old-point (point)))
+      (back-to-indentation)
+      (>= old-point (point)))))
+(defun move-end-of-line-or-indentation () (interactive)
+       "If at end of line go to next line.
+If at indentation go to end of line.
+Go to indentation otherwise"
+       (cond ((eolp) (forward-line 1))
+             ((at-or-after-indentation-p) (move-end-of-line nil))
+             (t (back-to-indentation))))
+(global-set-key (kbd "C-e") #'move-end-of-line-or-indentation)
