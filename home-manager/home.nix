@@ -12,8 +12,9 @@
     inputs.hyprland.homeManagerModules.default
 
     # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
-    ./hyprland.nix
+    #./hyprland.nix
+    # Hyprland config 
+    
     #./firefox.nix
     
   ];
@@ -90,6 +91,11 @@
 
   # Configure packages ##################################
 
+  wayland.windowManager.hyprland = {
+    enable = true;
+    extraConfig = builtins.readFile ./hyprland.conf;
+  };
+  
   # Configure emacs version & packages, point to init.el
   programs.emacs = {
     enable = true;
@@ -102,6 +108,7 @@
       which-key
       magit
       flycheck
+      sudo-edit
       beacon
       indent-guide
       smart-hungry-delete
@@ -118,7 +125,7 @@
     ];
     extraConfig = builtins.readFile ./emacs-init.el;
   };
-  
+
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
@@ -128,6 +135,6 @@
   # Let home manager install ans manage itself.
   programs.home-manager.enable = true;
 
-  
+
 }
 

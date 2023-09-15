@@ -56,6 +56,10 @@
   :init
   (add-hook 'after-init-hook #'global-flycheck-mode))
 
+(use-package sudo-edit
+  :bind
+  ("C-c C-r" . sudo-edit))
+
 (use-package beacon
   :init
   (beacon-mode))
