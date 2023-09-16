@@ -14,6 +14,7 @@
     
     # Hyprland config
     ./hyprland.nix
+    ./kitty.nix
 
     #TODO Firefox config 
     #./firefox.nix
@@ -94,14 +95,14 @@
 
   programs = {
     
-    kitty = {
-      enable = true;
-      settings = {
-        foreground = "f4d06f";
-        background = "1e2d24";
-        confirm_os_window_close = 0;
-      };
-    };
+    # kitty = {
+    #   enable = true;
+    #   settings = {
+    #     foreground = "f4d06f";
+    #     background = "1e2d24";
+    #     confirm_os_window_close = 0;
+    #   };
+    # };
     
     # Configure emacs version & packages, point to init.el
     emacs = {
@@ -133,6 +134,11 @@
       extraConfig = builtins.readFile ./emacs-init.el;
     };
   };
+
+  # waybar = {
+  #   enable = true;
+  
+  # };
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
