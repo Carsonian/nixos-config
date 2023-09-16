@@ -14,6 +14,7 @@
     
     # Hyprland config
     ./hyprland.nix
+    ./waybar.nix
     ./kitty.nix
 
     #TODO Firefox config 
@@ -78,7 +79,7 @@
     ledger
 
     # Wayland/Hyprland stuff
-    waybar
+    #waybar
     #font-awesome
     wofi
     hyprpaper
@@ -127,18 +128,6 @@
       ];
       extraConfig = builtins.readFile ./emacs-init.el;
     };
-  
-    # To do, move settings to their own files (.css and waybar.nix)
-    # waybar = {
-    #       enable = true;
-    #       settings = {};
-    #       style = ''
-    #                *{
-    #     font-family: Arimo Nerd Font;
-    #     font-size: 16px;}
-    # '';
-    
-    #    };
   };
 
   # Nicely reload system units when changing configs
