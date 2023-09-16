@@ -73,15 +73,17 @@
 
     # Install nerdfonts
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-        
+    
     # Programs
     firefox
     ledger
 
     # Wayland/Hyprland stuff
-    wofi
+    #wofi
     hyprpaper
     dunst
+    light
+    mpv
     
     # Shell
     zsh
@@ -104,7 +106,7 @@
           terminal = "kitty -e";
           layer = "overlay";
           font = "JetBrains Mono Nerd Font";
-          prompt = " ";
+          prompt = " 󱎱";
         };
         colors = {
           background = "1E201FEE";
@@ -122,7 +124,7 @@
         };
       };
     };
-      
+    
     
     # Configure emacs version & packages, point to init.el
     emacs = {
@@ -164,5 +166,5 @@
   # Let home manager install ans manage itself.
   programs.home-manager.enable = true;
 
-  }
+}
 

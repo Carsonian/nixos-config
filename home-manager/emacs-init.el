@@ -36,11 +36,14 @@
 (use-package gruvbox-theme
   :config
   (load-theme 'gruvbox-dark-medium t)
-)
+  )
+
+;; Set font
+(add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font" ))
 
 ;; Org mode settings
 ;;(setq org-todo-keywords
-  ;;'((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
+;;'((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
 
 ;; Install different modes
 (use-package ledger-mode)

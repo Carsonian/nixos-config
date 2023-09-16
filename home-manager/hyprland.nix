@@ -164,7 +164,7 @@
         "$mainMod, return, exec, kitty"
         "$mainMod, F, exec, firefox"
         "$mainMod, E, exec, emacs"
-        "$mainMod, R, exec, wofi --show drun"
+        "$mainMod, R, exec, fuzzel"
         
         # Cycle focus with n & p (emacs keys) 
         "$mainMod, N, cyclenext"

@@ -5,166 +5,64 @@
     settings = {
       mainBar = {
 	      layer = "top";
-	        modules-left = ["custom/launcher" "cpu""memory" "idle_inhibitor" "hyprland/window"];
-	        modules-center = ["wlr/workspaces" "custom/waybar-media"];
-	        modules-right = ["tray" "pulseaudio" "backlight" "network" "clock" "battery" "custom/power"];
-	        pulseaudio = {
-		        tooltip = false;
-		        scroll-step = 5;
-		        format = "{icon} {volume}%";
-		        format-muted = " {volume}%";
-		        on-click ="pactl set-sink-mute @DEFAULT_SINK@ toggle";
-		        on-click-right ="gnome-control-center sound";
-		        on-click-middle ="gnome-control-center sound";
-		        format-icons = {
-			        default = ["" "" ""];
-		        };
-	        };
-	        
-	        "custom/rarr" = {
-	          format = "";
-	        };
-	        "custom/rarr#1" = {
-	          format = "";
-	        };
-	        "custom/rarr#2" = {
-	          format = "";
-	        };
-	        "custom/rarr#3" = {
-	          format = "";
-	        };
-	        
-	        "custom/larr" = {
-	          format = "";
-	        };
-	        "custom/larr#1" = {
-	          format = "";
-	        };
-	        "custom/larr#2" = {
-	          format = "";
-	        };
-	        "custom/larr#3" = {
-	          format = "";
-	        };
-	        "custom/larr#4" = {
-	          format = "";
-	        };
-	        
-	        idle_inhibitor = {
-            format = "{icon}";
-            format-icons = {
-              activated = " ";
-              deactivated = " ";
-            };
-	          on-scroll-down = "hyprctl dispatch workspace +1";
-            on-scroll-up = "hyprctl dispatch workspace -1";
-          };
+	      modules-left = ["custom/launcher" "cpu" "memory" "custom/media" "network" "tray"];
+	      modules-center = ["river/tags"];
+	      modules-right = ["custom/updates" "custom/wallpaper" "backlight" "pulseaudio" "clock"  "battery" "custom/power"];
+	      
+	      pulseaudio = {
+		      tooltip = false;
+		      scroll-step = 5;
+		      format = "{icon} {volume}%";
+		      format-muted = "{icon} {volume}%";
+		    on-click ="pactl set-sink-mute @DEFAULT_SINK@ toggle";
+		    format-icons = {
+			    default = [""  ""  ""];
+		    };
+	      };
 
-          "hyprland/window" = {
-            max-length = 29;
-            format = "什 {}";
-            on-scroll-down = "hyprctl dispatch workspace +1";
-            on-scroll-up = "hyprctl dispatch workspace -1";
-          };
-          
-          "hyprland/language" = {
-            format = " {}";
-            format-us = "us";
-            format-vi = "vi";
-            keyboard-name = "AT Translated Set 2 keyboard";
-          };
-	        
-          "wlr/workspaces" = {
-            workspace-warparound ="false";
-            on-click = "activate";
-            all-outputs = true;
-            sort-by-number = true;
-            sort-by-name = false;
-            format = "{icon}";
-            format-icons = {
-      		    "1" = " ";
-      		    "2" = " ";
-      		    "3" = " ";
-      		    "4" = "﫸 ";
-      		    "5" = "漣 ";
-      		    "6" = " ";
-      	    };
-            #format-icons = ["" "" "" "" "﫸" "漣"];
-            on-scroll-down = "hyprctl dispatch workspace +1";
-            on-scroll-up = "hyprctl dispatch workspace -1";
-            smooth-scrolling-threshold = 1;
-          };
-
-          "river/tags" = {
-		        num-tags = 6;
-          };
+        "river/tags" = {
+		      num-tags = 6;
+        };
 	        network = {
-            # interface = "wlp2*"; # (Optional) To force the use of this interface
-            # format-wifi = " {essid}";
-            format-wifi = " ";
-            format-ethernet = " {ipaddr}/{cidr}";
-            tooltip-format = " {essid} | {gwaddr}";
-            format-linked = " {ifname} (No IP)";
-            format-disconnected = "⚠ Disconnected";
-            # format-alt = "{ifname}: {ipaddr}/{cidr}";
-            format-alt = " {essid}";
-            on-click-right = "gnome-control-center wifi";
-            on-click-middle = "gnome-control-center wifi";
-          };
+		        tooltip = false;
+		        format-wifi = "  {essid}";
+		        format-ethernet = "";
+	        };
 	        backlight = {
 		        tooltip = false;
-		        # format = "盛 {}%";
-		        format = "盛 ";
-		        format-alt = "盛 {}%";
+		        format = " {}%";
 		        interval =1;
             on-scroll-up = "light -A 5";
 		        on-scroll-down = "light -U 5";
 	        };
           battery = {
             states = {
-              good = 90;
-              warning = 20;
+              good = 95;
+              warning = 30;
               critical = 20;
             };
             format = "{icon}  {capacity}%";
-            format-charging = "{icon}  {capacity}%";
-            format-plugged = "{icon}  {capacity}%";
-            format-alt = "{icon}  {time}";
-            format-icons = ["" "" "" "" ""];
-            on-click-right = "gnome-control-center power";
-            on-click-middle = "gnome-control-center power";
-            on-scroll-up = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%+";
-            on-scroll-down = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%-";
+            format-charging = " {capacity}%";
+            format-plugged = " {capacity}%";
+            format-alt = "{time} {icon}";
+            format-icons = [""  ""  ""  ""  ""];
           };
 	        tray ={
 		        icon-size =18;
 		        spacing = 10;
-		        format = "{} ";
 	        };
-          clock = {
-            format = "{: %I:%M %p   %d/%m/%Y}";
-            format-alt = "{: %r   %d/%m/%Y}";
-            on-click = "eww open --toggle calendar";
-            on-scroll-down = "hyprctl dispatch workspace +1";
-            on-scroll-up = "hyprctl dispatch workspace -1";
-            interval = 1;
-          };
-          cpu = {
-            interval = 55;
-            format = " {}%";
+            clock = {
+              format = "{: %I:%M %p   %d/%m/%Y}";
+            };
+            cpu = {
+            interval = 15;
+            format = " {}%";
             max-length = 10;
-            on-click-right = "kitty btm";
-            on-click-middle = "kitty btm";
-            on-scroll-down = "hyprctl dispatch workspace +1";
-            on-scroll-up = "hyprctl dispatch workspace -1";
-          };
+            };
           memory = {
-            interval = 5;
-            format = " {used} GiB 易 {swapUsed} GiB";
-            on-click-right = "kitty btm";
-            on-click-middle = "kitty btm";
-            on-scroll-down = "hyprctl dispatch workspace +1";
-            on-scroll-up = "hyprctl dispatch workspace -1";
+            interval = 30;
+            format = "󰍛 {}%";
+            max-length = 10;
           };
           "custom/media" = {
             interval = 30;
@@ -173,334 +71,144 @@
             max-length = 20;
             format-icons = {
               spotify = " ";
-              default = " ";
+              default = " ";
             };
             escape = true;
             exec = "$HOME/.config/system_scripts/mediaplayer.py 2> /dev/null";
             on-click = "playerctl play-pause";
           };
           "custom/launcher" ={
-            format = " ";
-            on-click = "pkill fuzzel || fuzzel --icon-theme=candy-icons fuzzel --background-color=1E201FEE --text-color=d8caacff --match-color=A8B468FF --border-width=3 --border-radius=10 --border-color=A8B370FF --selection-color=A8B468FF --selection-text-color=3E5B32FF --selection-match-color=e76c69ff --font='Cantarell'  --prompt='    '";
-            on-scroll-down = "hyprctl dispatch workspace +1";
-            on-scroll-up = "hyprctl dispatch workspace -1";
+            format = " ";
+            on-click = "fuzzel";
+            #on-click-right = "killall rofi";
           };
           "custom/power" ={
-            format = "  ";
-            on-click = "eww open --toggle system-menu";
-            on-click-middle = "hyprctl dispatch exit exit";
-            on-scroll-up = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%+";
-            on-scroll-down = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%-";
+            format = " ";
+            on-click = "bash ~/.config/rofi/leave/leave.sh";
           };
+          # "custom/updates" ={
+          #   format = "{} Update(s)";
+          #   exec = "checkupdates | wc -l";
+          #   exec-if = "[[ $(checkupdates | wc -l) != 0 ]]";
+          #   interval = 15;
+          #   on-click = "alacritty -e paru -Syu && notify-send 'The system has been updated' ";
+          # };
           "custom/wallpaper" ={
             format =" ";
             on-click = "bash ~/.config/system_scripts/pkill_bc";
-          };
-          "custom/ws#1" ={
-            format = "  ";
-            on-click = "hyprctl dispatch workspace 1";
-            on-scroll-down = "hyprctl dispatch workspace +1";
-            on-scroll-up = "hyprctl dispatch workspace -1";
-          };
-          "custom/ws#2" ={
-            format = "  ";
-            on-click = "hyprctl dispatch workspace 2";
-            on-scroll-down = "hyprctl dispatch workspace +1";
-            on-scroll-up = "hyprctl dispatch workspace -1";
-          };
-          "custom/ws#3" ={
-            format = "  ";
-            on-click = "hyprctl dispatch workspace 3";
-            on-scroll-down = "hyprctl dispatch workspace +1";
-            on-scroll-up = "hyprctl dispatch workspace -1";
-          };
-          "custom/ws#4" ={
-            format = " 﫸 ";
-            on-click = "hyprctl dispatch workspace 4";
-            on-scroll-down = "hyprctl dispatch workspace +1";
-            on-scroll-up = "hyprctl dispatch workspace -1";
-          };
-          "custom/ws#5" ={
-            format = " 﨩 ";
-            on-click = "hyprctl dispatch workspace 5";
-            on-scroll-down = "hyprctl dispatch workspace +1";
-            on-scroll-up = "hyprctl dispatch workspace -1";
-          };
-          "custom/ws#6" ={
-            format = "  ";
-            on-click = "hyprctl dispatch workspace 6";
-            on-scroll-down = "hyprctl dispatch workspace +1";
-            on-scroll-up = "hyprctl dispatch workspace -1";
-          };
-          "custom/ws#7" ={
-            format = "  ";
-            on-click = "hyprctl dispatch workspace 7";
-            on-scroll-down = "hyprctl dispatch workspace +1";
-            on-scroll-up = "hyprctl dispatch workspace -1";
-          };
-      };
-      # [    﫸  ]
-      "custom/waybar-media" = {
-        return-type = "json";
-        exec = "waybar-media.py status";
-        on-click = "waybar-media.py playpause";
-        on-scroll-up = "waybar-media.py previous";
-        on-scroll-down = "waybar-media.py next";
-        escape = true;
-      };
-
-      mpd = {
-        format = "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ";
-        format-disconnected = "Disconnected ";
-        format-stopped = "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ";
-        interval = 10;
-        consume-icons = {
-          on = " "; # Icon shows only when "consume" is on
-        };
-        random-icons = {
-          off = "<span color=\"#f53c3c\"></span> "; # Icon grayed out when "random" is off
-          on = " ";
-        };
-        repeat-icons = {
-          on = " ";
-        };
-        single-icons = {
-          on = "1 ";
-        };
-        state-icons = {
-          paused = "";
-          playing = "";
-        };
-        tooltip-format = "MPD (connected)";
-        tooltip-format-disconnected = "MPD (disconnected)";
+          };  
       };
     };
-    
+      
     style = ''
-
-/**
- Paralellogram: transform: skew(20deg);
-
-
-
-**/
 * {
-  border-radius: 10px;
-  padding: 0 0 0 0;
-  margin: 0 0 0 0;
-  font-family: "SF Mono Nerd Font";
-  /*font-family: "Ubuntu Nerd Font"; */
-	min-height: 25px;
-	font-size: 12pt;
+	border: none;
+	border-radius: 10;
+    font-family: "JetbrainsMono Nerd Font" ;
+	font-size: 15px;
+	min-height: 10px;
 }
 
-#waybar {
-  margin-left: 0;
-  margin-right: 0;
+window#waybar {
 	background: transparent;
 }
 
-#waybar.hidden {
+window#waybar.hidden {
 	opacity: 0.2;
 }
 
-#custom-launcher {
-  margin-left: 0px;
-  background-color: #1e201f;
-  color: #d8caac;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  border-radius: 12px;
-  border: 3px solid transparent;
-  padding-left: 5px;
-  padding-right: 2px;
-  
-}
-
-#clock {
-	color: #d8caac;
-	background-color: #1e201f;
-  border-radius: 12px;
-  border: 3px solid transparent;
-  margin-left: 3px;
-  margin-right: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  
-}
-
-#cpu {
-	color: #d8caac;
-	background-color: #1e201f;
-  border-radius: 12px;
-  border: 3px solid transparent;
-  margin-left: 3px;
-  margin-right: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  
-  
-}
-
-#memory {
-	color: #d8caac;
-  background-color: #1e201f;
-  border-radius: 12px;
-  border: 3px solid transparent;
-  margin-left: 3px;
-  margin-right: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  
-  
-}
-
-#idle_inhibitor {
-  color: #D8CAAC;
-  background-color: #1e201f;
-  border-radius: 12px;
-  /*border: 3px solid transparent;*/
-  margin-left: 3px;
-  margin-right: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
 #window {
-  color: #d8caac;
-  background-color: #1e201f;
-  border-radius: 12px;
-  /*border: 3px solid transparent;*/
-  margin-left: 3px;
-  margin-right: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#workspaces {
-  color: #d8caac;
-  /*background-color: rgba(30, 32, 31, 0.7);*/
-  background-color: transparent;
-  border-radius: 12px;
-  /*border: 3px solid #d8caac;*/
-  padding-left: 320px;
-  padding-right: 320px;
-    
-}
-
-#workspaces button {
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #d8caac;
-    
-  
-}
-
-#workspaces button.active {
-  color: #161320;
-  background-color: #a8b370;
-}
-
-#workspaces button:hover {
-  color: #161320;
-  
-}
-
-#workspaces button.focused {
-  color: #161320;
-  
-}
-
-#workspaces button.urgent {
-  color: #161320;
-  
-}
-
-#tray {
-	margin-left: 10px;
+	margin-top: 6px;
 	padding-left: 10px;
 	padding-right: 10px;
 	border-radius: 10px;
 	transition: none;
-	color: #d8caac;
-	background: #1E201F;
-  border-radius: 12px;
-  border: 3px solid transparent;
-  margin-left: 3px;
-  margin-right: 4px;
-	
+    color: transparent;
+	background: transparent;
 }
-#tray menu{
-  padding-left: 10px;
-	padding-right: 10px;
+#tags {
+	margin-top: 6px;
+	margin-left: 12px;
+	font-size: 4px;
+	margin-bottom: 0px;
 	border-radius: 10px;
-	color: #D8CAAC;
-	background-color: #1E201F;
-  border-radius: 12px;
-  border: 3px solid transparent;
-  margin-left: 3px;
-  margin-right: 4px;
-	
+	background: #161320;
+	transition: none;
 }
 
-
-#pulseaudio {
-	color: #d8caac;
-	background-color: #1e201f;
-  border-radius: 12px;
-  border: 3px solid transparent;
-  margin-left: 3px;
-  margin-right: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-	
-	
+#tags button {
+	transition: none;
+	color: #B5E8E0;
+	background: transparent;
+	font-size: 16px;
+	border-radius: 2px;
 }
 
-#backlight {
-	color: #d8caac;
-	background-color: #1e201f;
-  border-radius: 12px;
-  border: 3px solid transparent;
-  margin-left: 3px;
-  margin-right: 4px;
-  padding-left: 5px;
-  padding-right: 0px;
-	
-  
+#tags button.occupied {
+	transition: none;
+	color: #F28FAD;
+	background: transparent;
+	font-size: 4px;
+}
+
+#tags button.focused {
+	color: #ABE9B3;
+    border-top: 2px solid #ABE9B3;
+    border-bottom: 2px solid #ABE9B3;
+}
+
+#tags button:hover {
+	transition: none;
+	box-shadow: inherit;
+	text-shadow: inherit;
+	color: #FAE3B0;
+    border-color: #E8A2AF;
+    color: #E8A2AF;
+}
+
+#tags button.focused:hover {
+    color: #E8A2AF;
 }
 
 #network {
-	color: #d8caac;
-	background-color: #1e201f;
-  border-radius: 12px;
-  border: 3px solid transparent;
-  /*margin-left: 3px;
-  margin-right: 4px;*/
-  padding-left: 5px;
-  padding-right: 4px;
-	
-  
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	transition: none;
+	color: #161320;
+	background: #bd93f9;
+}
+
+#pulseaudio {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	transition: none;
+	color: #1A1826;
+	background: #FAE3B0;
 }
 
 #battery {
-	color: #d8caac;
-	background-color: #1e201f;
-  border-radius: 12px;
-  border: 3px solid transparent;
-  margin-left: 3px;
-  margin-right: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-	
-  
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	transition: none;
+	color: #161320;
+	background: #B5E8E0;
 }
 
 #battery.charging, #battery.plugged {
-	  color: #A8B468;
-    background-color: #1e201f;
+	color: #161320;
+    background-color: #B5E8E0;
 }
 
 #battery.critical:not(.charging) {
@@ -513,22 +221,6 @@
     animation-direction: alternate;
 }
 
-/*
-#battery.good {
-	  color: #B1E0AD;
-    background-color: #D4B7F7;
-}
-*/
-
-#custom-power {
-	color: #d8caac;
-	background-color: #1e201f;
-  border-radius: 12px;
-  border: 3px solid transparent;
-  padding-left: 1px;
-  padding-right: 5px;
-}
-
 @keyframes blink {
     to {
         background-color: #BF616A;
@@ -536,140 +228,126 @@
     }
 }
 
-
-#custom-ws{
-  
-  background-color: #f7cdec;
-  color: #161320;
+#backlight {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	transition: none;
+	color: #161320;
+	background: #F8BD96;
+}
+#clock {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	transition: none;
+	color: #161320;
+	background: #ABE9B3;
+	/*background: #1A1826;*/
 }
 
-/* Unused */
+#memory {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	margin-bottom: 0px;
+	padding-right: 10px;
+	border-radius: 10px;
+	transition: none;
+	color: #161320;
+	background: #DDB6F2;
+}
+#cpu {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	margin-bottom: 0px;
+	padding-right: 10px;
+	border-radius: 10px;
+	transition: none;
+	color: #161320;
+	background: #96CDFB;
+}
 
-#idle_inhibitor{
-	  color: #161320;
+#tray {
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	margin-bottom: 0px;
+	padding-right: 10px;
+	border-radius: 10px;
+	transition: none;
+	color: #B5E8E0;
+	background: #161320;
+}
+
+#custom-launcher {
+	font-size: 24px;
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 5px;
+	border-radius: 10px;
+	transition: none;
+    color: #89DCEB;
+    background: #161320;
+}
+
+#custom-power {
+	font-size: 20px;
+	margin-top: 6px;
+	margin-left: 8px;
+	margin-right: 8px;
+	padding-left: 10px;
+	padding-right: 5px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	transition: none;
+	color: #161320;
+	background: #F28FAD;
 }
 
 #custom-wallpaper {
-	  color: #161320;
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	transition: none;
+	color: #161320;
+	background: #C9CBFF;
 }
 
 #custom-updates {
-	  color: #161320;
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	transition: none;
+	color: #161320;
+	background: #E8A2AF;
 }
 
 #custom-media {
-	  color: #161320;
+	margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+	border-radius: 10px;
+	transition: none;
+	color: #161320;
+	background: #F2CDCD;
 }
-
-#battery.warning:not(.charging) {
-    background: #f53c3c;
-    color: white;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
-
-
-
-
-/* Hover */
-#custom-launcher:hover {
-  color: #3E5B32;
-  background-color: #A8B468;
-}
-
-#clock:hover {
-  color: #3E5B32;
-  background-color: #A8B468;
-}
-
-#cpu:hover {
-  color: #3E5B32;
-  background-color: #A8B468;
-	
-}
-
-#memory:hover {
-  color: #3E5B32;
-  background-color: #A8B468;
-	
-}
-
-#window:hover {
-  color: #3E5B32;
-  background-color: #A8B468;
-	
-}
-
-#workspaces button.active:hover {
-    color: #d8caac;
-    background-color: #e76c69;
-}
-
-#workspaces button:hover {
-  color: #3E5B32;
-  background-color: #e76c69;
-  
-}
-
-#tray:hover {
-  color: #3E5B32;
-  background-color: #A8B468;
-	
-}
-
-#pulseaudio:hover {
-  color: #3E5B32;
-  background-color: #A8B468;
-	
-}
-
-#backlight:hover {
-  color: #3E5B32;
-  background-color: #A8B468;
-	
-}
-
-#network:hover {
-  color: #3E5B32;
-  background-color: #A8B468;
-	
-}
-
-#battery:hover {
-  color: #3E5B32;
-  background-color: #A8B468;
-	
-}
-
-#battery.charging, #battery.plugged:hover {
-  color: #3E5B32;
-  background-color: #A8B468;
-	  
-}
-
-#battery.critical:not(.charging):hover {
-  color: #d8caac;
-  background-color: #e76c69;
-    
-}
-
-/*
-#battery.good {
-	  color: #B1E0AD;
-    background-color: #D4B7F7;
-}
-*/
-
-#custom-power:hover {
-  color: #3E5B32;
-  background-color: #A8B468;
-	
-}
-
         '';    
-};
+  };
 }
