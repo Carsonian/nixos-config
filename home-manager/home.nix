@@ -79,17 +79,15 @@
     ledger
 
     # Wayland/Hyprland stuff
-    #waybar
-    #font-awesome
     wofi
     hyprpaper
     dunst
-
+    
     # Shell
     zsh
 
     # Boring utilities
-    pipewire
+    #pipewire
     xdg-desktop-portal
     qt5.qtwayland
     qt6.qtwayland
@@ -98,6 +96,33 @@
   # Configure packages ##################################
 
   programs = {
+
+    fuzzel = {
+      enable = true;
+      settings = {
+        main = {
+          terminal = "kitty -e";
+          layer = "overlay";
+          font = "JetBrains Mono Nerd Font";
+          prompt = " ";
+        };
+        colors = {
+          background = "1E201FEE";
+          text = "d8caacff";
+          #icon-theme = "candy-icons fuzzel
+          match = "A8B468FF";
+          selection = "A8B468FF";
+          selection-text = "3E5B32FF";
+          selection-match = "e76c69ff";
+          border = "A8B370FF";
+        };
+        border = {
+          width = 3;
+          radius = 10;
+        };
+      };
+    };
+      
     
     # Configure emacs version & packages, point to init.el
     emacs = {
@@ -139,5 +164,5 @@
   # Let home manager install ans manage itself.
   programs.home-manager.enable = true;
 
-}
+  }
 
