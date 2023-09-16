@@ -20,7 +20,7 @@
     #./firefox.nix
     
   ];
-  
+
   nixpkgs = {
 
     # You can add overlays here
@@ -62,14 +62,17 @@
     userEmail = "carson2477@live.com";
   };
 
-    # Add packages #############################################
+  # Add packages #############################################
+
+  fonts.fontconfig.enable = true;
+  #fonts.fontconfig.defaultFonts.monospace = "JetBrainsMono Nerd Font";
 
   home.packages = with pkgs; [
     # Add programs here to install them via home-modules
 
-    # Terminal
-    #kitty
-
+    # Install nerdfonts
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+        
     # Programs
     firefox
     ledger
@@ -94,15 +97,6 @@
   # Configure packages ##################################
 
   programs = {
-    
-    # kitty = {
-    #   enable = true;
-    #   settings = {
-    #     foreground = "f4d06f";
-    #     background = "1e2d24";
-    #     confirm_os_window_close = 0;
-    #   };
-    # };
     
     # Configure emacs version & packages, point to init.el
     emacs = {
@@ -133,12 +127,19 @@
       ];
       extraConfig = builtins.readFile ./emacs-init.el;
     };
-  };
-
-  # waybar = {
-  #   enable = true;
   
-  # };
+    # To do, move settings to their own files (.css and waybar.nix)
+    # waybar = {
+    #       enable = true;
+    #       settings = {};
+    #       style = ''
+    #                *{
+    #     font-family: Arimo Nerd Font;
+    #     font-size: 16px;}
+    # '';
+    
+    #    };
+  };
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
