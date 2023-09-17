@@ -31,13 +31,12 @@
           format = "{icon}";
           format-icons = {
       		  "1" = " ";
-      		  "2" = " ";
+      		  "2" = "";
       		  "3" = " ";
-      		  "4" = "﫸 ";
-      		  "5" = "漣 ";
-      		  "6" = " ";
+      		  "4" = " ";
+      		  "5" = "󰍩 ";
+      		  "6" = "󱇿 ";
       	  };
-          #format-icons = ["" "" "" "" "﫸" "漣"];
           smooth-scrolling-threshold = 1;
         };
 
@@ -151,7 +150,7 @@ window#waybar.hidden {
 	transition: none;
 	color: #161320;
 	/*background: #bd93f9;*/
-  background: #${config.colorScheme.colors.base05}
+  background: #${config.colorScheme.colors.base0D}
 }
 
 #pulseaudio {
@@ -163,7 +162,7 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
 	color: #1A1826;
-	background: #FAE3B0;
+	background: #${config.colorScheme.colors.base0B};
 }
 
 #battery {
@@ -176,16 +175,16 @@ window#waybar.hidden {
 	transition: none;
 	color: #161320;
 	/*background: #B5E8E0;*/
-  background: #ABE983;
-}
+  background: #FAE3B0;
+ }
 
 #battery.charging, #battery.plugged {
 	color: #161320;
-    background-color: #B5E8E0;
+    background-color: #ABE983;
 }
 
 #battery.critical:not(.charging) {
-    background-color: #B5E8E0;
+    background-color: #EF6F6C;
     color: #161320;
     animation-name: blink;
     animation-duration: 0.5s;
@@ -210,7 +209,7 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
 	color: #161320;
-	background: #F8BD96;
+	background: #${config.colorScheme.colors.base0A};
 }
 #clock {
 	margin-top: 6px;
@@ -221,7 +220,7 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
 	color: #161320;
-	background: #ABE9B3;
+	background: #${config.colorScheme.colors.base0C};
 	/*background: #1A1826;*/
 }
 
@@ -234,7 +233,7 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
 	color: #161320;
-	background: #DDB6F2;
+	background: #${config.colorScheme.colors.base0E};
 }
 #cpu {
 	margin-top: 6px;
@@ -245,7 +244,7 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
 	color: #161320;
-	background: #96CDFB;
+	background: #${config.colorScheme.colors.base0F};
 }
 
 #tray {
@@ -269,7 +268,7 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
     /*color: #89DCEB;*/
-  color: #89DCEB;
+  color: #${config.colorScheme.colors.base04};
     background: #161320;
 }
 
@@ -284,7 +283,7 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
 	color: #161320;
-	background: #F28FAD;
+	background: #${config.colorScheme.colors.base0D};
 }
 
 #custom-wallpaper {
@@ -296,7 +295,7 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
 	color: #161320;
-	background: #C9CBFF;
+	background: #${config.colorScheme.colors.base09};
 }
 
 #custom-media {
@@ -308,7 +307,7 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
 	color: #161320;
-	background: #F2CDCD;
+	background: #${config.colorScheme.colors.base07};
 }
 
 #workspaces {
@@ -327,7 +326,7 @@ window#waybar.hidden {
   /*padding-bottom: 3px;*/
   /*padding-left: 5px;*/
   /*padding-right: 5px;*/
-  color: #363638;
+  color: #${config.colorScheme.colors.base00};
   margin-top: 6px;
 	margin-left: 8px;
 	padding-left: 5px;
@@ -336,16 +335,18 @@ window#waybar.hidden {
 }
 
 #workspaces button.active {
-  color: #161320;
-  background-color: #a8b370;
+  color: #${config.colorScheme.colors.base00};
+  background-color: #${config.colorScheme.colors.base04};
 }
 
 #workspaces button:hover {
-  color: #161320;
+  color: #${config.colorScheme.colors.base05};
+  /*background-color: #${config.colorScheme.colors.base05};*/
 }
 
 #workspaces button.focused {
-  color: #161320;
+  color: #${config.colorScheme.colors.base06};
+  /*background-color: #${config.colorScheme.colors.base04};*/
 }
 
 #workspaces button.urgent {

@@ -18,14 +18,16 @@
     ./waybar.nix
     ./kitty.nix
 
+    # Import custom colorscheme
+    ./colors.nix
+
     #TODO Firefox config 
     #./firefox.nix
     
   ];
 
-  # Set colorscheme
-  colorScheme = import ./colors.nix;
-  #colorScheme = nix-colors.colorSchemes.dracula;
+  # Or choose a premade colorscheme (lame)
+  #colorScheme = inputs.nix-colors.colorSchemes.dracula;
 
   nixpkgs = {
 
