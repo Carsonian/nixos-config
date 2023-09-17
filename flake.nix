@@ -30,8 +30,9 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Hyprland setup
-    #hyprland.url = "github:hyprwm/Hyprland";
+    # nix-colors
+    nix-colors.url = "github:misterio77/nix-colors";
+
   };
 
   outputs = { self, nixpkgs, home-manager, hyprland, ... }@inputs:

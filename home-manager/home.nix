@@ -9,6 +9,7 @@
 
     # Or modules exported from other flakes:
     #inputs.hyprland.homeManagerModules.default
+    inputs.nix-colors.homeManagerModules.default
 
     # You can also split up your configuration and import pieces of it here:
     
@@ -21,6 +22,10 @@
     #./firefox.nix
     
   ];
+
+  # Set colorscheme
+  colorScheme = import ./colors.nix;
+  #colorScheme = nix-colors.colorSchemes.dracula;
 
   nixpkgs = {
 
@@ -84,13 +89,12 @@
     dunst
     light
     mpv
-        
+    
     # Boring utilities
     #pipewire
     xdg-desktop-portal
     qt5.qtwayland
     qt6.qtwayland
-    libappindicator-gtk3
   ];
 
   # Configure packages ##################################
@@ -116,27 +120,27 @@
         plugins = [ "git" ];
         theme = "alanpeabody";
       };
-      };
+    };
 
-      fuzzel = {
-        enable = true;
-        settings = {
-          main = {
-            terminal = "kitty -e";
-            layer = "overlay";
-            font = "JetBrains Mono Nerd Font";
-            prompt = "󱎱 ";
-          };
-          colors = {
-            background = "1E201FEE";
-            text = "d8caacff";
-            #icon-theme = "candy-icons fuzzel
-            match = "A8B468FF";
-            selection = "A8B468FF";
-            selection-text = "3E5B32FF";
-            selection-match = "e76c69ff";
-            border = "A8B370FF";
-          };
+    fuzzel = {
+      enable = true;
+      settings = {
+        main = {
+          terminal = "kitty -e";
+          layer = "overlay";
+          font = "JetBrains Mono Nerd Font";
+          prompt = " 󱎱  ";
+        };
+        colors = {
+          background = "1E201FEE";
+          text = "d8caacff";
+          #icon-theme = "hicolor";
+          match = "A8B468FF";
+          selection = "A8B468FF";
+          selection-text = "3E5B32FF";
+          selection-match = "e76c69ff";
+          border = "A8B370FF";
+        };
         border = {
           width = 3;
           radius = 10;

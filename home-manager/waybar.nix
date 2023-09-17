@@ -1,3 +1,5 @@
+{ pkgs, config, ...}:
+
 {
   # My waybar config via nix settings
   programs.waybar = {
@@ -5,9 +7,9 @@
     settings = {
       mainBar = {
 	      layer = "top";
- 	      modules-left = ["custom/launcher" "cpu" "memory" "custom/media" "network" "tray" "hyprland/window"];
+ 	      modules-left = ["custom/launcher" "cpu" "memory" "network" "custom/media"];
 	      modules-center = ["wlr/workspaces"];
-	      modules-right = ["custom/updates" "custom/wallpaper" "backlight" "pulseaudio" "clock"  "battery" "custom/power"];
+	      modules-right = [ "custom/wallpaper" "backlight" "pulseaudio" "clock"  "battery" "custom/power"];
 	      
 	      pulseaudio = {
 		      tooltip = false;
@@ -19,18 +21,6 @@
 			      default = [""  ""  ""];
 		      };
 	      };
-
-        "hyprland/window" = {
-          max-length = 29;
-          format = "󰌪 {}";
-        };
-        
-        "hyprland/language" = {
-          format = " {}";
-          format-us = "us";
-          format-vi = "vi";
-          keyboard-name = "AT Translated Set 2 keyboard";
-        };
 	      
         "wlr/workspaces" = {
           workspace-warparound ="false";
@@ -81,6 +71,7 @@
 	      tray ={
 		      icon-size =18;
 		      spacing = 10;
+          format = "{} ";
 	      };
         clock = {
           format = "{: %I:%M %p   %d/%m/%Y}";
@@ -111,30 +102,22 @@
         "custom/launcher" ={
           format = " ";
           on-click = "fuzzel";
-          #on-click-right = "killall rofi";
         };
         "custom/power" ={
           format = " ";
           on-click = "bash ~/.config/rofi/leave/leave.sh";
         };
-        # "custom/updates" ={
-        #   format = "{} Update(s)";
-        #   exec = "checkupdates | wc -l";
-        #   exec-if = "[[ $(checkupdates | wc -l) != 0 ]]";
-        #   interval = 15;
-        #   on-click = "alacritty -e paru -Syu && notify-send 'The system has been updated' ";
-        # };
         "custom/wallpaper" ={
           format =" ";
           on-click = "bash ~/.config/system_scripts/pkill_bc";
         };  
       };
     };
-      
+    
     style = ''
 * {
 	border: none;
-	border-radius: 10;
+	border-radius: 10px;
     font-family: "JetbrainsMono Nerd Font" ;
 	font-size: 15px;
 	min-height: 10px;
@@ -157,49 +140,6 @@ window#waybar.hidden {
     color: transparent;
 	background: transparent;
 }
-#tags {
-	margin-top: 6px;
-	margin-left: 12px;
-	font-size: 4px;
-	margin-bottom: 0px;
-	border-radius: 10px;
-	background: #161320;
-	transition: none;
-}
-
-#tags button {
-	transition: none;
-	color: #B5E8E0;
-	background: transparent;
-	font-size: 16px;
-	border-radius: 2px;
-}
-
-#tags button.occupied {
-	transition: none;
-	color: #F28FAD;
-	background: transparent;
-	font-size: 4px;
-}
-
-#tags button.focused {
-	color: #ABE9B3;
-    border-top: 2px solid #ABE9B3;
-    border-bottom: 2px solid #ABE9B3;
-}
-
-#tags button:hover {
-	transition: none;
-	box-shadow: inherit;
-	text-shadow: inherit;
-	color: #FAE3B0;
-    border-color: #E8A2AF;
-    color: #E8A2AF;
-}
-
-#tags button.focused:hover {
-    color: #E8A2AF;
-}
 
 #network {
 	margin-top: 6px;
@@ -210,7 +150,8 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
 	color: #161320;
-	background: #bd93f9;
+	/*background: #bd93f9;*/
+  background: #${config.colorScheme.colors.base05}
 }
 
 #pulseaudio {
@@ -234,7 +175,8 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
 	color: #161320;
-	background: #B5E8E0;
+	/*background: #B5E8E0;*/
+  background: #ABE983;
 }
 
 #battery.charging, #battery.plugged {
@@ -326,7 +268,8 @@ window#waybar.hidden {
 	padding-right: 5px;
 	border-radius: 10px;
 	transition: none;
-    color: #89DCEB;
+    /*color: #89DCEB;*/
+  color: #89DCEB;
     background: #161320;
 }
 
@@ -356,18 +299,6 @@ window#waybar.hidden {
 	background: #C9CBFF;
 }
 
-#custom-updates {
-	margin-top: 6px;
-	margin-left: 8px;
-	padding-left: 10px;
-	padding-right: 10px;
-	margin-bottom: 0px;
-	border-radius: 10px;
-	transition: none;
-	color: #161320;
-	background: #E8A2AF;
-}
-
 #custom-media {
 	margin-top: 6px;
 	margin-left: 8px;
@@ -378,6 +309,47 @@ window#waybar.hidden {
 	transition: none;
 	color: #161320;
 	background: #F2CDCD;
+}
+
+#workspaces {
+  color: #d8caac;
+  /*background-color: rgba(30, 32, 31, 0.7);*/
+  background-color: transparent;
+  border-radius: 10px;
+  /*border: 3px solid #d8caac;*/
+  padding-left: 320px;
+  padding-right: 320px;
+    
+}
+
+#workspaces button {
+  /*padding-top: 3px;*/
+  /*padding-bottom: 3px;*/
+  /*padding-left: 5px;*/
+  /*padding-right: 5px;*/
+  color: #363638;
+  margin-top: 6px;
+	margin-left: 8px;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-bottom: 0px;
+}
+
+#workspaces button.active {
+  color: #161320;
+  background-color: #a8b370;
+}
+
+#workspaces button:hover {
+  color: #161320;
+}
+
+#workspaces button.focused {
+  color: #161320;
+}
+
+#workspaces button.urgent {
+  color: #161320;
 }
         '';    
   };

@@ -9,7 +9,7 @@
       monitor= "eDP-1,1920x1080@60,0x0,1";
 
       # Execute apps at launch
-      exec-once = "waybar & hyprpaper &";
+      exec-once = "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY in hyrpland.conf & waybar & hyprpaper &";
 
       # Source a file (multi-file configs)
       # source = ~/.config/hypr/myColors.conf
