@@ -5,8 +5,8 @@
     settings = {
       mainBar = {
 	      layer = "top";
-	      modules-left = ["custom/launcher" "cpu" "memory" "custom/media" "network" "tray"];
-	      modules-center = ["river/tags"];
+ 	      modules-left = ["custom/launcher" "cpu" "memory" "custom/media" "network" "tray" "hyprland/window"];
+	      modules-center = ["wlr/workspaces"];
 	      modules-right = ["custom/updates" "custom/wallpaper" "backlight" "pulseaudio" "clock"  "battery" "custom/power"];
 	      
 	      pulseaudio = {
@@ -14,89 +14,120 @@
 		      scroll-step = 5;
 		      format = "{icon} {volume}%";
 		      format-muted = "{icon} {volume}%";
-		    on-click ="pactl set-sink-mute @DEFAULT_SINK@ toggle";
-		    format-icons = {
-			    default = [""  ""  ""];
-		    };
+		      on-click ="pactl set-sink-mute @DEFAULT_SINK@ toggle";
+		      format-icons = {
+			      default = [""  ""  ""];
+		      };
 	      };
+
+        "hyprland/window" = {
+          max-length = 29;
+          format = "󰌪 {}";
+        };
+        
+        "hyprland/language" = {
+          format = " {}";
+          format-us = "us";
+          format-vi = "vi";
+          keyboard-name = "AT Translated Set 2 keyboard";
+        };
+	      
+        "wlr/workspaces" = {
+          workspace-warparound ="false";
+          on-click = "activate";
+          all-outputs = true;
+          sort-by-number = true;
+          sort-by-name = false;
+          format = "{icon}";
+          format-icons = {
+      		  "1" = " ";
+      		  "2" = " ";
+      		  "3" = " ";
+      		  "4" = "﫸 ";
+      		  "5" = "漣 ";
+      		  "6" = " ";
+      	  };
+          #format-icons = ["" "" "" "" "﫸" "漣"];
+          smooth-scrolling-threshold = 1;
+        };
 
         "river/tags" = {
 		      num-tags = 6;
         };
-	        network = {
-		        tooltip = false;
-		        format-wifi = "  {essid}";
-		        format-ethernet = "";
-	        };
-	        backlight = {
-		        tooltip = false;
-		        format = " {}%";
-		        interval =1;
-            on-scroll-up = "light -A 5";
-		        on-scroll-down = "light -U 5";
-	        };
-          battery = {
-            states = {
-              good = 95;
-              warning = 30;
-              critical = 20;
-            };
-            format = "{icon}  {capacity}%";
-            format-charging = " {capacity}%";
-            format-plugged = " {capacity}%";
-            format-alt = "{time} {icon}";
-            format-icons = [""  ""  ""  ""  ""];
+	      network = {
+		      tooltip = false;
+		      format-wifi = "  {essid}";
+		      format-ethernet = "";
+	      };
+	      backlight = {
+		      tooltip = false;
+		      format = " {}%";
+		      interval =1;
+          on-scroll-up = "light -A 5";
+		      on-scroll-down = "light -U 5";
+	      };
+        battery = {
+          states = {
+            good = 95;
+            warning = 30;
+            critical = 20;
           };
-	        tray ={
-		        icon-size =18;
-		        spacing = 10;
-	        };
-            clock = {
-              format = "{: %I:%M %p   %d/%m/%Y}";
-            };
-            cpu = {
-            interval = 15;
-            format = " {}%";
-            max-length = 10;
-            };
-          memory = {
-            interval = 30;
-            format = "󰍛 {}%";
-            max-length = 10;
+          format = "{icon}  {capacity}%";
+          format-charging = " {capacity}%";
+          format-plugged = " {capacity}%";
+          format-alt = "{time} {icon}";
+          format-icons = [""  ""  ""  ""  ""];
+        };
+	      tray ={
+		      icon-size =18;
+		      spacing = 10;
+	      };
+        clock = {
+          format = "{: %I:%M %p   %d/%m/%Y}";
+        };
+        cpu = {
+          interval = 15;
+          format = " {}%";
+          max-length = 10;
+        };
+        memory = {
+          interval = 30;
+          format = "󰍛 {}%";
+          max-length = 10;
+        };
+        "custom/media" = {
+          interval = 30;
+          format = "{icon} {}";
+          return-type = "json";
+          max-length = 20;
+          format-icons = {
+            spotify = " ";
+            default = " ";
           };
-          "custom/media" = {
-            interval = 30;
-            format = "{icon} {}";
-            return-type = "json";
-            max-length = 20;
-            format-icons = {
-              spotify = " ";
-              default = " ";
-            };
-            escape = true;
-            exec = "$HOME/.config/system_scripts/mediaplayer.py 2> /dev/null";
-            on-click = "playerctl play-pause";
-          };
-          "custom/launcher" ={
-            format = " ";
-            on-click = "fuzzel";
-            #on-click-right = "killall rofi";
-          };
-          "custom/power" ={
-            format = " ";
-            on-click = "bash ~/.config/rofi/leave/leave.sh";
-          };
-          # "custom/updates" ={
-          #   format = "{} Update(s)";
-          #   exec = "checkupdates | wc -l";
-          #   exec-if = "[[ $(checkupdates | wc -l) != 0 ]]";
-          #   interval = 15;
-          #   on-click = "alacritty -e paru -Syu && notify-send 'The system has been updated' ";
-          # };
-          "custom/wallpaper" ={
-            format =" ";
-            on-click = "bash ~/.config/system_scripts/pkill_bc";
-          };  
+          escape = true;
+          exec = "$HOME/.config/system_scripts/mediaplayer.py 2> /dev/null";
+          on-click = "playerctl play-pause";
+        };
+        "custom/launcher" ={
+          format = " ";
+          on-click = "fuzzel";
+          #on-click-right = "killall rofi";
+        };
+        "custom/power" ={
+          format = " ";
+          on-click = "bash ~/.config/rofi/leave/leave.sh";
+        };
+        # "custom/updates" ={
+        #   format = "{} Update(s)";
+        #   exec = "checkupdates | wc -l";
+        #   exec-if = "[[ $(checkupdates | wc -l) != 0 ]]";
+        #   interval = 15;
+        #   on-click = "alacritty -e paru -Syu && notify-send 'The system has been updated' ";
+        # };
+        "custom/wallpaper" ={
+          format =" ";
+          on-click = "bash ~/.config/system_scripts/pkill_bc";
+        };  
       };
     };
       

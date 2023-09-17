@@ -84,40 +84,59 @@
     dunst
     light
     mpv
-    
-    # Shell
-    zsh
-
+        
     # Boring utilities
     #pipewire
     xdg-desktop-portal
     qt5.qtwayland
     qt6.qtwayland
+    libappindicator-gtk3
   ];
 
   # Configure packages ##################################
 
   programs = {
 
-    fuzzel = {
+    zsh = {
       enable = true;
-      settings = {
-        main = {
-          terminal = "kitty -e";
-          layer = "overlay";
-          font = "JetBrains Mono Nerd Font";
-          prompt = " 󱎱";
-        };
-        colors = {
-          background = "1E201FEE";
-          text = "d8caacff";
-          #icon-theme = "candy-icons fuzzel
-          match = "A8B468FF";
-          selection = "A8B468FF";
-          selection-text = "3E5B32FF";
-          selection-match = "e76c69ff";
-          border = "A8B370FF";
-        };
+      syntaxHighlighting.enable = true;
+      shellAliases = {
+        ll = "ls -l";
+        update = "(cd /nix-config && sudo nixos-rebuild switch --flake .#angkor)";
+        test = "(cd /nix-config && sudo nixos-rebuild test --flake .#angkor)";
+      };
+      # History settings
+      history = {
+        size = 10000;
+        path = "${config.xdg.dataHome}/zsh/history";
+      };
+      # zsh plugin manager
+      oh-my-zsh = {
+        enable = true;
+        plugins = [ "git" ];
+        theme = "alanpeabody";
+      };
+      };
+
+      fuzzel = {
+        enable = true;
+        settings = {
+          main = {
+            terminal = "kitty -e";
+            layer = "overlay";
+            font = "JetBrains Mono Nerd Font";
+            prompt = "󱎱 ";
+          };
+          colors = {
+            background = "1E201FEE";
+            text = "d8caacff";
+            #icon-theme = "candy-icons fuzzel
+            match = "A8B468FF";
+            selection = "A8B468FF";
+            selection-text = "3E5B32FF";
+            selection-match = "e76c69ff";
+            border = "A8B370FF";
+          };
         border = {
           width = 3;
           radius = 10;

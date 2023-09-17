@@ -105,13 +105,16 @@
 
   hardware.pulseaudio.enable = true;
 
+  # Set default shell to zsh
+  programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
+
   # Configure system-wide user settings (groups, etc)
   users.users = {
     carson = {
       isNormalUser = true;
       packages = with pkgs; [
         # I use home manager to install packages so no user specific packages go here
-	      #hyprland
       ];
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
