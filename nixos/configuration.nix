@@ -3,11 +3,43 @@
 
 { inputs, outputs, lib, config, pkgs, ... }: {
 
+  # Setup sudo
+  security.sudo = {
+    enable = true;
+    extraConfig = "Defaults:carson timestamp_timeout=30";
+    extraRules = [{
+      commands = [
+        {
+          command = "${pkgs.systemd}/bin/systemctl suspend";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "${pkgs.systemd}/bin/reboot";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "${pkgs.systemd}/bin/poweroff";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+      groups = [ "wheel" ];
+    }];
+  };
+  
   # Install systemwide packages
   environment.systemPackages = with pkgs; [
     networkmanager
     git
+    bluez
   ];
+
+  #Configure pipewire
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    jack.enable = true;
+    pulse.enable = true;
+  };
 
   # Set keyboard layout
   services.xserver = {
@@ -103,7 +135,7 @@
   # Note: You will have to grant permissions to the config folder to the config group if installing on a new system
   users.groups.config = {};
 
-  hardware.pulseaudio.enable = true;
+  #hardware.pulseaudio.enable = true;
 
   # Set default shell to zsh
   programs.zsh.enable = true;
@@ -120,7 +152,7 @@
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = [ "wheel" "config" "audio" "video" ];
+      extraGroups = [ "wheel" "config" "audio" "video" "input" "lp"];
     };
   };
 

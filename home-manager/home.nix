@@ -89,14 +89,17 @@
     #wofi
     hyprpaper
     dunst
-    light
-    mpv
+
+    # Music player, visualizer, controller
+    cmus
+    cava
+    playerctl
     
     # Boring utilities
-    #pipewire
     xdg-desktop-portal
     qt5.qtwayland
     qt6.qtwayland
+    brightnessctl
   ];
 
   # Configure packages ##################################

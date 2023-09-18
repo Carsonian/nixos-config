@@ -13,9 +13,9 @@
 	      
 	      pulseaudio = {
 		      tooltip = false;
-		      scroll-step = 5;
+		      scroll-step = 1;
 		      format = "{icon} {volume}%";
-		      format-muted = "{icon} {volume}%";
+		      format-muted = "󰝟 {volume}%";
 		      on-click ="pactl set-sink-mute @DEFAULT_SINK@ toggle";
 		      format-icons = {
 			      default = [""  ""  ""];
@@ -31,11 +31,11 @@
           format = "{icon}";
           format-icons = {
       		  "1" = " ";
-      		  "2" = "";
+      		  "2" = " ";
       		  "3" = " ";
-      		  "4" = " ";
-      		  "5" = "󰍩 ";
-      		  "6" = "󱇿 ";
+      		  "4" = " ";
+      		  "5" = " ";
+      		  "6" = "󰍩 ";
       	  };
           smooth-scrolling-threshold = 1;
         };
@@ -44,16 +44,18 @@
 		      num-tags = 6;
         };
 	      network = {
-		      tooltip = false;
-		      format-wifi = "  {essid}";
-		      format-ethernet = "";
+		      tooltip = true;
+		      format-wifi = " ";
+		      format-ethernet = "󰈁";
+          tooltip-format = "  {essid}";
+          format-disconnected = " ";
 	      };
 	      backlight = {
 		      tooltip = false;
 		      format = " {}%";
 		      interval =1;
-          on-scroll-up = "light -A 5";
-		      on-scroll-down = "light -U 5";
+          on-scroll-up = "brightnessctl s +1%";
+		      on-scroll-down = "brightnessctl s 1%-";
 	      };
         battery = {
           states = {
@@ -77,13 +79,15 @@
         };
         cpu = {
           interval = 15;
-          format = " {}%";
-          max-length = 10;
+          format = " {usage}%";
+          min-length = 5;
+          max-length = 5;
         };
         memory = {
           interval = 30;
           format = "󰍛 {}%";
-          max-length = 10;
+          min-length = 5;
+          max-length = 5;
         };
         "custom/media" = {
           interval = 30;
