@@ -30,16 +30,22 @@
   environment.systemPackages = with pkgs; [
     networkmanager
     git
-    bluez
   ];
 
   #Configure pipewire
+  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
-    alsa.enable = true;
-    jack.enable = true;
+    audio.enable = true;
+    wireplumber.enable = true;
+    #alsa.enable = true;
+    #jack.enable = true;
     pulse.enable = true;
   };
+
+  hardware.bluetooth.enable = true;
+  
+  programs.git.enable = true;
 
   # Set keyboard layout
   services.xserver = {
@@ -134,8 +140,6 @@
   # Create a config user group for users who can edit /nix-config
   # Note: You will have to grant permissions to the config folder to the config group if installing on a new system
   users.groups.config = {};
-
-  #hardware.pulseaudio.enable = true;
 
   # Set default shell to zsh
   programs.zsh.enable = true;

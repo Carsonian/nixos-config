@@ -9,18 +9,18 @@
 	      layer = "top";
  	      modules-left = ["custom/launcher" "cpu" "memory" "network" "custom/media"];
 	      modules-center = ["wlr/workspaces"];
-	      modules-right = [ "custom/wallpaper" "backlight" "pulseaudio" "clock"  "battery" "custom/power"];
-	      
-	      pulseaudio = {
-		      tooltip = false;
+	      modules-right = [ "custom/wallpaper" "backlight" "wireplumber" "clock"  "battery" "custom/power"];
+
+        wireplumber = {
+	        tooltip = false;
 		      scroll-step = 1;
 		      format = "{icon} {volume}%";
 		      format-muted = "󰝟 {volume}%";
-		      on-click ="pactl set-sink-mute @DEFAULT_SINK@ toggle";
+		      on-click ="pamixer -t";
 		      format-icons = {
 			      default = [""  ""  ""];
 		      };
-	      };
+        };
 	      
         "wlr/workspaces" = {
           workspace-warparound ="false";
@@ -32,8 +32,8 @@
           format-icons = {
       		  "1" = " ";
       		  "2" = " ";
-      		  "3" = " ";
-      		  "4" = " ";
+      		  "3" = " ";
+      		  "4" = " ";
       		  "5" = " ";
       		  "6" = "󰍩 ";
       	  };
@@ -103,6 +103,7 @@
           on-click = "playerctl play-pause";
         };
         "custom/launcher" ={
+          tooltip = false;
           format = " ";
           on-click = "fuzzel";
         };
@@ -157,7 +158,7 @@ window#waybar.hidden {
   background: #${config.colorScheme.colors.base0D}
 }
 
-#pulseaudio {
+#wireplumber {
 	margin-top: 6px;
 	margin-left: 8px;
 	padding-left: 10px;

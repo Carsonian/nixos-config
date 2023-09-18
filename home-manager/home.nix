@@ -63,13 +63,6 @@
     homeDirectory = "/home/carson";
   };
 
-  # Basic git configuration
-  programs.git = {
-    enable = true;
-    userName = "carsonian";
-    userEmail = "carson2477@live.com";
-  };
-
   # Add packages #############################################
 
   fonts.fontconfig.enable = true;
@@ -100,12 +93,19 @@
     qt5.qtwayland
     qt6.qtwayland
     brightnessctl
+    pamixer
   ];
 
   # Configure packages ##################################
 
   programs = {
 
+    git = {
+      enable = true;
+      userName = "Carson Moore";
+      userEmail = "carson2477@live.com";
+    };
+      
     zsh = {
       enable = true;
       syntaxHighlighting.enable = true;
