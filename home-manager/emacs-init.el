@@ -41,6 +41,11 @@
 ;; Set font
 (add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font" ))
 
+(use-package nerd-icons
+  :custom
+  (nerd-icons-font-family "JetBrainsMono Nerd Font")
+  )
+
 ;; Org mode settings
 ;;(setq org-todo-keywords
 ;;'((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
@@ -81,13 +86,19 @@
 (use-package smooth-scrolling
   :init (smooth-scrolling-mode))
 
-(use-package all-the-icons
-  :if (display-graphic-p))
+;; (use-package all-the-icons
+;;   :if (display-graphic-p))
 
 (use-package aggressive-indent
   :init
   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
   (add-hook 'nix-mode-hook #'aggressive-indent-mode))
+
+;; Swiper for better searching with C-s
+(use-package swiper
+  :bind
+  (("\C-s" . swiper))
+  )
 
 ;; Install vertico & friends packages #########################
 (use-package vertico
@@ -104,116 +115,36 @@
 
 ;; Rich annotations in the minibuffer
 (use-package marginalia
-  ;; Bind `marginalia-cycle' locally in the minibuffer and *Completions* buffer
-  :bind
-  (:map minibuffer-local-map
-        ("M-A" . marginalia-cycle))
-  (:map completion-list-mode-map
-         ("M-A" . marginalia-cycle))
   :init
   (marginalia-mode))
 
+;; Use C-. to perform actions on things
 (use-package embark
   :bind
   (("C-." . embark-act)
-   ("C-;" . embark-dwim) 
-   ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
-  :init
-  ;; Optionally replace the key help with a completing-read interface
-  (setq prefix-help-command #'embark-prefix-help-command)
-
-  ;; Show the Embark target at point via Eldoc.  You may adjust the Eldoc
-  ;; strategy, if you want to see the documentation from multiple providers.
-  (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
-  :config
-  ;; Hide the mode line of the Embark live/completions buffers
-  (add-to-list 'display-buffer-alist
-               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
-                 nil
-                 (window-parameters (mode-line-format . none)))))
-
-;; Better searching with consult
-(use-package consult
-  :bind (;; C-c bindings in `mode-specific-map'
-	 	 
-	 ;; Bindings I actually use
-         ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer	 
-         ("C-c i" . consult-info)
-         ("M-y" . consult-yank-pop)                ;; orig. yank-pop	 
-
-	 ;; Bindings for things I may want to use someday
-         ("C-c M-x" . consult-mode-command)
-         ("C-c h" . consult-history)
-         ([remap Info-search] . consult-info)
-
-         ;; C-x bindings in `ctl-x-map'
-         ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
-         ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
-         ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
-         ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
-         ;; Other custom bindings
-
-         ;; M-g bindings in `goto-map'
-         ("M-g e" . consult-compile-error)
-         ("M-g f" . consult-flymake) 
-         ("M-g g" . consult-goto-line)
-         ("M-g M-g" . consult-goto-line)
-         ("M-g o" . consult-outline)
-
-         ;; M-s bindings in `search-map'
-	 ;; Bindings for searching in all files
-         ("M-s D" . consult-locate)
-         ("M-s g" . consult-grep)
-         ("M-s G" . consult-git-grep)
-         ("M-s r" . consult-ripgrep)
-         ("M-s l" . consult-line)
-         ("M-s L" . consult-line-multi)
-         ("M-s k" . consult-keep-lines)
-         ("M-s u" . consult-focus-lines)
-	 
-  ;; Enable automatic preview at point in the *Completions* buffer.
-  ;; Relevant when you use the default completion UI.
-  :hook (completion-list-mode . consult-preview-at-point-mode)
+   :config
+   ;; Hide the mode line of the Embark live/completions buffers
+   (add-to-list 'display-buffer-alist
+		'("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                  nil
+                  (window-parameters (mode-line-format . none)))))
   )
-)
-
-;; Replace isearch with consult-line on C-s
-(global-set-key "\C-s" 'consult-line)
-
-(use-package embark-consult
-  :hook
-  (embark-collect-mode . consult-preview-at-point-mode))
-
-;; Corfu Auto completion
-(use-package corfu
-  :custom
-  (corfu-auto t)          ;; Enable auto completion
-  :init
-  (global-corfu-mode))
 
 ;; A few more useful configurations...
-(use-package emacs
-  :init
-  ;; TAB cycle if there are only few candidates
-  (setq completion-cycle-threshold 3)
+  (use-package emacs
+    :init
+    ;; Emacs 28: Hide commands in M-x which do not apply to the current mode.
+    (setq read-extended-command-predicate
+          #'command-completion-default-include-p)
 
-  ;; Emacs 28: Hide commands in M-x which do not apply to the current mode.
-  ;; Corfu commands are hidden, since they are not supposed to be used via M-x.
-  (setq read-extended-command-predicate
-         #'command-completion-default-include-p)
+    ;; Do not allow the cursor in the minibuffer prompt
+    (setq minibuffer-prompt-properties
+          '(read-only t cursor-intangible t face minibuffer-prompt))
+    (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
 
-  ;; Enable indentation+completion using the TAB key.
-  ;; `completion-at-point' is often bound to M-TAB.
-  (setq tab-always-indent 'complete)
-
-  ;; Do not allow the cursor in the minibuffer prompt
-  (setq minibuffer-prompt-properties
-        '(read-only t cursor-intangible t face minibuffer-prompt))
-  (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
-
-  ;; Enable recursive minibuffers
-  (setq enable-recursive-minibuffers t)
-)
+    ;; Enable recursive minibuffers
+    (setq enable-recursive-minibuffers t)
+    )
 
 ;; End of  vertico & friends packages #########################
 

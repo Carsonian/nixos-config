@@ -9,7 +9,7 @@
 	      layer = "top";
  	      modules-left = ["custom/launcher" "cpu" "memory" "network" "custom/media"];
 	      modules-center = ["wlr/workspaces"];
-	      modules-right = [ "custom/wallpaper" "backlight" "wireplumber" "clock"  "battery" "custom/power"];
+	      modules-right = [ "wireplumber" "backlight" "clock"  "battery" "custom/power"];
 
         wireplumber = {
 	        tooltip = false;
@@ -31,11 +31,11 @@
           format = "{icon}";
           format-icons = {
       		  "1" = " ";
-      		  "2" = " ";
+      		  "2" = " ";
       		  "3" = " ";
       		  "4" = " ";
       		  "5" = " ";
-      		  "6" = "󰍩 ";
+      		  "6" = " ";
       	  };
           smooth-scrolling-threshold = 1;
         };
@@ -108,8 +108,9 @@
           on-click = "fuzzel";
         };
         "custom/power" ={
-          format = " ";
-          on-click = "bash ~/.config/rofi/leave/leave.sh";
+          tooltip = false;
+          format = "⏻ ";
+          on-click = "shutdown now";
         };
         "custom/wallpaper" ={
           format =" ";
@@ -288,7 +289,7 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
 	color: #161320;
-	background: #${config.colorScheme.colors.base0D};
+	background: #${config.colorScheme.colors.base09};
 }
 
 #custom-wallpaper {

@@ -69,7 +69,7 @@
   #fonts.fontconfig.defaultFonts.monospace = "JetBrainsMono Nerd Font";
 
   home.packages = with pkgs; [
-    # Add programs here to install them via home-modules
+    # Add programs here to install them for the user
 
     # Install nerdfonts
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
@@ -77,6 +77,7 @@
     # Programs
     firefox
     ledger
+    libreoffice
 
     # Wayland/Hyprland stuff
     #wofi
@@ -105,7 +106,7 @@
       userName = "Carson Moore";
       userEmail = "carson2477@live.com";
     };
-      
+    
     zsh = {
       enable = true;
       syntaxHighlighting.enable = true;
@@ -134,17 +135,17 @@
           terminal = "kitty -e";
           layer = "overlay";
           font = "JetBrains Mono Nerd Font";
-          prompt = " 󱎱  ";
+          prompt = "'󱎱 '";
         };
         colors = {
-          background = "1E201FEE";
-          text = "d8caacff";
+          background = "${config.colorScheme.colors.base00}80";
+          text = "${config.colorScheme.colors.base07}E6";
           #icon-theme = "hicolor";
-          match = "A8B468FF";
-          selection = "A8B468FF";
-          selection-text = "3E5B32FF";
-          selection-match = "e76c69ff";
-          border = "A8B370FF";
+          match = "${config.colorScheme.colors.base09}E6";
+          selection = "${config.colorScheme.colors.base04}CC";
+          selection-text = "${config.colorScheme.colors.base01}FF";
+          selection-match = "${config.colorScheme.colors.base08}E6";
+          border = "${config.colorScheme.colors.base03}E6";
         };
         border = {
           width = 3;
@@ -161,6 +162,7 @@
       extraPackages = epkgs: with epkgs; [
         use-package
         gruvbox-theme
+        nerd-icons
         ledger-mode
         nix-mode
         which-key
@@ -180,9 +182,23 @@
         embark
         embark-consult
         corfu
+        ivy
+        swiper
       ];
       extraConfig = builtins.readFile ./emacs-init.el;
     };
+  };
+
+  # Configure mpd
+  services.mpd = {
+    enable = true;
+    musicDirectory = "~/Music";
+    extraConfig = ''
+    audio_output {
+      type "pipewire"
+      name "My PipeWire Output"
+    }
+    '';
   };
 
   # Nicely reload system units when changing configs
