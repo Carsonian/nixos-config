@@ -1,3 +1,5 @@
+{ pkgs, config, ...}:
+
 {
   # My waybar config via nix settings
   programs.waybar = {
@@ -11,131 +13,132 @@
           "margin-bottom" = 0;
           "margin-left" = 0;
           "margin-right" = 0;
-          "modules-left" = ["custom/launcher" "hyprland/workspaces" "custom/playerctl" "custom/playerlabel"];
-          "modules-center" = ["cpu" "memory" "disk"];
-          "modules-right" = ["tray" "custom/randwall" "network" "pulseaudio" "clock"];
-          // Modules configuration
+          "modules-left" = ["custom/launcher" "cpu" "memory" "disk" "custom/playerctl" "custom/playerlabel"];
+          "modules-center" = [ "hyprland/workspaces"];
+          "modules-right" = ["tray" "wireplumber" "backlight" "network" "clock"];
+          
+          # Modules configuration
 	          "clock" = {
 		          "format" = " {:%H:%M}";
 		        "tooltip" = "true";
         	  "tooltip-format" = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-        	  "format-alt" = " {:%d/%m}"
+        	  "format-alt" = " {:%d/%m}";
 	          };
 	        
-
-	        "hyprland/workspaces" = {
-            "active-only" = false;
-            "all-outputs" = true;
-            "disable-scroll" = false;
-            "on-scroll-up" = "hyprctl dispatch workspace -1";
-            "on-scroll-down" = "hyprctl dispatch workspace +1";
-		        "format" = "{icon}";
-		        "on-click" = "activate";
-		        "format-icons" = {
-              //			"1" = "一";
-              //			"2" = "二";
-              //			"3" = "三";
-              //			"4" = "四";
-              //			"5" = "五";
-			        "urgent" = "";
-			        "active" = "";
-			        "default" = "󰧞";
-              "sort-by-number" = true
+	          "hyprland/workspaces" = {
+              "active-only" = false;
+              "all-outputs" = true;
+              "disable-scroll" = true;
+		          "format" = "{icon}";
+		          "on-click" = "activate";
+		          "format-icons" = {
+			          "urgent" = "";
+			          "active" = "";
+			          "default" = "󰧞";
+                "sort-by-number" = true;
+              };
             };
-          };
 
-          "custom/playerctl" = {
-            "format" = "{icon}";
-            "return-type" = "json";
-            "max-length" = 64;
-            "exec" = "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F";
-            "on-click-middle" = "playerctl play-pause";
-            "on-click" = "playerctl previous";
-            "on-click-right" = "playerctl next";
-            "format-icons" = {
-              "Playing": "<span foreground='#E5B9C6'>󰒮 󰐌 󰒭</span>";
-              "Paused": "<span foreground='#928374'>󰒮 󰏥 󰒭</span>"
+            "custom/playerctl" = {
+              "format" = "{icon}";
+              "return-type" = "json";
+              "max-length" = 64;
+              "exec" = "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F";
+              "on-click-middle" = "playerctl play-pause";
+              "on-click" = "playerctl previous";
+              "on-click-right" = "playerctl next";
+              "format-icons" = {
+                "Playing" = "<span foreground='#E5B9C6'>󰒮 󰐌 󰒭</span>";
+                "Paused" = "<span foreground='#928374'>󰒮 󰏥 󰒭</span>";
+              };
             };
-          };
 
-          "custom/playerlabel" = {
-            "format" = "<span>{}</span>";
-            "return-type" = "json";
-            "max-length" = 48;
-            "exec" = "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F";
-            "on-click-middle" = "playerctl play-pause";
-            "on-click" = "playerctl previous";
-            "on-click-right" = "playerctl next";
-            "format-icons" = {
-              "Playing": "<span foreground='#E5B9C6'>󰒮 󰐌 󰒭</span>";
-              "Paused": "<span foreground='#928374'>󰒮 󰏥 󰒭</span>"
+            "custom/playerlabel" = {
+              "format" = "<span>{}</span>";
+              "return-type" = "json";
+              "max-length" = 48;
+              "exec" = "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F";
+              "on-click-middle" = "playerctl play-pause";
+              "on-click" = "playerctl previous";
+              "on-click-right" = "playerctl next";
+              "format-icons" = {
+                "Playing" = "<span foreground='#E5B9C6'>󰒮 󰐌 󰒭</span>";
+                "Paused" = "<span foreground='#928374'>󰒮 󰏥 󰒭</span>";
+              };
             };
-          };
 
-	        "battery" = {
-            "states" = {
-              "good" = 95;
-              "warning" = 30;
-              "critical" = 15
+
+            battery = {
+              states = {
+                good = 95;
+                warning = 30;
+                critical = 15;
+              };
+              format = "{icon}  {capacity}%";
+              format-charging = " {capacity}%";
+              format-plugged = " {capacity}%";
+              format-alt = "{time} {icon}";
+              format-icons = [""  ""  ""  ""  ""];
             };
-            "format" ="{icon}  {capacity}%";
-            "format-charging" = "{capacity}% ";
-            "format-plugged" = "{capacity}% ";
-            "format-alt" = "{icon} {time}";
-            // "format-good" = ""; // An empty format will hide the module
-                                  // "format-full" = "";
-            "format-icons" = ["" "" "" "" ""]
-	        };
+            
+            "memory" = {
+              "format" = "󰍛 {}%";
+              "format-alt" = "󰍛 {used}/{total} GiB";
+              "interval" = 5;
+            };
 
-          "memory" = {
-            "format" = "󰍛 {}%";
-            "format-alt" = "󰍛 {used}/{total} GiB";
-            "interval" = 5
-          };
+            "cpu" = {
+              "format" = " {usage}%";
+              "format-alt" = " {avg_frequency} GHz";
+              "interval" = 5;
+            };
 
-          "cpu" = {
-            "format" = "󰻠 {usage}%";
-            "format-alt" = "󰻠 {avg_frequency} GHz";
-            "interval" = 5
-          };
+            "disk" = {
+              "format" = "󰋊 {}%";
+              "format-alt" = "󰋊 {used}/{total} GiB";
+              "interval" = 5;
+              "path" = "/";
+            };
 
-          "disk" = {
-            "format" = "󰋊 {}%";
-            "format-alt" = "󰋊 {used}/{total} GiB";
-            "interval" = 5;
-            "path" = "/mnt/Datos"
-          };
-	        
-	        "network" = {
-        	  "format-wifi" = "󰤨";
-        	  "format-ethernet" = " {ifname} = Aesthetic";
-        	  "format-linked" = " {ifname} (No IP)";
-        	  "format-disconnected" = "󰤭";
-        	  "format-alt" = " {ifname} = {ipaddr}/{cidr}";
-            "tooltip-format" = "{essid}";
-            "on-click-right" = "nm-connection-editor"
-	        };
+            network = {
+		          tooltip = true;
+		          format-wifi = " ";
+		          format-ethernet = "󰈁";
+              tooltip-format = "  {essid}";
+              format-disconnected = " ";
+	          };
 
-	        "tray" = {
-		        "icon-size" = 16;
-		        "spacing" = 5
-	        };
+	          "tray" = {
+		          "icon-size" = 16;
+		          "spacing" = 5;
+	          };
 
-	        "backlight" = {
-            // "device" = "acpi_video1";
-	          "format" = "{icon} {percent}%";
-            "format-icons" = ["" "" "" "" "" "" "" "" ""];
-            //	"on-scroll-up" =;
-            //	"on-scroll-down" =;
-	        };
+            wireplumber = {
+	            tooltip = false;
+		          scroll-step = 1;
+		          format = "{icon} {volume}%";
+		          format-muted = "󰝟 {volume}%";
+		          on-click ="wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+		          format-icons = {
+			          default = [""  ""  ""];
+		          };
+            };
 
-          "custom/launcher" ={
-            tooltip = false;
-            format = " ";
-            on-click = "fuzzel";
-          };
-      }
-      }
+            backlight = {
+		          tooltip = false;
+		          format = "{icon} {}%";
+              "format-icons" = ["" "" "" "" "" "" "" "" ""];
+		          interval =1;
+              on-scroll-up = "brightnessctl s +1%";
+		          on-scroll-down = "brightnessctl s 1%-";
+	          };
+
+            "custom/launcher" ={
+              tooltip = false;
+              format = " ";
+              on-click = "fuzzel";
+            };
+      };
     };
     
     style = ''
@@ -149,13 +152,13 @@
 }
 
 window#waybar {
-    background: rgba(30, 30, 46, 0.5);
-    border-bottom: 1px solid #282828;
+    background: #${config.colorScheme.colors.base01};
+    border-bottom: 1px solid #${config.colorScheme.colors.base00};
     color: #f4d9e1
 }
 
 #workspaces {
-	background: #282828;
+	background: #${config.colorScheme.colors.base03};
 	margin: 5px 5px 5px 5px;
   padding: 0px 5px 0px 5px;
 	border-radius: 16px;
@@ -332,5 +335,5 @@ window#waybar {
 }
 
         '';    
-};
+  };
 }
