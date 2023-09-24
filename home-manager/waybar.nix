@@ -8,7 +8,7 @@
       mainBar = {
 	      layer = "top";
  	      modules-left = ["custom/launcher" "cpu" "memory" "network" "custom/media"];
-	      modules-center = ["river/tags"];
+	      modules-center = ["wlr/workspaces"];
         # "wlr/workspaces"
 	      modules-right = [ "wireplumber" "backlight" "clock"  "battery" "custom/power"];
 

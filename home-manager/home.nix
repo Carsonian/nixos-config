@@ -15,8 +15,9 @@
     
     # Hyprland config
     ./hyprland.nix
-    ./waybar.nix
-    #./waybar-new.nix
+    #./waybar.nix
+    #./waybar-match.nix
+    ./waybar-new.nix
     ./kitty.nix
 
     # Import custom colorscheme
@@ -33,9 +34,10 @@
   #colorScheme = inputs.nix-colors.colorSchemes.woodland;
   #colorScheme = inputs.nix-colors.colorSchemes.atlas;
   #colorScheme = inputs.nix-colors.colorSchemes.material;
-  #colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-medium;
+  #colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-hard;
   #colorScheme = inputs.nix-colors.colorSchemes.onedark;
   colorScheme = inputs.nix-colors.colorSchemes.silk-dark;
+  #colorScheme = inputs.nix-colors.colorSchemes.brushtrees-dark;
   
   nixpkgs = {
 
@@ -86,6 +88,7 @@
     firefox
     ledger
     libreoffice
+    neofetch
 
     # Wayland/Hyprland stuff
     #wofi

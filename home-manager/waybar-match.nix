@@ -150,7 +150,7 @@ window#waybar.hidden {
 	transition: none;
 	color: #161320;
 	/*background: #bd93f9;*/
-  background: #${config.colorScheme.colors.base03}
+  background: #${config.colorScheme.colors.base05}
 }
 
 #wireplumber {
@@ -162,7 +162,7 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
 	color: #1A1826;
-	background: #${config.colorScheme.colors.base03};
+	background: #${config.colorScheme.colors.base05};
 }
 
 #battery {
@@ -209,7 +209,7 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
 	color: #161320;
-	background: #${config.colorScheme.colors.base03};
+	background: #${config.colorScheme.colors.base05};
 }
 #clock {
 	margin-top: 6px;
@@ -220,7 +220,7 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
 	color: #161320;
-	background: #${config.colorScheme.colors.base04};
+	background: #${config.colorScheme.colors.base06};
 	/*background: #1A1826;*/
 }
 
@@ -307,7 +307,7 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
 	color: #161320;
-	background: #${config.colorScheme.colors.base03};
+	background: #${config.colorScheme.colors.base05};
 }
 
 #workspaces {

@@ -19,10 +19,10 @@
           
           # Modules configuration
 	          "clock" = {
-		          "format" = " {:%H:%M}";
+		          "format" = "  {:%H:%M}";
 		        "tooltip" = "true";
         	  "tooltip-format" = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-        	  "format-alt" = " {:%d/%m}";
+        	  "format-alt" = "  {:%d/%m}";
 	          };
 	        
 	          "hyprland/workspaces" = {
@@ -32,10 +32,15 @@
 		          "format" = "{icon}";
 		          "on-click" = "activate";
 		          "format-icons" = {
+                "1" = "󰧞";
+                "2" = "󰧞";
 			          "urgent" = "";
 			          "active" = "";
 			          "default" = "󰧞";
                 "sort-by-number" = true;
+              };
+              "persistent-workspaces" = {
+                "*" = 2; # 2 workspaces by default on every monitor
               };
             };
 
@@ -74,11 +79,11 @@
                 warning = 30;
                 critical = 15;
               };
-              format = "{icon}  {capacity}%";
-              format-charging = " {capacity}%";
-              format-plugged = " {capacity}%";
+              format = "{icon} {capacity}%";
+              format-charging = "{capacity}%  ";
+              format-plugged = "{capacity}%  ";
               format-alt = "{time} {icon}";
-              format-icons = [""  ""  ""  ""  ""];
+              format-icons = [" "  " "  " "  " "  " "];
             };
             
             "memory" = {
@@ -104,7 +109,7 @@
 		          tooltip = true;
 		          format-wifi = " ";
 		          format-ethernet = "󰈁";
-              tooltip-format = "  {essid}";
+              tooltip-format = "   {essid}";
               format-disconnected = " ";
 	          };
 
@@ -116,8 +121,8 @@
             wireplumber = {
 	            tooltip = false;
 		          scroll-step = 1;
-		          format = "{icon} {volume}%";
-		          format-muted = "󰝟 {volume}%";
+		          format = "{icon}  {volume}%";
+		          format-muted = "󰝟  {volume}%";
 		          on-click ="wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
 		          format-icons = {
 			          default = [""  ""  ""];
@@ -151,7 +156,6 @@
     min-height: 0;
     }
 
-# Settings for transparent bar background
 window#waybar {
     background: rgba(30, 30, 46, 0.5);
     border-bottom: 1px solid #282828;
@@ -159,7 +163,7 @@ window#waybar {
 }
 
 #workspaces {
-	background: #${config.colorScheme.colors.base02};
+	background: #${config.colorScheme.colors.base01};
 	margin: 5px 5px 5px 5px;
   padding: 0px 5px 0px 5px;
 	border-radius: 16px;
@@ -168,24 +172,19 @@ window#waybar {
   font-style: normal;
 }
 #workspaces button {
+    color: #${config.colorScheme.colors.base06};
     padding: 0px 5px;
     border-radius: 16px;
     color: #928374;
 }
 
 #workspaces button.active {
-    color: #f4d9e1;
+    color: #${config.colorScheme.colors.base09};
     background-color: transparent;
     border-radius: 16px;
 }
 
-#workspaces button:hover {
-	background-color: #E6B9C6;
-	color: black;
-	border-radius: 16px;
-}
-
-#custom-date, #clock, #battery, #network, #custom-launcher {
+#custom-date, #clock, #battery, #network #wireplumber {
 	background: transparent;
 	padding: 5px 5px 5px 5px;
 	margin: 5px 5px 5px 5px;
@@ -217,8 +216,9 @@ window#waybar {
 }
 
 #clock {
-    color: #E6B9C6;
+    color: #${config.colorScheme.colors.base06};
     background-color: #282828;
+    font-size: 15px;
     border-radius: 0px 0px 0px 24px;
     padding-left: 13px;
     padding-right: 15px;
@@ -230,39 +230,48 @@ window#waybar {
     /*border-left: solid 1px #282738;*/
 }
 
-
 #battery {
     color: #9ece6a;
+    font-size: 15px;
 }
 
 #battery.charging {
     color: #9ece6a;
+    font-size: 15px;
 }
 
 #battery.warning:not(.charging) {
     background-color: #f7768e;
     color: #24283b;
+    font-size: 15px;
     border-radius: 5px 5px 5px 5px;
 }
 
+#wireplumber {
+    color: #${config.colorScheme.colors.base06};
+    font-size: 15px;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
 #backlight {
-    background-color: #24283b;
-    color: #db4b4b;
-    border-radius: 0px 0px 0px 0px;
-    margin: 5px;
-    margin-left: 0px;
-    margin-right: 0px;
-    padding: 0px 0px;
+    color: #${config.colorScheme.colors.base06};
+    font-size: 15px;
+    margin-left: 6px;
+    margin-right: 6px;
 }
 
 #network {
-    color: #f4d9e1;
+    color: #${config.colorScheme.colors.base06};
+    font-size: 15px;
     border-radius: 8px;
-    margin-right: 5px;
+    margin-left: 6px;
+    margin-right: 6px;
 }
 
 #custom-playerctl {
 	background: #282828;
+  color: #${config.colorScheme.colors.base06};
 	padding-left: 15px;
   padding-right: 14px;
 	border-radius: 16px;
@@ -273,11 +282,12 @@ window#waybar {
   margin-left: 0px;
   font-weight: normal;
   font-style: normal;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 #custom-playerlabel {
     background: transparent;
+    color: #${config.colorScheme.colors.base06};
     padding-left: 10px;
     padding-right: 15px;
     border-radius: 16px;
@@ -302,9 +312,20 @@ window#waybar {
     font-style: normal;
 }
 
+#custom-launcher
+{
+    background-color: #282828;
+    font-size: 24px;
+    color: #${config.colorScheme.colors.base0B};
+    border-radius: 0px 24px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    padding: 0 20px 0 13px;
+    font-weight: bold;
+}
+
 #cpu {
     background-color: #282828;
-    /*color: #FABD2D;*/
+    color: #${config.colorScheme.colors.base06};
     border-radius: 16px;
     margin: 5px;
     margin-left: 5px;
@@ -315,7 +336,7 @@ window#waybar {
 
 #memory {
     background-color: #282828;
-    /*color: #83A598;*/
+    color: #${config.colorScheme.colors.base06};
     border-radius: 16px;
     margin: 5px;
     margin-left: 5px;
@@ -326,7 +347,7 @@ window#waybar {
 
 #disk {
     background-color: #282828;
-    /*color: #8EC07C;*/
+    color: #${config.colorScheme.colors.base06};
     border-radius: 16px;
     margin: 5px;
     margin-left: 5px;
