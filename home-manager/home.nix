@@ -15,8 +15,8 @@
     
     # Hyprland config
     ./hyprland.nix
-    #./waybar.nix
-    ./waybar-new.nix
+    ./waybar.nix
+    #./waybar-new.nix
     ./kitty.nix
 
     # Import custom colorscheme

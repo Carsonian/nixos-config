@@ -15,7 +15,7 @@
           "margin-right" = 0;
           "modules-left" = ["custom/launcher" "cpu" "memory" "disk" "custom/playerctl" "custom/playerlabel"];
           "modules-center" = [ "hyprland/workspaces"];
-          "modules-right" = ["tray" "wireplumber" "backlight" "network" "clock"];
+          "modules-right" = ["tray" "wireplumber" "backlight" "network" "battery" "clock"];
           
           # Modules configuration
 	          "clock" = {
@@ -149,16 +149,17 @@
     font-size: 14px;
     font-style: normal;
     min-height: 0;
-}
+    }
 
+# Settings for transparent bar background
 window#waybar {
-    background: #${config.colorScheme.colors.base01};
-    border-bottom: 1px solid #${config.colorScheme.colors.base00};
+    background: rgba(30, 30, 46, 0.5);
+    border-bottom: 1px solid #282828;
     color: #f4d9e1
 }
 
 #workspaces {
-	background: #${config.colorScheme.colors.base03};
+	background: #${config.colorScheme.colors.base02};
 	margin: 5px 5px 5px 5px;
   padding: 0px 5px 0px 5px;
 	border-radius: 16px;

@@ -150,7 +150,7 @@ window#waybar.hidden {
 	transition: none;
 	color: #161320;
 	/*background: #bd93f9;*/
-  background: #${config.colorScheme.colors.base0D}
+  background: #${config.colorScheme.colors.base03}
 }
 
 #wireplumber {
@@ -162,7 +162,7 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
 	color: #1A1826;
-	background: #${config.colorScheme.colors.base0B};
+	background: #${config.colorScheme.colors.base03};
 }
 
 #battery {
@@ -209,7 +209,7 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
 	color: #161320;
-	background: #${config.colorScheme.colors.base0A};
+	background: #${config.colorScheme.colors.base03};
 }
 #clock {
 	margin-top: 6px;
@@ -220,7 +220,7 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
 	color: #161320;
-	background: #${config.colorScheme.colors.base0C};
+	background: #${config.colorScheme.colors.base04};
 	/*background: #1A1826;*/
 }
 
@@ -233,7 +233,7 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
 	color: #161320;
-	background: #${config.colorScheme.colors.base0E};
+	background: #${config.colorScheme.colors.base05};
 }
 #cpu {
 	margin-top: 6px;
@@ -244,7 +244,7 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
 	color: #161320;
-	background: #${config.colorScheme.colors.base0F};
+	background: #${config.colorScheme.colors.base05};
 }
 
 #tray {
@@ -268,7 +268,7 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
     /*color: #89DCEB;*/
-  color: #${config.colorScheme.colors.base04};
+  color: #${config.colorScheme.colors.base05};
     background: #161320;
 }
 
@@ -283,7 +283,7 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
 	color: #161320;
-	background: #${config.colorScheme.colors.base09};
+	background: #${config.colorScheme.colors.base0F};
 }
 
 #custom-wallpaper {
@@ -307,41 +307,36 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
 	color: #161320;
-	background: #${config.colorScheme.colors.base05};
+	background: #${config.colorScheme.colors.base03};
 }
 
 #workspaces {
-  color: #d8caac;
-  /*background-color: rgba(30, 32, 31, 0.7);*/
-  background-color: transparent;
-  border-radius: 10px;
-  /*border: 3px solid #d8caac;*/
-  padding-left: 320px;
-  padding-right: 320px;
-    
+	background: #${config.colorScheme.colors.base02};
+	margin: 5px 5px 5px 5px;
+  padding: 0px 5px 0px 5px;
+	border-radius: 16px;
+  border: solid 0px #f4d9e1;
+  font-weight: normal;
+  font-style: normal;
 }
-
 #workspaces button {
-  /*padding-top: 3px;*/
-  /*padding-bottom: 3px;*/
-  /*padding-left: 5px;*/
-  /*padding-right: 5px;*/
-  color: #${config.colorScheme.colors.base00};
-  margin-top: 6px;
-	margin-left: 8px;
-	padding-left: 5px;
-	padding-right: 5px;
-	margin-bottom: 0px;
+    padding: 0px 5px;
+    border-radius: 16px;
+    color: #${config.colorScheme.colors.base00};
 }
 
 #workspaces button.active {
-  color: #${config.colorScheme.colors.base00};
-  background-color: #${config.colorScheme.colors.base04};
+    color: #f4d9e1;
+    color: #${config.colorScheme.colors.base07};
+    background-color: transparent;
+    border-radius: 16px;
 }
 
 #workspaces button:hover {
-  color: #${config.colorScheme.colors.base05};
-  /*background-color: #${config.colorScheme.colors.base05};*/
+	background-color: #E6B9C6;
+  background-color: #${config.colorScheme.colors.base05};
+	color: black;
+	border-radius: 16px;
 }
 
 #workspaces button.focused {
