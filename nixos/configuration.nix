@@ -43,8 +43,27 @@
     #pulse.enable = true;
   };
 
-  hardware.bluetooth.enable = true;
   
+  # Configure mpd
+  # services.mpd = {
+  #   enable = true;
+  #   musicDirectory = "/home/carson/Music";
+  #   extraConfig = ''
+  #   audio_output {
+  #     type "pipewire"
+  #     name "My PipeWire Output"
+  #   }
+  #   '';
+  # };  
+
+  # #services.mpd.user = "carson";
+  # systemd.services.mpd.environment = {
+  #   # https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/609
+  #   XDG_RUNTIME_DIR = "/run/user/1000"; # User-id 1000 must match above user. MPD will look inside this directory for the PipeWire socket.
+  # };
+
+  hardware.bluetooth.enable = true;
+
   programs.git.enable = true;
 
   # Set keyboard layout
@@ -156,7 +175,7 @@
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = [ "wheel" "config" "audio" "video" "input" "lp"];
+      extraGroups = [ "wheel" "config" "network"  "audio" "video" "input" "lp"];
     };
   };
 

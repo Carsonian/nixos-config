@@ -32,11 +32,11 @@
 ;; Display line numbers in every buffer
 (global-display-line-numbers-mode 1)
 
- ;;Install & load theme
-(use-package gruvbox-theme
-  :config
-  (load-theme 'gruvbox-dark-medium t)
-  )
+;;Install & load theme (no need, using nix-colors now)
+;;(use-package gruvbox-theme
+;;  :config
+;;  (load-theme 'gruvbox-dark-medium t)
+;;  )
 
 ;; Set font
 (add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font" ))

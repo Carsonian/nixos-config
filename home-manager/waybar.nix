@@ -8,7 +8,8 @@
       mainBar = {
 	      layer = "top";
  	      modules-left = ["custom/launcher" "cpu" "memory" "network" "custom/media"];
-	      modules-center = ["wlr/workspaces"];
+	      modules-center = ["river/tags"];
+        # "wlr/workspaces"
 	      modules-right = [ "wireplumber" "backlight" "clock"  "battery" "custom/power"];
 
         wireplumber = {
@@ -16,7 +17,7 @@
 		      scroll-step = 1;
 		      format = "{icon} {volume}%";
 		      format-muted = "󰝟 {volume}%";
-		      on-click ="pamixer -t";
+		      on-click ="wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
 		      format-icons = {
 			      default = [""  ""  ""];
 		      };
@@ -90,16 +91,11 @@
           max-length = 5;
         };
         "custom/media" = {
-          interval = 30;
-          format = "{icon} {}";
-          return-type = "json";
-          max-length = 20;
-          format-icons = {
-            spotify = " ";
-            default = " ";
-          };
-          escape = true;
-          exec = "$HOME/.config/system_scripts/mediaplayer.py 2> /dev/null";
+          interval = 10;
+          format = "  {}";
+          max-length = 30;
+          tooltip = false;
+          exec = "playerctl metadata --format '{{ title }} - {{ artist }}'";
           on-click = "playerctl play-pause";
         };
         "custom/launcher" ={
@@ -313,7 +309,7 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
 	color: #161320;
-	background: #${config.colorScheme.colors.base07};
+	background: #${config.colorScheme.colors.base05};
 }
 
 #workspaces {

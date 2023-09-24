@@ -15,20 +15,28 @@
     
     # Hyprland config
     ./hyprland.nix
-    ./waybar.nix
+    #./waybar.nix
+    ./waybar-new.nix
     ./kitty.nix
 
     # Import custom colorscheme
-    ./colors.nix
+    #./colors.nix
 
     #TODO Firefox config 
     #./firefox.nix
     
   ];
 
-  # Or choose a premade colorscheme (lame)
-  #colorScheme = inputs.nix-colors.colorSchemes.dracula;
-
+  # Or choose a premade colorscheme, here's some I like:
+  #colorScheme = inputs.nix-colors.colorSchemes.material;
+  #colorScheme = inputs.nix-colors.colorSchemes.nord;
+  #colorScheme = inputs.nix-colors.colorSchemes.woodland;
+  #colorScheme = inputs.nix-colors.colorSchemes.atlas;
+  #colorScheme = inputs.nix-colors.colorSchemes.material;
+  #colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-medium;
+  #colorScheme = inputs.nix-colors.colorSchemes.onedark;
+  colorScheme = inputs.nix-colors.colorSchemes.silk-dark;
+  
   nixpkgs = {
 
     # You can add overlays here
@@ -88,13 +96,13 @@
     cmus
     cava
     playerctl
+    mpc-cli
     
     # Boring utilities
     xdg-desktop-portal
     qt5.qtwayland
     qt6.qtwayland
     brightnessctl
-    pamixer
   ];
 
   # Configure packages ##################################
@@ -178,14 +186,17 @@
         vertico
         orderless
         marginalia
-        consult
         embark
-        embark-consult
-        corfu
-        ivy
         swiper
+        base16-theme
       ];
-      extraConfig = builtins.readFile ./emacs-init.el;
+      extraConfig = builtins.readFile ./emacs-init.el
+                    # Add the base16 theme we are using in nixos to emacs
+                    +''(use-package base16-theme
+                        :config
+                        (load-theme 'base16-${config.colorScheme.slug} t))
+                        (set-cursor-color "#${config.colorScheme.colors.base09}") 
+                        '';
     };
   };
 
@@ -199,6 +210,11 @@
       name "My PipeWire Output"
     }
     '';
+  };
+
+  # This service allows mpd to be detected by playerctl
+  services.mpd-mpris = {
+    enable = true;
   };
 
   # Nicely reload system units when changing configs

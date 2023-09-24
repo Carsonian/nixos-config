@@ -1,3 +1,6 @@
+{ pkgs, config, ...}:
+
+
 {
   # Hyprland config 
   wayland.windowManager.hyprland = {
@@ -40,7 +43,9 @@
         gaps_in = 10;
         gaps_out = 10;
         border_size = 2;
-        "col.active_border" = " rgb(09E85E) rgb(F4D06F) 45deg";
+        #"col.active_border" = " rgb(09E85E) rgb(F4D06F) 45deg";
+        #"col.active_border" = " rgb(${config.colorScheme.colors.base0A}) rgb(${config.colorScheme.colors.base0B}) 45deg";
+        "col.active_border" = " rgb(${config.colorScheme.colors.base0B})";
         "col.inactive_border" = "rgb(1E2D24)";
         layout = "dwindle";
       };
@@ -60,11 +65,11 @@
       decoration = {
         rounding = 2;
         active_opacity = 1.0;
-        inactive_opacity = 0.75;
+        inactive_opacity = 0.8;
         blur = {
           enabled = "yes";
-          size = 6;
-          passes = 3;
+          size = 3;
+          passes = 1;
           new_optimizations = "on";
           xray = true;
           ignore_opacity = true;
@@ -83,51 +88,45 @@
 
         # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
 
-        bezier=[
-          "slow,0,0.85,0.3,1"
-          "overshot,0.7,0.6,0.1,1.1"
-          "bounce,1,1.6,0.1,0.85"
-          "slingshot,1,-2,0.9,1.25"
-          "nice,0,6.9,0.5,-4.20"
-        ];
+        # bezier=[
+        #   "slow,0,0.85,0.3,1"
+        #   "overshot,0.7,0.6,0.1,1.1"
+        #   "bounce,1,1.6,0.1,0.85"
+        #   "slingshot,1,-2,0.9,1.25"
+        #   "nice,0,6.9,0.5,-4.20"
+        # ];
 
-        # bezier = [
-        #   "wind, 0.05, 0.9, 0.1, 1.05"
-        #   "winIn, 0.1, 1.1, 0.1, 1.1"
-        #   "winOut, 0.3, -0.3, 0, 1"
-        #   "liner, 1, 1, 1, 1"
+        bezier = [
+          "wind, 0.05, 0.9, 0.1, 1.05"
+          "winIn, 0.1, 1.1, 0.1, 1.1"
+          "winOut, 0.3, -0.3, 0, 1"
+          "liner, 1, 1, 1, 1"
+        ]; 
+
+        # animation = [
+        #   "windows,1,1,bounce,slide"
+        #   "border,1,20,default"
+        #   "fade,1,5,default"
+        #   "workspaces,1,5,overshot,slide"
         # ];
 
         animation = [
-          "windows,1,5,bounce,slide"
-          "border,1,20,default"
-          "fade,1,5,default"
-          "workspaces,1,5,overshot,slide"
+          "windows, 1, 6, wind, slide"
+          "windowsIn, 1, 6, winIn, slide"
+          "windowsOut, 1, 5, winOut, slide"
+          "windowsMove, 1, 5, wind, slide"
+          "border, 1, 1, liner"
+          "borderangle, 1, 30, liner, loop"
+          "fade, 1, 10, default"
+          "workspaces, 1, 5, wind"
         ];
-
-        # animation = [
-        #   "windows, 1, 6, wind, slide"
-        #   "windowsIn, 1, 6, winIn, slide"
-        #   "windowsOut, 1, 5, winOut, slide"
-        #   "windowsMove, 1, 5, wind, slide"
-        #   "border, 1, 1, liner"
-        #   "borderangle, 1, 30, liner, loop"
-        #   "fade, 1, 10, default"
-        #   "workspaces, 1, 5, wind"
-        # ];
         
       };
 
       dwindle = {
-        # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/
-        pseudotile = "yes"; # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
-        preserve_split = "yes"; # you probably want this
-        split_width_multiplier=1.25;
-      };
-
-      master = {
-        # See https://wiki.hyprland.org/Configuring/Master-Layout/
-        new_is_master = true;
+        force_split = 2;
+        smart_resizing = false;
+        preserve_split = true;
       };
 
       gestures = {
@@ -140,6 +139,9 @@
         workspace_swipe_forever=0;
       };
 
+      
+      windowrule=["opacity 1.0 override 0.9 override,^(firefox)$"
+                  "opacity 0.9 override 0.8 override,^(emacs)$"];
       # Example windowrule v1
       # windowrule = float, ^(kitty)$
       # Example windowrule v2
@@ -150,15 +152,21 @@
       # KEYBINDINGS ###########################################
 
       "$mainMod" = "SUPER";
-
+      
       # Utility keybinds
 
       bind = [
         "$mainMod, Q, killactive"
         "SUPER_SHIFT, X, exit, "
-        "$mainMod, V, togglefloating, "
-        "$mainMod, G, pseudo, "# dwindle
-        "$mainMod, J, togglesplit," # dwindle
+        "$mainMod, right , swapwindow, r"
+        "$mainMod, left, swapwindow, l"
+        "$mainMod, up, swapwindow, u"
+        "$mainMod, down, swapwindow, d"
+        "$mainMod SHIFT, right, resizeactive, 25 0"
+        "$mainMod SHIFT, left, resizeactive, -25 0"
+        "$mainMod SHIFT, up, resizeactive, 0 -25"
+        "$mainMod SHIFT, down, resizeactive, 0 25"
+        "$mainMod, T, togglesplit,"
 
         # Exec programs
         "$mainMod, return, exec, kitty"
