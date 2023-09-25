@@ -16,7 +16,6 @@
     # Hyprland config
     ./hyprland.nix
     #./waybar.nix
-    #./waybar-match.nix
     ./waybar-new.nix
     ./kitty.nix
 
@@ -33,10 +32,9 @@
   #colorScheme = inputs.nix-colors.colorSchemes.nord;
   #colorScheme = inputs.nix-colors.colorSchemes.woodland;
   #colorScheme = inputs.nix-colors.colorSchemes.atlas;
-  #colorScheme = inputs.nix-colors.colorSchemes.material;
-  #colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-hard;
+  colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-hard;
   #colorScheme = inputs.nix-colors.colorSchemes.onedark;
-  colorScheme = inputs.nix-colors.colorSchemes.silk-dark;
+  #colorScheme = inputs.nix-colors.colorSchemes.silk-dark;
   #colorScheme = inputs.nix-colors.colorSchemes.brushtrees-dark;
   
   nixpkgs = {

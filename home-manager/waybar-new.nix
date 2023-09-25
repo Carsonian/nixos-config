@@ -20,9 +20,8 @@
           # Modules configuration
 	          "clock" = {
 		          "format" = "  {:%H:%M}";
-		        "tooltip" = "true";
-        	  "tooltip-format" = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-        	  "format-alt" = "  {:%d/%m}";
+        	    "format-alt" = "  {:%d/%m}";
+              "tooltip" = "false";
 	          };
 	        
 	          "hyprland/workspaces" = {
@@ -32,15 +31,14 @@
 		          "format" = "{icon}";
 		          "on-click" = "activate";
 		          "format-icons" = {
-                "1" = "󰧞";
-                "2" = "󰧞";
 			          "urgent" = "";
 			          "active" = "";
 			          "default" = "󰧞";
+                "persistent" = "󰧞";
                 "sort-by-number" = true;
               };
               "persistent-workspaces" = {
-                "*" = 2; # 2 workspaces by default on every monitor
+                "*" = 2;
               };
             };
 
@@ -49,12 +47,12 @@
               "return-type" = "json";
               "max-length" = 64;
               "exec" = "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F";
-              "on-click-middle" = "playerctl play-pause";
-              "on-click" = "playerctl previous";
+              "on-click" = "playerctl play-pause";
+              "on-click-middle" = "playerctl previous";
               "on-click-right" = "playerctl next";
               "format-icons" = {
-                "Playing" = "<span foreground='#E5B9C6'>󰒮 󰐌 󰒭</span>";
-                "Paused" = "<span foreground='#928374'>󰒮 󰏥 󰒭</span>";
+                "Playing" = "<span foreground='#${config.colorScheme.colors.base06}'>󰒮 󰐌 󰒭</span>";
+                "Paused" = "<span foreground='#${config.colorScheme.colors.base04}'>󰒮 󰏥 󰒭</span>";
               };
             };
 
@@ -63,15 +61,10 @@
               "return-type" = "json";
               "max-length" = 48;
               "exec" = "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F";
-              "on-click-middle" = "playerctl play-pause";
-              "on-click" = "playerctl previous";
+              "on-click" = "playerctl play-pause";
+              "on-click-middle" = "playerctl previous";
               "on-click-right" = "playerctl next";
-              "format-icons" = {
-                "Playing" = "<span foreground='#E5B9C6'>󰒮 󰐌 󰒭</span>";
-                "Paused" = "<span foreground='#928374'>󰒮 󰏥 󰒭</span>";
-              };
             };
-
 
             battery = {
               states = {
@@ -87,22 +80,27 @@
             };
             
             "memory" = {
-              "format" = "󰍛 {}%";
-              "format-alt" = "󰍛 {used}/{total} GiB";
+              "format" = "<span color=\"#${config.colorScheme.colors.base0F}\"> </span>  {}%";
+              tooltip-format = "{used}/{total} GiB";
               "interval" = 5;
+              min-length = 6;
+              max-length = 6;
             };
 
             "cpu" = {
-              "format" = " {usage}%";
-              "format-alt" = " {avg_frequency} GHz";
+              "format" = "<span color=\"#${config.colorScheme.colors.base0E}\">󰄧 </span> {usage}%";
               "interval" = 5;
+              min-length = 6;
+              max-length = 6;
             };
 
             "disk" = {
-              "format" = "󰋊 {}%";
-              "format-alt" = "󰋊 {used}/{total} GiB";
+              "format" = "<span color=\"#${config.colorScheme.colors.base0D}\">󰋊 </span> {percentage_used}%";
+              tooltip-format ="{used}/{total}";
               "interval" = 5;
               "path" = "/";
+              min-length = 6;
+              max-length = 6;
             };
 
             network = {
@@ -162,6 +160,17 @@ window#waybar {
     color: #f4d9e1
 }
 
+.modules-right {
+    /*background-color: transparent;*/
+    background-color: #${config.colorScheme.colors.base01};
+    color: #${config.colorScheme.colors.base06};
+    border-radius: 16px;
+    font-size: 12px;
+    padding: 5px 15px 5px 10px;
+	  margin: 5px 15px 5px 5px;
+    border-radius: 16px;
+}
+
 #workspaces {
 	background: #${config.colorScheme.colors.base01};
 	margin: 5px 5px 5px 5px;
@@ -171,6 +180,7 @@ window#waybar {
   font-weight: normal;
   font-style: normal;
 }
+
 #workspaces button {
     color: #${config.colorScheme.colors.base06};
     padding: 0px 5px;
@@ -184,21 +194,9 @@ window#waybar {
     border-radius: 16px;
 }
 
-#custom-date, #clock, #battery, #network #wireplumber {
-	background: transparent;
-	padding: 5px 5px 5px 5px;
-	margin: 5px 5px 5px 5px;
-  border-radius: 8px;
-  border: solid 0px #f4d9e1;
-}
-
-#custom-date {
-	color: #D3869B;
-}
-
 #custom-power {
-	color: #24283b;
-	background-color: #db4b4b;
+	color: #${config.colorScheme.colors.base0B};
+	background-color: #${config.colorScheme.colors.base01};
 	border-radius: 5px;
 	margin-right: 10px;
 	margin-top: 5px;
@@ -208,72 +206,76 @@ window#waybar {
 }
 
 #tray {
-    background: #282828;
+    background: #${config.colorScheme.colors.base01};
     margin: 5px 5px 5px 5px;
     border-radius: 16px;
     padding: 0px 5px;
     /*border-right: solid 1px #282738;*/
 }
 
-#clock {
-    color: #${config.colorScheme.colors.base06};
-    background-color: #282828;
-    font-size: 15px;
-    border-radius: 0px 0px 0px 24px;
-    padding-left: 13px;
-    padding-right: 15px;
-    margin-right: 0px;
+#wireplumber {
+    margin-left: 6px;
+}
+
+#backlight {
     margin-left: 10px;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    font-weight: bold;
-    /*border-left: solid 1px #282738;*/
+}
+
+#network {
+    margin-left: 10px;
+}
+
+#clock {
+    margin-left: 15px;
 }
 
 #battery {
+    margin-left: 10px;
+    margin-right: 6px;
     color: #9ece6a;
-    font-size: 15px;
 }
 
 #battery.charging {
     color: #9ece6a;
-    font-size: 15px;
+    margin-left: 10px;
+    margin-right: 6px;
 }
 
 #battery.warning:not(.charging) {
+    margin-left: 10px;
+    margin-right: 6px;
     background-color: #f7768e;
     color: #24283b;
-    font-size: 15px;
     border-radius: 5px 5px 5px 5px;
 }
 
-#wireplumber {
+#cpu, #memory, #disk {
+    background-color: #${config.colorScheme.colors.base01};
     color: #${config.colorScheme.colors.base06};
-    font-size: 15px;
-    margin-left: 6px;
-    margin-right: 6px;
+    border-radius: 16px;
+    margin: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 0px 10px 0px 10px;
+    font-weight: bold;
 }
 
-#backlight {
-    color: #${config.colorScheme.colors.base06};
-    font-size: 15px;
-    margin-left: 6px;
-    margin-right: 6px;
-}
-
-#network {
-    color: #${config.colorScheme.colors.base06};
-    font-size: 15px;
-    border-radius: 8px;
-    margin-left: 6px;
-    margin-right: 6px;
+#custom-launcher
+{
+    background-color: #${config.colorScheme.colors.base00};
+    font-size: 24px;
+    color: #${config.colorScheme.colors.base0B};
+    border-radius: 0px 24px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    padding: 0 10px 0 10px;
+    font-weight: bold;
 }
 
 #custom-playerctl {
-	background: #282828;
+	background: #${config.colorScheme.colors.base00};
   color: #${config.colorScheme.colors.base06};
 	padding-left: 15px;
-  padding-right: 14px;
+  padding-right: 15px;
 	border-radius: 16px;
   /*border-left: solid 1px #282738;*/
   /*border-right: solid 1px #282738;*/
@@ -310,50 +312,6 @@ window#waybar {
     margin-bottom: 5px;
     font-weight: normal;
     font-style: normal;
-}
-
-#custom-launcher
-{
-    background-color: #282828;
-    font-size: 24px;
-    color: #${config.colorScheme.colors.base0B};
-    border-radius: 0px 24px 0px 0px;
-    margin: 0px 0px 0px 0px;
-    padding: 0 20px 0 13px;
-    font-weight: bold;
-}
-
-#cpu {
-    background-color: #282828;
-    color: #${config.colorScheme.colors.base06};
-    border-radius: 16px;
-    margin: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-    padding: 0px 10px 0px 10px;
-    font-weight: bold;
-}
-
-#memory {
-    background-color: #282828;
-    color: #${config.colorScheme.colors.base06};
-    border-radius: 16px;
-    margin: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-    padding: 0px 10px 0px 10px;
-    font-weight: bold;
-}
-
-#disk {
-    background-color: #282828;
-    color: #${config.colorScheme.colors.base06};
-    border-radius: 16px;
-    margin: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-    padding: 0px 10px 0px 10px;
-    font-weight: bold;
 }
 
         '';    
