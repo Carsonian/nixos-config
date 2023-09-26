@@ -26,7 +26,7 @@
 	        
 	          "hyprland/workspaces" = {
               "active-only" = false;
-              "all-outputs" = true;
+              "all-outputs" = false;
               "disable-scroll" = true;
 		          "format" = "{icon}";
 		          "on-click" = "activate";
@@ -72,7 +72,7 @@
                 warning = 30;
                 critical = 15;
               };
-              format = "{icon} {capacity}%";
+              format = "{capacity}% {icon}";
               format-charging = "{capacity}%  ";
               format-plugged = "{capacity}%  ";
               format-alt = "{time} {icon}";
@@ -130,7 +130,7 @@
             backlight = {
 		          tooltip = false;
 		          format = "{icon} {}%";
-              "format-icons" = ["" "" "" "" "" "" "" "" ""];
+              "format-icons" = ["" "" "" "" "" "" "" "" "󰖨"];
 		          interval =1;
               on-scroll-up = "brightnessctl s +1%";
 		          on-scroll-down = "brightnessctl s 1%-";
@@ -218,11 +218,11 @@ window#waybar {
 }
 
 #backlight {
-    margin-left: 10px;
+    margin-left: 12px;
 }
 
 #network {
-    margin-left: 10px;
+    margin-left: 12px;
 }
 
 #clock {
