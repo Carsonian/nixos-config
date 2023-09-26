@@ -44,6 +44,7 @@
 
             "custom/playerctl" = {
               "format" = "{icon}";
+              tooltip = false;
               "return-type" = "json";
               "max-length" = 64;
               "exec" = "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F";
@@ -57,6 +58,7 @@
             };
 
             "custom/playerlabel" = {
+              tooltip = false;
               "format" = "<span>{}</span>";
               "return-type" = "json";
               "max-length" = 48;
