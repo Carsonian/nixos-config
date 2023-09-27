@@ -30,7 +30,14 @@
   environment.systemPackages = with pkgs; [
     networkmanager
     git
+    sddm-themes
   ];
+
+  services.xserver.enable = true;
+  services.xserver.displayManager.sddm = {
+    enable = true;
+    theme = "sddm-astronaut-theme";
+  };
 
   #Configure pipewire
   security.rtkit.enable = true;
