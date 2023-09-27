@@ -43,25 +43,6 @@
     #pulse.enable = true;
   };
 
-  
-  # Configure mpd
-  # services.mpd = {
-  #   enable = true;
-  #   musicDirectory = "/home/carson/Music";
-  #   extraConfig = ''
-  #   audio_output {
-  #     type "pipewire"
-  #     name "My PipeWire Output"
-  #   }
-  #   '';
-  # };  
-
-  # #services.mpd.user = "carson";
-  # systemd.services.mpd.environment = {
-  #   # https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/609
-  #   XDG_RUNTIME_DIR = "/run/user/1000"; # User-id 1000 must match above user. MPD will look inside this directory for the PipeWire socket.
-  # };
-
   hardware.bluetooth.enable = true;
 
   programs.git.enable = true;
@@ -79,6 +60,21 @@
   networking.networkmanager.enable = true;
   programs.hyprland.enable = true;
   security.polkit.enable = true;
+
+  # Setup greetd with tuigreet
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland -r --asterisks";
+        user = "greeter";
+      };
+    };
+  };
+
+  # Setup fingerprint login
+  #services.fprintd.enable = true;
+  #security.pam.services.carson.fprintAuth = config.services.fprintd.enable;
 
   # You can import other NixOS modules here
   imports = [
@@ -149,12 +145,24 @@
     };
   };
 
-
   # Set hostname
   networking.hostName = "angkor";
 
-  # Set the bootloader
-  boot.loader.systemd-boot.enable = true;
+  # Set the bootloader & boot options
+  boot = {
+    loader= {
+      systemd-boot.enable = true;
+      timeout = 0;
+      systemd-boot.configurationLimit = 10;
+    };
+    # Suppress boot messages
+    plymouth.enable = true;
+    plymouth.theme = "script";
+    kernelParams = ["quiet" "rd.systemd.show_status=false" "rd.udev.log_level=3" "udev.log_priority=3" "boot.shell_on_fail"];
+    consoleLogLevel = 0;
+    initrd.verbose = false;
+  };
+  systemd.watchdog.rebootTime = "0";
 
   # Create a config user group for users who can edit /nix-config
   # Note: You will have to grant permissions to the config folder to the config group if installing on a new system
