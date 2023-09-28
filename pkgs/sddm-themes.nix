@@ -2,7 +2,7 @@
 {
   sddm-astronaut-theme = stdenv.mkDerivation rec {
     pname = "sddm-astronaut-theme";
-    #version = "1.2";
+    version = "f9f08c5";
     dontBuild = true;
     installPhase = ''
       mkdir -p $out/share/sddm/themes
@@ -12,7 +12,8 @@
       owner = "Keyitdev";
       repo = "sddm-astronaut-theme";
       #rev = "v${version}";
-      #sha256 = "0gx0am7vq1ywaw2rm1p015x90b75ccqxnb1sz3wy8yjl27v82yhb";
+      rev = "f9f08c53cb45d481317f029e3e30ffae9e68d465";
+      sha256 = "I39W9U4j/MbyYp4BlB4sWuQ5GVf/z4bm4ohrSfIWcXI=";
     };
   };
 }

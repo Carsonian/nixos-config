@@ -3,5 +3,5 @@
 
 { pkgs ? (import ../nixpkgs.nix) { } }: {
   # example = pkgs.callPackage ./example { };
-  sddm-themes = pkgs.callPackage ./sddm-themes.nix { };
+  sddm-themes = (pkgs.callPackage ./sddm-themes.nix { }).sddm-astronaut-theme;
 }

@@ -71,7 +71,7 @@
             battery = {
               states = {
                 good = 95;
-                warning = 30;
+                warning = 20;
                 critical = 15;
               };
               format = "{capacity}% {icon}";
@@ -246,8 +246,7 @@ window#waybar {
 #battery.warning:not(.charging) {
     margin-left: 10px;
     margin-right: 6px;
-    background-color: #f7768e;
-    color: #24283b;
+    color: #f7768e;
     border-radius: 5px 5px 5px 5px;
 }
 

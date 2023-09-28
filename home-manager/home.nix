@@ -89,8 +89,8 @@
     neofetch
 
     # Wayland/Hyprland stuff
-    #wofi
-    hyprpaper
+    #rofi wayland
+    wpaperd
     dunst
 
     # Music player, visualizer, controller
@@ -104,9 +104,23 @@
     qt5.qtwayland
     qt6.qtwayland
     brightnessctl
+    multimarkdown
   ];
 
-  # Configure packages ##################################
+  # Add config files to home directory (for programs without built-in home manager options)
+  home.file = { 
+    "/.config/wpaperd/wallpaper.toml" = {
+      text = ''
+      [default]
+      path = "/home/carson/Pictures/Wallpapers/"
+      # duration = "30m"
+      sorting = "random"
+      apply-shadow = true
+   '';
+    };
+  };
+
+  # Configure packages with home manager options ##################################
 
   programs = {
 
@@ -135,6 +149,10 @@
         plugins = [ "git" ];
         theme = "alanpeabody";
       };
+    };
+
+    btop = {
+      enable = true;
     };
 
     fuzzel = {
@@ -174,6 +192,7 @@
         nerd-icons
         ledger-mode
         nix-mode
+        markdown-mode
         which-key
         magit
         flycheck
@@ -182,8 +201,10 @@
         indent-guide
         smart-hungry-delete
         smooth-scrolling
-        all-the-icons
+        speed-type
         aggressive-indent
+        dashboard
+        projectile
         vertico
         orderless
         marginalia

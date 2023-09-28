@@ -38,6 +38,11 @@
 ;;  (load-theme 'gruvbox-dark-medium t)
 ;;  )
 
+;; Customize mpc
+(setq
+ mpc-browser-tags '(Artist Album)
+ mpc-songs-format "%-5{Time} %25{Title} %20{Album} %20{Artist}")
+
 ;; Set font
 (add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font" ))
 
@@ -53,6 +58,9 @@
 ;; Install different modes
 (use-package ledger-mode)
 (use-package nix-mode)
+(use-package markdown-mode
+  :mode ("README\\.md\\'" . gfm-mode)
+  :init (setq markdown-command "multimarkdown"))
 
 ;; Install some basic helper packages
 (use-package which-key
@@ -86,6 +94,8 @@
 (use-package smooth-scrolling
   :init (smooth-scrolling-mode))
 
+(use-package speed-type)
+
 ;; (use-package all-the-icons
 ;;   :if (display-graphic-p))
 
@@ -98,6 +108,31 @@
 (use-package swiper
   :bind
   (("\C-s" . swiper))
+  )
+
+;; Dashboard setup
+(use-package dashboard
+  :config
+  (dashboard-setup-startup-hook)
+  (setq dashboard-banner-logo-title "Welcome")
+  ;; Set the banner
+  (setq dashboard-startup-banner 4)
+  (setq dashboard-center-content t)
+  (setq dashboard-items '((recents  . 5) (bookmarks . 5) (projects . 5)))
+  (dashboard-modify-heading-icons '((recents . "nf-oct-file_symlink_file")
+                                    (bookmarks . "nf-oct-book")
+				    (projects . "nf-oct-briefcase")))
+  (setq dashboard-display-icons-p t)
+  (setq dashboard-icon-type 'nerd-icons)
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+  (setq dashboard-set-init-info t)
+  )
+
+(use-package projectile
+  :config
+  (projectile-mode +1)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   )
 
 ;; Install vertico & friends packages #########################

@@ -31,15 +31,20 @@
     networkmanager
     git
     sddm-themes
+    #sddm-chili-theme
+    # Dependencies for astronaut-theme
+    libsForQt5.qt5.qtgraphicaleffects
+    libsForQt5.qt5.qtquickcontrols2
+    libsForQt5.qt5.qtsvg
   ];
 
   services.xserver.enable = true;
   services.xserver.displayManager.sddm = {
     enable = true;
-    theme = "sddm-astronaut-theme";
+    theme = "astronaut-theme";
   };
 
-  #Configure pipewire
+  #Configure pipewirex
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -69,15 +74,15 @@
   security.polkit.enable = true;
 
   # Setup greetd with tuigreet
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland -r --asterisks";
-        user = "greeter";
-      };
-    };
-  };
+  # services.greetd = {
+  #   enable = true;
+  #   settings = {
+  #     default_session = {
+  #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland -r --asterisks";
+  #       user = "greeter";
+  #     };
+  #   };
+  # };
 
   # Setup fingerprint login
   #services.fprintd.enable = true;
@@ -161,10 +166,25 @@
       systemd-boot.enable = true;
       timeout = 0;
       systemd-boot.configurationLimit = 10;
+      efi.canTouchEfiVariables = true;
     };
     # Suppress boot messages
     plymouth.enable = true;
-    plymouth.theme = "script";
+    plymouth.theme = "bgrt";
+    plymouth.extraConfig = ''
+[Daemon]
+ShowDelay=5
+    [Unit]
+Conflicts=plymouth-quit.service
+After=plymouth-quit.service rc-local.service plymouth-start.service systemd-user-sessions.service
+OnFailure=plymouth-quit.service
+
+[Service]
+ExecStartPre=-/usr/bin/plymouth deactivate
+ExecStartPost=-/usr/bin/sleep 30
+ExecStartPost=-/usr/bin/plymouth quit --retain-splash
+    '';
+    #"quiet" "splash"
     kernelParams = ["quiet" "rd.systemd.show_status=false" "rd.udev.log_level=3" "udev.log_priority=3" "boot.shell_on_fail"];
     consoleLogLevel = 0;
     initrd.verbose = false;
