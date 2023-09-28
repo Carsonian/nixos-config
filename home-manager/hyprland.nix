@@ -1,6 +1,5 @@
 { pkgs, config, ...}:
 
-
 {
   # Hyprland config 
   wayland.windowManager.hyprland = {
@@ -12,7 +11,7 @@
       monitor= "eDP-1,1920x1080@60,0x0,1";
 
       # Execute apps at launch
-      exec-once = "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY in hyrpland.conf & waybar & hyprpaper &";
+      exec-once = "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY in hyrpland.conf & waybar & wpaperd";
 
       # Source a file (multi-file configs)
       # source = ~/.config/hypr/myColors.conf
@@ -85,8 +84,6 @@
 
       animations = {
         enabled = "yes";
-
-        # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
 
         # bezier=[
         #   "slow,0,0.85,0.3,1"

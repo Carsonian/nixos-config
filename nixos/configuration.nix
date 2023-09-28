@@ -1,5 +1,4 @@
-# This is your system's configuration file.
-# Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
+# This is the system configuration file.
 
 { inputs, outputs, lib, config, pkgs, ... }: {
 
@@ -31,7 +30,6 @@
     networkmanager
     git
     sddm-themes
-    #sddm-chili-theme
     # Dependencies for astronaut-theme
     libsForQt5.qt5.qtgraphicaleffects
     libsForQt5.qt5.qtquickcontrols2
@@ -125,13 +123,6 @@
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
-
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
     ];
     # Configure your nixpkgs instance
     config = {
@@ -166,26 +157,13 @@
       systemd-boot.enable = true;
       timeout = 0;
       systemd-boot.configurationLimit = 10;
+      systemd-boot.extraEntries = { "test.conf" = "quiet splash";};
       efi.canTouchEfiVariables = true;
     };
     # Suppress boot messages
     plymouth.enable = true;
-    plymouth.theme = "bgrt";
-    plymouth.extraConfig = ''
-[Daemon]
-ShowDelay=5
-    [Unit]
-Conflicts=plymouth-quit.service
-After=plymouth-quit.service rc-local.service plymouth-start.service systemd-user-sessions.service
-OnFailure=plymouth-quit.service
-
-[Service]
-ExecStartPre=-/usr/bin/plymouth deactivate
-ExecStartPost=-/usr/bin/sleep 30
-ExecStartPost=-/usr/bin/plymouth quit --retain-splash
-    '';
-    #"quiet" "splash"
-    kernelParams = ["quiet" "rd.systemd.show_status=false" "rd.udev.log_level=3" "udev.log_priority=3" "boot.shell_on_fail"];
+    #plymouth.theme = "breeze";
+    kernelParams = ["quiet" "splash" "rd.systemd.show_status=false" "rd.udev.log_level=3" "udev.log_priority=3" "boot.shell_on_fail"];
     consoleLogLevel = 0;
     initrd.verbose = false;
   };
