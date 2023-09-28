@@ -1,4 +1,4 @@
-<div align="center"><img width="350" height="350" src="/nix-config/pictures/nixoslogowithtext.png"></div>
+<div align="center"><img width="350" height="350" src="pictures/nixoslogowithtext.png"></div>
 <h1 align="center">NixOS & Hyprland Configuration</h1>
 
 <div align="center">
@@ -70,7 +70,7 @@ This is a list of all the noteworthy programs. There are many more utilites and 
 
 - 🪶 **Lightweight**: Using only a window manager and lightweight utilities keeps memory usage low and the system unbloated.
 
-- 🎨 **Customizable**: Leveraging the power of Linux and Hyprland, this configuration offers extensive customization options, allowing you to tailor your setup to your preferences.
+- 🎨 **Customizable**: By changing the base16 theme most programs will update to use that colorscheme. Config wise all programs are and can be configured via home manager in one place. 
 
 ## 🚀 Installation
 
@@ -83,6 +83,7 @@ This is a list of all the noteworthy programs. There are many more utilites and 
 I try to use Emacs keys as much as possible as it is my favorite software :)
 
 ### Main
+TODO: Fill in my keybinds
 
 | Key Combination      | Action                                            |
 |----------------------|---------------------------------------------------|
@@ -129,32 +130,9 @@ All system zsh scripts are located in the TBD directory.
 
 This project is licensed under the GPL3 License - see the [LICENSE](LICENSE) file for details. 
 
-
 # More
 
-Flake-based NixOS (and home-manager ) configurations for my devices.
-
-These use tmpfs for the root directory, including the home directory, with the impermanence module. Persistent data is organized via btrfs submodules. I use sway as window manager for a graphical environment.
-
-I wrote this mostly from scratch, as an exercise to improve my understanding of the Nix and NixOS ecosystem. Some links that I got help and inspiration from can be found below.
-
-
-## Notes
-
-### For Visitors
-
-These configurations are obviously meant for my personal use.
-
-However, I strive to structure it well and document options and my decisions extensively via comments (mainly for my own sake, so it's easily maintainable and I won't have to wonder why I did something in a particular way some time in the future, but who knows, it might help other people as well). I also use some potentially interesting custom design patterns and features.
-
-So, this project might be a useful resource if you're working on your own config, so feel free to look through it. If you're just starting with NixOS, I'd suggest you look at <https://github.com/Misterio77/nix-starter-configs>.
-
-### References
-
-I used elements and inspiration from these resources. 
-
-- https://github.com/Misterio77/nix-starter-configs
-- https://github.com/XNM1/linux-nixos-hyprland-config-dotfiles
+## Future Ideas
 
 ### Interesting
 
@@ -166,12 +144,32 @@ Clipboard-jh
 avizo (macos like sound/brightness popup)
 
 
+### For Visitors
+
+These configurations are obviously meant for my personal use.
+
+I wrote this mostly from scratch, as an exercise to improve my understanding of the Nix and NixOS ecosystem as well as about linux, window managers and software in general.
+
+However, I try to structure it well and document options and my decisions extensively via comments (mainly for my own sake, so it's easily maintainable and I won't have to wonder why I did something in a particular way some time in the future.).
+
+So, this project might be a useful resource if you're working on your own config, so feel free to look through it, copy whatever you want, steal whatever, anything that helps!
+
+If you're just starting with NixOS, I'd suggest you look at <https://github.com/Misterio77/nix-starter-configs>.
+
+### References
+
+I used elements and inspiration from these resources. 
+
+- https://github.com/Misterio77/nix-starter-configs
+- https://github.com/XNM1/linux-nixos-hyprland-config-dotfiles
+
+
 ## Structure 
+TODO: Add my structure in the format below...
 ```
 project
 │   README.md
 │   flake.nix (entry to configuration)
-│   .sops.yaml (config for sops storage encryption)
 │   ...
 │
 └───emacs (doom emacs config)
@@ -191,8 +189,6 @@ project
 │   │   ...
 │   └───nixosvm (base config for running nixos on a virtualbox vm)
 │   │   ...
-│
-└───machines (hardware configuration for all machines this config runs on)
 │
 └───modules (custom nixos modules)
 │   │   ...
