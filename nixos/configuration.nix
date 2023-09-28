@@ -155,10 +155,9 @@
   boot = {
     loader= {
       systemd-boot.enable = true;
+      # This makes it select default boot option without showing screen (unless you press a key beforehand)
       timeout = 0;
       systemd-boot.configurationLimit = 10;
-      systemd-boot.extraEntries = { "test.conf" = "quiet splash";};
-      efi.canTouchEfiVariables = true;
     };
     # Suppress boot messages
     plymouth.enable = true;
