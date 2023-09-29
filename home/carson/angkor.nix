@@ -7,6 +7,7 @@
     #./features/music.nix
     ./features/kitty.nix
     ./features/emacs/default.nix
+    ./features/fonts.nix
     
     inputs.nix-colors.homeManagerModule
 
