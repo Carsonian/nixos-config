@@ -6,7 +6,7 @@
     ./features/display/hyprland
     #./features/music.nix
     ./features/kitty.nix
-    ./features/emacs.nix
+    ./features/emacs/default.nix
     
     inputs.nix-colors.homeManagerModule
 
