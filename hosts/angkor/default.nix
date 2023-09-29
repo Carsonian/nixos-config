@@ -12,7 +12,7 @@
     ./hardware-configuration.nix
 
     ../common/global
-    ../common/users/misterio
+    ../common/users/carson
   ];
 
   # Setup sudo
@@ -166,7 +166,7 @@
     };
   };
   
-  home-manager.users.carson = import ../../home/carson/angkor.nix;
+  #home-manager.users.carson = import ../../home/carson/angkor.nix;
 
   # This setups a SSH server. Very important if you're setting up a headless system.
   # Feel free to remove if you don't need it.

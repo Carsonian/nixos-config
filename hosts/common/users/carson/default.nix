@@ -3,7 +3,7 @@ let ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.
 in
 {
   #users.mutableUsers = false;
-  users.users.misterio = {
+  users.users.carson = {
     isNormalUser = true;
     shell = pkgs.zsh;
     extraGroups = [
@@ -18,6 +18,6 @@ in
     ];
   };
 
-  home-manager.users.misterio = import ../../../../home/misterio/${config.networking.hostName}.nix;
+  home-manager.users.carson = import ../../../../home/carson/${config.networking.hostName}.nix;
 
 }
