@@ -1,6 +1,9 @@
 { pkgs, config, ...}:
-
 {
+  imports = [
+    ./waybar.nix
+  ];
+
   # Hyprland config 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -216,3 +219,4 @@
     extraConfig = '''';
   };
 }
+

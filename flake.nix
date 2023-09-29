@@ -35,15 +35,15 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, hyprland, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
       inherit (self) outputs;
       forAllSystems = nixpkgs.lib.genAttrs [
         "aarch64-linux"
         "i686-linux"
         "x86_64-linux"
-        "aarch64-darwin"
-        "x86_64-darwin"
+        # "aarch64-darwin"
+        # "x86_64-darwin"
       ];
     in
     rec {
@@ -71,31 +71,38 @@
       # These are usually stuff you would upstream into home-manager
       homeManagerModules = import ./modules/home-manager;
 
-      # NixOS configuration entrypoint
-      # Available through 'nixos-rebuild --flake .#your-hostname'
+      # Availbale through 'nixos-rebuild --flake .#hostname'
       nixosConfigurations = {
-        # FIXME replace with your hostname
+        # Personal Laptop
         angkor = nixpkgs.lib.nixosSystem {
+          modules = [./hosts/angkor];
           specialArgs = { inherit inputs outputs; };
-          modules = [
-            # > Our main nixos configuration file <
-            ./nixos/configuration.nix
-          ];
+        };
+        # Gaming Desktop
+        skadi = nixpkgs.lib.nixosSystem {
+          modules = [./hosts/skadi];
+          specialArgs = { inherit inputs outputs; };
+        };
+        # Server
+        bastet = nixpkgs.lib.nixosSystem {
+          modules = [./hosts/bastet];
+          specialArgs = { inherit inputs outputs; };
         };
       };
 
-      # Standalone home-manager configuration entrypoint
-      # Available through 'home-manager --flake .#your-username@your-hostname'
-      #homeConfigurations = {
-      # FIXME replace with your username@hostname
-      #  "carson@angkor" = home-manager.lib.homeManagerConfiguration {
-      #    pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-      #    extraSpecialArgs = { inherit inputs outputs; };
-      #    modules = [
-      #      # > Our main home-manager configuration file <
-      #      ./home-manager/home.nix
-      #    ];
-      # };
-      #};
+      # Available through 'home-manager --flake .#username@hostname'
+      homeConfigurations = {
+        # User home manager setups per system
+        "carson@angkor" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home/carson/angkor.nix];
+        };
+        "carson@skadi" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home/carson/skadi.nix];
+        };
+      };
     };
 }
