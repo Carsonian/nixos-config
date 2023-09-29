@@ -1,7 +1,7 @@
 # This is the system configuration file for angkor (personal laptop)
 # Same as configuration.nix 
 
-{ inputs, outputs, lib, config, pkgs, ... }: {
+{ inputs, outputs, lib, pkgs, ... }: {
 
   # You can import other NixOS modules here
   imports = [
@@ -10,6 +10,9 @@
     inputs.home-manager.nixosModules.home-manager
 
     ./hardware-configuration.nix
+
+    ../common/global
+    ../common/users/misterio
   ];
 
   # Setup sudo
@@ -93,40 +96,40 @@
   #services.fprintd.enable = true;
   #security.pam.services.carson.fprintAuth = config.services.fprintd.enable;
 
-  nixpkgs = {
-    # You can add overlays here
-    overlays = [
-      # Add overlays your own flake exports (from overlays and pkgs dir):
-      outputs.overlays.additions
-      outputs.overlays.modifications
-      outputs.overlays.unstable-packages
+  # nixpkgs = {
+  #   # You can add overlays here
+  #   overlays = [
+  #     # Add overlays your own flake exports (from overlays and pkgs dir):
+  #     outputs.overlays.additions
+  #     outputs.overlays.modifications
+  #     outputs.overlays.unstable-packages
 
-      # You can also add overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-    ];
-    # Configure your nixpkgs instance
-    config = {
-      # Disable if you don't want unfree packages
-      allowUnfree = true;
-    };
-  };
+  #     # You can also add overlays exported from other flakes:
+  #     # neovim-nightly-overlay.overlays.default
+  #   ];
+  #   # Configure your nixpkgs instance
+  #   config = {
+  #     # Disable if you don't want unfree packages
+  #     allowUnfree = true;
+  #   };
+  # };
 
-  nix = {
-    # This will add each flake input as a registry
-    # To make nix3 commands consistent with your flake
-    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
+  # nix = {
+  #   # This will add each flake input as a registry
+  #   # To make nix3 commands consistent with your flake
+  #   registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
 
-    # This will additionally add your inputs to the system's legacy channels
-    # Making legacy nix commands consistent as well, awesome!
-    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
+  #   # This will additionally add your inputs to the system's legacy channels
+  #   # Making legacy nix commands consistent as well, awesome!
+  #   #nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
 
-    settings = {
-      # Enable flakes and new 'nix' command
-      experimental-features = "nix-command flakes";
-      # Deduplicate and optimize nix store
-      auto-optimise-store = true;
-    };
-  };
+  #   settings = {
+  #     # Enable flakes and new 'nix' command
+  #     experimental-features = "nix-command flakes";
+  #     # Deduplicate and optimize nix store
+  #     auto-optimise-store = true;
+  #   };
+  # };
 
   # Set hostname
   networking.hostName = "angkor";
@@ -162,6 +165,8 @@
       extraGroups = [ "wheel" "config" "network"  "audio" "video" "input" "lp"];
     };
   };
+  
+  home-manager.users.carson = import ../../home/carson/angkor.nix;
 
   # This setups a SSH server. Very important if you're setting up a headless system.
   # Feel free to remove if you don't need it.
