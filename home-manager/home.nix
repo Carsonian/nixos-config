@@ -151,6 +151,11 @@
       };
     };
 
+    swaylock = {
+      enable = true;
+      package = pkgs.swaylock-effects;
+    };
+
     btop = {
       enable = true;
     };

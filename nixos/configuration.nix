@@ -29,18 +29,7 @@
   environment.systemPackages = with pkgs; [
     networkmanager
     git
-    sddm-themes
-    # Dependencies for astronaut-theme
-    libsForQt5.qt5.qtgraphicaleffects
-    libsForQt5.qt5.qtquickcontrols2
-    libsForQt5.qt5.qtsvg
   ];
-
-  services.xserver.enable = true;
-  services.xserver.displayManager.sddm = {
-    enable = true;
-    theme = "astronaut-theme";
-  };
 
   #Configure pipewirex
   security.rtkit.enable = true;
@@ -72,15 +61,23 @@
   security.polkit.enable = true;
 
   # Setup greetd with tuigreet
-  # services.greetd = {
-  #   enable = true;
-  #   settings = {
-  #     default_session = {
-  #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland -r --asterisks";
-  #       user = "greeter";
-  #     };
-  #   };
-  # };
+  services.greetd = {
+    enable = true;
+    settings = {
+      # Tuigreet as display manager
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland -r --asterisks";
+        user = "greeter";
+      };
+    };
+  };
+
+  # Turn off network wait because it slows down boot
+  systemd.network.wait-online.enable = false;
+  systemd.services.NetworkManager-wait-online.enable = false; 
+
+  # Setup swaylock with pam (otherwise it can't unlock)
+  security.pam.services.swaylock = {};
 
   # Setup fingerprint login
   #services.fprintd.enable = true;
@@ -159,14 +156,8 @@
       timeout = 0;
       systemd-boot.configurationLimit = 10;
     };
-    # Suppress boot messages
-    plymouth.enable = true;
-    #plymouth.theme = "breeze";
-    kernelParams = ["quiet" "splash" "rd.systemd.show_status=false" "rd.udev.log_level=3" "udev.log_priority=3" "boot.shell_on_fail"];
-    consoleLogLevel = 0;
-    initrd.verbose = false;
   };
-  systemd.watchdog.rebootTime = "0";
+  
 
   # Create a config user group for users who can edit /nix-config
   # Note: You will have to grant permissions to the config folder to the config group if installing on a new system

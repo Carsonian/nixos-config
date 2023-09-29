@@ -11,7 +11,11 @@
       monitor= "eDP-1,1920x1080@60,0x0,1";
 
       # Execute apps at launch
-      exec-once = "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY in hyrpland.conf & waybar & wpaperd";
+      exec-once = ["dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY in hyrpland.conf"
+                   "waybar"
+                   "wpaperd"
+                   # "swaylock --screenshots --effect-vignette 0.8:0.8 --effect-greyscale --effect-blur 3x3 --clock --indicator --ring-ver-color 00cc0080 --inside-ver-color 3bff3b80"
+                  ];
 
       # Source a file (multi-file configs)
       # source = ~/.config/hypr/myColors.conf
