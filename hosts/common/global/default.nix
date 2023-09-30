@@ -15,7 +15,7 @@
 
   # Programs all systems will have at the system level
   programs = {
-    programs.zsh.enable = true;
+    zsh.enable = true;
     git.enable = true;  
   };
 
