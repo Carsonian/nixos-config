@@ -4,8 +4,6 @@
   # Setup Cachix
   nixConfig = {
     substituters = [
-      # Replace the official cache with a mirror located in China (not working
-      #"https://mirrors.ustc.edu.cn/nix-channels/store"
       "https://cache.nixos.org/"
     ];
 

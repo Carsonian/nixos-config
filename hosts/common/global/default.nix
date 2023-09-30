@@ -1,4 +1,4 @@
-# This file (and the global directory) holds config that i use on all hosts
+# This file (and the global directory) holds config that I use on all hosts
 { inputs, outputs, ... }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
@@ -12,4 +12,11 @@
       allowUnfree = true;
     };
   };
+
+  # Programs all systems will have at the system level
+  programs = {
+    programs.zsh.enable = true;
+    git.enable = true;  
+  };
+
 }
