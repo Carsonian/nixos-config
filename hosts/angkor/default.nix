@@ -23,7 +23,7 @@
 
   # Programs installed at a system level for angkor
   programs = {
-    
+    hyprland.enable = true;
   };
 
   #Configure pipewire
