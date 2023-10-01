@@ -78,6 +78,30 @@ This is a list of all the noteworthy programs. There are many more utilites and 
 2. Clone the repo, change your system hostname in flake.nix and configuration.nix
 3. # Run 'nixos-rebuild --flake .#your-hostname'
 
+## Structure 
+
+- `flake.nix`: Entrypoint for hosts and home configurations. Also exposes a
+  devshell for boostrapping (`nix develop` or `nix-shell`).
+- `hosts`: NixOS Configurations, accessible via `nixos-rebuild --flake`.
+  - `common`: Shared configurations imported into the machine specific configs.
+    - `global`: Configurations that are globally applied to all my machines.
+    - `optional`: Opt-in configurations my machines can use.
+  - `angkor`: Personal Laptop - Asus ZenBook UX430U | Hyprland
+  - `skadi`: TBD - Desktop PC - xx RAM, cpu, gpu | KDE?
+  - `bastet`: TBD - Server
+- `home`: My Home-manager configurations
+  - `user`: The user the home manager is customizing, Ex. "carson"
+	- `features`: "Features" (programs, configs) each hm configuration can import.
+	- `global`: Configurations all home manager configs for that user will get
+	- `"hostname".nix`: The home manager config for user@hostname. Ex. carson@angkor
+	
+- `custom`: Custom nix modules and nix files that modify or create packages. Could be shared or upstreamed, not personal configurations.
+  - `modules`: Actual modules (with options) I haven't upstreamed yet.
+  - `overlay`: Patches and version overrides for some packages.
+  - `pkgs`: My custom packages. 
+
+
+
 ## ⌨️ Keybindings
 
 I try to use Emacs keys as much as possible as it is my favorite software :)
@@ -148,8 +172,6 @@ avizo (macos like sound/brightness popup)
 
 These configurations are obviously meant for my personal use.
 
-I wrote this mostly from scratch, as an exercise to improve my understanding of the Nix and NixOS ecosystem as well as about linux, window managers and software in general.
-
 However, I try to structure it well and document options and my decisions extensively via comments (mainly for my own sake, so it's easily maintainable and I won't have to wonder why I did something in a particular way some time in the future.).
 
 So, this project might be a useful resource if you're working on your own config, so feel free to look through it, copy whatever you want, steal whatever, anything that helps!
@@ -161,29 +183,7 @@ If you're just starting with NixOS, I'd suggest you look at <https://github.com/
 I used elements and inspiration from these resources. 
 
 - https://github.com/Misterio77/nix-starter-configs
+- https://github.com/Misterio77/nix-config/tree/main
 - https://github.com/XNM1/linux-nixos-hyprland-config-dotfiles
 
-
-## Structure 
-TODO: Add my structure in the format below...
-
-- `flake.nix`: Entrypoint for hosts and home configurations. Also exposes a
-  devshell for boostrapping (`nix develop` or `nix-shell`).
-- `hosts`: NixOS Configurations, accessible via `nixos-rebuild --flake`.
-  - `common`: Shared configurations imported into the machine specific configs.
-    - `global`: Configurations that are globally applied to all my machines.
-    - `optional`: Opt-in configurations my machines can use.
-  - `angkor`: Personal Laptop - Asus ZenBook UX430U | Hyprland
-  - `skadi`: TBD - Desktop PC - xx RAM, cpu, gpu | KDE?
-  - `bastet`: TBD - Server
-- `home`: My Home-manager configurations
-  - `user`: The user the home manager is customizing, Ex. "carson"
-	- `features`: "Features" (programs, configs) each hm configuration can import.
-	- `global`: Configurations all home manager configs for that user will get
-	- `"hostname".nix`: The home manager config for user@hostname. Ex. carson@angkor
-	
-- `custom`: Custom nix modules and nix files that modify or create packages. Could be shared or upstreamed, not personal configurations.
-  - `modules`: Actual modules (with options) I haven't upstreamed yet.
-  - `overlay`: Patches and version overrides for some packages.
-  - `pkgs`: My custom packages. 
 

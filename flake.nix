@@ -49,7 +49,7 @@
       # Accessible through 'nix build', 'nix shell', etc
       packages = forAllSystems (system:
         let pkgs = nixpkgs.legacyPackages.${system};
-        in import ./pkgs { inherit pkgs; }
+        in import ./custom/pkgs { inherit pkgs; }
       );
 
       # Devshell for bootstrapping
@@ -60,14 +60,14 @@
       );
       
       # Your custom packages and modifications, exported as overlays
-      overlays = import ./overlays { inherit inputs; };
+      overlays = import ./custom/overlays { inherit inputs; };
 
       # Reusable nixos modules you might want to export
       # These are usually stuff you would upstream into nixpkgs
-      nixosModules = import ./modules/nixos;
+      nixosModules = import ./custom/modules/nixos;
       # Reusable home-manager modules you might want to export
       # These are usually stuff you would upstream into home-manager
-      homeManagerModules = import ./modules/home-manager;
+      homeManagerModules = import ./custom/modules/home-manager;
 
       # Availbale through 'nixos-rebuild --flake .#hostname'
       nixosConfigurations = {
