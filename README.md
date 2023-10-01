@@ -1,4 +1,4 @@
-<div align="center"><img width="350" height="350" src="pictures/nixoslogowithtext.png"></div>
+<div align="center"><img width="350" height="350" img src="https://raw.githubusercontent.com/NixOS/nixos-artwork/e7e665687ff9d80550e26948405511bc70b5c6de/logo/nixos.svg"></div>
 <h1 align="center">NixOS & Hyprland Configuration</h1>
 
 <div align="center">
@@ -55,7 +55,7 @@ TODO: Add gif eventually
 | Lock             | Swaylock - To install                |
 | Logout menu      | Wlogout - To install                 |
 | Wallpaper        | Wpaperd                              |
-| Graphical Boot   | Plymouth                             |
+| Graphical Boot   | None (No Plymouth)                   |
 | Display Manager  | Greetd + Tuigreet                    |
 
 This is a list of all the noteworthy programs. There are many more utilites and programs installed that aren't listed. Check the home.nix and configuration.nix pkgs to see them all.
@@ -166,41 +166,24 @@ I used elements and inspiration from these resources.
 
 ## Structure 
 TODO: Add my structure in the format below...
-```
-project
-│   README.md
-│   flake.nix (entry to configuration)
-│   ...
-│
-└───emacs (doom emacs config)
-│   │   install (install script that symlinks emacs config into place)
-│   │   file012.txt
-│   │   ...
-│
-└───home (default home-manager configs)
-│   │   ...
-│
-└───machines (hardware configuration for all machines this config runs on)
-│   └───ascent (ephemeral matrix host)
-│   │   ...
-│   └───DovDev (daily driver laptop)
-│   │   ...
-│   └───DovDevUbuntu (nix on ubuntu)
-│   │   ...
-│   └───nixosvm (base config for running nixos on a virtualbox vm)
-│   │   ...
-│
-└───modules (custom nixos modules)
-│   │   ...
-│
-└───overlays
-│   │   default.nix (default package overides)
-│
-└───pkgs (custom packages)
-│   │   ...
-│
-└───users
-│   └───$user
-│   │   default.nix (called in the system context)
-│   │   home.nix (called in the home-manager context)
-```
+
+- `flake.nix`: Entrypoint for hosts and home configurations. Also exposes a
+  devshell for boostrapping (`nix develop` or `nix-shell`).
+- `hosts`: NixOS Configurations, accessible via `nixos-rebuild --flake`.
+  - `common`: Shared configurations imported into the machine specific configs.
+    - `global`: Configurations that are globally applied to all my machines.
+    - `optional`: Opt-in configurations my machines can use.
+  - `angkor`: Personal Laptop - Asus ZenBook UX430U | Hyprland
+  - `skadi`: TBD - Desktop PC - xx RAM, cpu, gpu | KDE?
+  - `bastet`: TBD - Server
+- `home`: My Home-manager configurations
+  - `user`: The user the home manager is customizing, Ex. "carson"
+	- `features`: "Features" (programs, configs) each hm configuration can import.
+	- `global`: Configurations all home manager configs for that user will get
+	- `"hostname".nix`: The home manager config for user@hostname. Ex. carson@angkor
+	
+- `custom`: Custom nix modules and nix files that modify or create packages. Could be shared or upstreamed, not personal configurations.
+  - `modules`: Actual modules (with options) I haven't upstreamed yet.
+  - `overlay`: Patches and version overrides for some packages.
+  - `pkgs`: My custom packages. 
+
