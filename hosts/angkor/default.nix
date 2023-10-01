@@ -45,11 +45,9 @@
     xkbVariant = "colemak";
     xkbOptions = "ctrl:nocaps";
   };
-
   # Use same config for ttyl console
   console.useXkbConfig = true;
 
-  #programs.hyprland.enable = true;
   security.polkit.enable = true;
 
   # Setup greetd with tuigreet
@@ -66,7 +64,6 @@
 
   # Use network manager
   networking.networkmanager.enable = true;
-
   # Turn off network wait because it slows down boot
   systemd.network.wait-online.enable = false;
   systemd.services.NetworkManager-wait-online.enable = false; 
