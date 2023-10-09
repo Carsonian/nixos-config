@@ -56,7 +56,16 @@
 ;;'((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
 
 ;; Install different modes
-(use-package ledger-mode)
+(use-package ledger-mode
+  ;; Setup tab completion for ledger mode
+  :init
+  (add-hook 'ledger-mode-hook
+	    (lambda ()
+	      (setq-local tab-always-indent 'complete)
+	      (setq-local completion-cycle-threshold t)
+	      (setq-local ledger-complete-in-steps t)))
+  )
+
 (use-package nix-mode)
 (use-package markdown-mode
   :mode ("README\\.md\\'" . gfm-mode)
@@ -156,30 +165,32 @@
 ;; Use C-. to perform actions on things
 (use-package embark
   :bind
-  (("C-." . embark-act)
-   :config
-   ;; Hide the mode line of the Embark live/completions buffers
-   (add-to-list 'display-buffer-alist
-		'("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
-                  nil
-                  (window-parameters (mode-line-format . none)))))
+  (("C-." . embark-act))
+  ;;("C-;" . embark-dwim)        ;; good alternative: M-.
+  
+  :config
+  ;; Hide the mode line of the Embark live/completions buffers
+  (add-to-list 'display-buffer-alist
+	       '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none))))
   )
 
 ;; A few more useful configurations...
-  (use-package emacs
-    :init
-    ;; Emacs 28: Hide commands in M-x which do not apply to the current mode.
-    (setq read-extended-command-predicate
-          #'command-completion-default-include-p)
+(use-package emacs
+  :init
+  ;; Emacs 28: Hide commands in M-x which do not apply to the current mode.
+  (setq read-extended-command-predicate
+        #'command-completion-default-include-p)
 
-    ;; Do not allow the cursor in the minibuffer prompt
-    (setq minibuffer-prompt-properties
-          '(read-only t cursor-intangible t face minibuffer-prompt))
-    (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+  ;; Do not allow the cursor in the minibuffer prompt
+  (setq minibuffer-prompt-properties
+        '(read-only t cursor-intangible t face minibuffer-prompt))
+  (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
 
-    ;; Enable recursive minibuffers
-    (setq enable-recursive-minibuffers t)
-    )
+  ;; Enable recursive minibuffers
+  (setq enable-recursive-minibuffers t)
+  )
 
 ;; End of  vertico & friends packages #########################
 

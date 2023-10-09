@@ -32,6 +32,7 @@
     neofetch
     
     multimarkdown
+    android-file-transfer
   ];
 
   # Configure packages with home manager options ##################################
