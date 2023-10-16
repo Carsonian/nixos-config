@@ -7,6 +7,8 @@
 
     ../common/global
     ../common/users/carson.nix
+
+    ../common/optional/python
   ];
 
   # Set hostname

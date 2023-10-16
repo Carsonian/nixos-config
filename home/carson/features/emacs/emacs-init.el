@@ -55,15 +55,22 @@
 ;;(setq org-todo-keywords
 ;;'((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
 
+;; Setup elpy
+(use-package elpy
+  :ensure t
+  :init
+  (elpy-enable))
+
 ;; Install different modes
 (use-package ledger-mode
   ;; Setup tab completion for ledger mode
   :init
   (add-hook 'ledger-mode-hook
-	    (lambda ()
-	      (setq-local tab-always-indent 'complete)
-	      (setq-local completion-cycle-threshold t)
-	      (setq-local ledger-complete-in-steps t)))
+	    ;;(lambda ()
+	    (setq-local tab-always-indent 'complete)
+	    (setq-local completion-cycle-threshold t)
+	    (setq-local ledger-complete-in-steps t))
+  ;;)
   )
 
 (use-package nix-mode)
