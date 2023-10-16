@@ -10,6 +10,7 @@
       gruvbox-theme
       nerd-icons
       ledger-mode
+      elpy
       nix-mode
       markdown-mode
       which-key

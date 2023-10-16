@@ -1,24 +1,8 @@
 { inputs, outputs, pkgs, ... }: {
   
-  #   environment.systemPackages = with pkgs; [
-  #     (python3.withPackages(ps: with ps; [ pandas requests]))
-  #   ];
-  # }
-
-
-  # let
-  #   my-python-packages = ps: with ps; [
-  #     pandas
-  #     requests
-  #     # other python packages
-  #   ];
-  # in
-  #   environment.systemPackages = [
-  #     (pkgs.python3.withPackages my-python-packages)
-  #   ];
-  
   environment.systemPackages = 
     let
+      # Install python packages here
       my-python-packages = ps: with ps; [
         pandas
         #requests
@@ -26,6 +10,7 @@
       ];
 
     in with pkgs; [
+      # This installs python 3 with all the packages listed above
       (python3.withPackages my-python-packages)
     ];
 }
