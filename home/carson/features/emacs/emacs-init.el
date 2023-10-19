@@ -60,20 +60,16 @@
   :ensure t
   :init
   (elpy-enable))
-;; workon home
-(setenv "WORKON_HOME" "/home/carson/Files/python_projects/base-venv/.venv")
-;;(setq elpy-rpc-virtualenv-path 'current)
-
 
 ;; Install different modes
 (use-package ledger-mode
   ;; Setup tab completion for ledger mode
   :init
   (add-hook 'ledger-mode-hook
-	    ;;(lambda ()
-	    (setq-local tab-always-indent 'complete)
-	    (setq-local completion-cycle-threshold t)
-	    (setq-local ledger-complete-in-steps t))
+	    (lambda ()
+	      (setq-local tab-always-indent 'complete)
+	      (setq-local completion-cycle-threshold t)
+	      (setq-local ledger-complete-in-steps t)))
   ;;)
   )
 
@@ -82,7 +78,11 @@
   :mode ("README\\.md\\'" . gfm-mode)
   :init (setq markdown-command "multimarkdown"))
 
-;; Install some basic helper packages
+;; Install packages
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
+
 (use-package which-key
   :init
   (which-key-mode))

@@ -13,6 +13,7 @@
       elpy
       nix-mode
       markdown-mode
+      doom-modeline
       which-key
       magit
       flycheck
