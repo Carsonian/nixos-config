@@ -60,6 +60,10 @@
   :ensure t
   :init
   (elpy-enable))
+;; workon home
+(setenv "WORKON_HOME" "/home/carson/Files/python_projects/base-venv/.venv")
+(setq elpy-rpc-virtualenv-path 'current)
+
 
 ;; Install different modes
 (use-package ledger-mode

@@ -6,7 +6,7 @@
       my-python-packages = ps: with ps; [
         pandas
         #requests
-        # other python packages
+          # other python packages
       ];
 
     in with pkgs; [
