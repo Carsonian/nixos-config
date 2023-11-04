@@ -9,7 +9,6 @@
     ../common/users/carson.nix
 
     ../common/optional/python
-    ../common/optional/metabase.nix
   ];
 
   # Set hostname

@@ -8,7 +8,6 @@
     ./features/emacs/default.nix
     ./features/fonts.nix
     
-    
     inputs.nix-colors.homeManagerModule
 
   ];
@@ -29,6 +28,8 @@
     # Programs
     firefox
     ledger
+    sqlite
+    metabase
     libreoffice
     neofetch
     
