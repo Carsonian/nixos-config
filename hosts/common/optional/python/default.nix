@@ -9,12 +9,14 @@
         pandas
         #requests
         # other python packages
+        matplotlib
+        tabulate
         
       ];
 
     in with pkgs; [
       # This installs python 3 with all the packages listed above
-      (python3.withPackages my-python-packages)
+      (python311.withPackages my-python-packages)
     ];
 }
 

@@ -79,9 +79,10 @@
   :init (setq markdown-command "multimarkdown"))
 
 ;; Install packages
+
 (use-package doom-modeline
-  :ensure t
   :init (doom-modeline-mode 1))
+(setq doom-modeline-position-column-format '("C%c"))
 
 (use-package which-key
   :init
@@ -124,11 +125,11 @@
   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
   (add-hook 'nix-mode-hook #'aggressive-indent-mode))
 
-;; Swiper for better searching with C-s
-(use-package swiper
-  :bind
-  (("\C-s" . swiper))
-  )
+;; ;; Swiper for better searching with C-s
+;; (use-package swiper
+;;   :bind
+;;   (("\C-s" . swiper))
+;;   )
 
 ;; Dashboard setup
 (use-package dashboard
