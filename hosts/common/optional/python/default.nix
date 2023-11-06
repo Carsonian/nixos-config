@@ -5,9 +5,13 @@
       # Install python packages here
       my-python-packages = ps: with ps; [
         pip
+        setuptools
         flake8
         pandas
         #requests
+        sqlalchemy
+        plotly
+        dash
         # other python packages
         matplotlib
         tabulate

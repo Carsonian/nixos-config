@@ -1,5 +1,5 @@
 # This file (and the global directory) holds config that I use on all hosts
-{ inputs, outputs, ... }: {
+{ inputs, outputs, pkgs, ... }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
   ] ++ (builtins.attrValues outputs.nixosModules);
@@ -16,7 +16,12 @@
   # Programs all systems will have at the system level
   programs = {
     zsh.enable = true;
-    git.enable = true;  
+    git.enable = true;
+    
   };
+
+  environment.systemPackages = [
+    pkgs.unzip
+  ];
 
 }
