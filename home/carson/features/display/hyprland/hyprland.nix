@@ -176,7 +176,7 @@
         "$mainMod, F, exec, firefox"
         "$mainMod, E, exec, emacs"
         "$mainMod, L, exec, swaylock -fF --screenshots --effect-vignette 0.8:0.8 --effect-greyscale --effect-blur 3x3 --clock --indicator --ring-ver-color 00cc0080 --inside-ver-color ${config.colorScheme.colors.base0B}"
-        "$mainMod, R, exec, fuzzel"
+        "$mainMod, R, exec, rofi -show"
         
         # Cycle focus with n & p (emacs keys) 
         "$mainMod, N, cyclenext"
