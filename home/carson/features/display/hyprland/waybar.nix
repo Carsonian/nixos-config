@@ -34,11 +34,7 @@
 			      "urgent" = "";
 			      "active" = "";
 			      "default" = "󰧞";
-            "persistent" = "󰧞";
             "sort-by-number" = true;
-          };
-          "persistent-workspaces" = {
-            "*" = 2;
           };
         };
 
@@ -176,7 +172,7 @@ window#waybar {
 #workspaces {
 	background: #${config.colorScheme.colors.base01};
 	margin: 5px 5px 5px 5px;
-  padding: 0px 5px 0px 5px;
+  padding: 0px 9px 0px 5px;
 	border-radius: 16px;
   border: solid 0px #f4d9e1;
   font-weight: normal;
@@ -184,7 +180,7 @@ window#waybar {
 }
 
 #workspaces button {
-    color: #${config.colorScheme.colors.base06};
+    color: #${config.colorScheme.colors.base01};
     padding: 0px 5px;
     border-radius: 16px;
     color: #928374;
