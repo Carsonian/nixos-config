@@ -232,7 +232,7 @@ window#waybar {
 }
 
 #battery {
-    margin-left: 10px;
+    margin-left: 12px;
     margin-right: 6px;
     color: #9ece6a;
 }
