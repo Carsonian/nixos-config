@@ -15,7 +15,7 @@
         "margin-right" = 0;
         "modules-left" = ["custom/launcher" "cpu" "memory" "disk" "custom/playerctl" "custom/playerlabel"];
         "modules-center" = [ "hyprland/workspaces"];
-        "modules-right" = ["tray" "wireplumber" "backlight" "network" "battery" "clock"];
+        "modules-right" = ["tray" "wireplumber" "backlight" "network" "clock" "battery"];
         
         # Modules configuration
 	      "clock" = {
