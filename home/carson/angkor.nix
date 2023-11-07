@@ -48,31 +48,6 @@
       userEmail = "carson2477@live.com";
     };
 
-    fuzzel = {
-      enable = true;
-      settings = {
-        main = {
-          terminal = "kitty -e";
-          layer = "overlay";
-          font = "JetBrains Mono Nerd Font";
-          prompt = "'󱎱 '";
-        };
-        colors = {
-          background = "${config.colorScheme.colors.base00}80";
-          text = "${config.colorScheme.colors.base07}E6";
-          #icon-theme = "hicolor";
-          match = "${config.colorScheme.colors.base09}E6";
-          selection = "${config.colorScheme.colors.base04}CC";
-          selection-text = "${config.colorScheme.colors.base01}FF";
-          selection-match = "${config.colorScheme.colors.base08}E6";
-          border = "${config.colorScheme.colors.base03}E6";
-        };
-        border = {
-          width = 3;
-          radius = 10;
-        };
-      };
-    };
     
   };
   

@@ -9,7 +9,6 @@
     enable = true;
     package = pkgs.rofi-wayland;
     configPath = "$HOME/.config/rofi";
-    theme = ./style-theme2.rasi;
     font = "JetBrains Mono Nerd Font";
     plugins = with pkgs; [
       rofi-calc
@@ -17,14 +16,25 @@
       rofi-mpd
     ];
     extraConfig = {
-      modes = "window,drun,run,ssh,combi,calc,power-menu:${pkgs.rofi-power-menu}/bin/rofi-power-menu";
+      modes = "window,drun,run,ssh,combi,calc,power-menu:$HOME/.config/rofi/powermenu.sh";
+    };
+  };
+
+  home.file = {
+    "/.config/rofi/config.rasi" = {
+      source = ./style-theme2.rasi;
+    };
+  };
+  home.file = {
+    "/.config/rofi/powermenu.rasi" = {
+      source = ./powermenu.rasi;
+    };
+  };
+  home.file = {
+    "/.config/rofi/powermenu.sh" = {
+      source = ./powermenu.sh;
+      executable = true;
     };
   };
   
-  home.file = {
-    "$HOME/.config/rofi/powermenu.rasi" = {
-      source = ./powermenu.rasi;
-          };
-  };
-    
 }
