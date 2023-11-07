@@ -121,8 +121,8 @@
         wireplumber = {
 	        tooltip = false;
 		      scroll-step = 1;
-		      format = "{icon}  {volume}%";
-		      format-muted = "󰝟  {volume}%";
+		      format = "<span>{icon} </span>  {volume}%";
+		      format-muted = "<span>󰝟 </span> {volume}%";
 		      on-click ="wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
 		      format-icons = {
 			      default = [""  ""  ""];
@@ -131,7 +131,7 @@
 
         backlight = {
 		      tooltip = false;
-		      format = "{icon} {}%";
+		      format = "<span>{icon} </span> {}%";
           "format-icons" = ["" "" "" "" "" "" "" "" "󰖨"];
 		      interval =1;
           on-scroll-up = "brightnessctl s +1%";
