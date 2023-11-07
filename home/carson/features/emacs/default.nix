@@ -11,6 +11,7 @@
       nerd-icons
       ledger-mode
       elpy
+      company
       nix-mode
       markdown-mode
       doom-modeline
@@ -29,6 +30,7 @@
       vertico
       orderless
       marginalia
+      consult
       embark
       swiper
       base16-theme

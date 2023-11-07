@@ -29,6 +29,9 @@
 ;; Turn autopair on
 (setq electric-pair-mode t)
 
+;; Turn repeat mode on
+(setq repeat-mode t)
+
 ;; Display line numbers in every buffer
 (global-display-line-numbers-mode 1)
 
@@ -57,9 +60,18 @@
 
 ;; Setup elpy
 (use-package elpy
-  :ensure t
   :init
   (elpy-enable))
+
+;; Setup elpy
+(use-package company
+  :init
+  (add-hook 'after-init-hook 'global-company-mode)
+  (setq company-idle-delay 0) ; No delay in showing suggestions.
+  (setq company-minimum-prefix-length 1) ; Show suggestions after entering one character.
+  (setq company-selection-wrap-around t)
+  (company-tng-configure-default) ; Use tab key to cycle through suggestions. ('tng' means 'tab and go')
+  )
 
 ;; Install different modes
 (use-package ledger-mode
@@ -174,6 +186,14 @@
   :init
   (marginalia-mode))
 
+(use-package consult
+  ;; Replace bindings. Lazily loaded due by `use-package'.
+  :bind (
+	 ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
+	 ("\C-s" . consult-line)
+	 )
+  )
+
 ;; Use C-. to perform actions on things
 (use-package embark
   :bind
@@ -184,8 +204,8 @@
   ;; Hide the mode line of the Embark live/completions buffers
   (add-to-list 'display-buffer-alist
 	       '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
-                 nil
-                 (window-parameters (mode-line-format . none))))
+		 nil
+		 (window-parameters (mode-line-format . none))))
   )
 
 ;; A few more useful configurations...

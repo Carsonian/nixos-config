@@ -7,6 +7,7 @@
     ./features/kitty.nix
     ./features/emacs/default.nix
     ./features/fonts.nix
+    #./features/firefox.nix
     
     inputs.nix-colors.homeManagerModule
 
@@ -29,7 +30,6 @@
     firefox
     ledger
     sqlite
-    metabase
     libreoffice
     neofetch
     

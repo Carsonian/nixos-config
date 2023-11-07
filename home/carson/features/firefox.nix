@@ -39,23 +39,19 @@
       "browser.newtabpage.activity-stream.section.highlights.includePocket" =
         false;
       "browser.newtabpage.activity-stream.showSponsored" = false;
-      "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
       "browser.newtabpage.pinned" = false;
       "browser.protections_panel.infoMessage.seen" = true;
       "browser.quitShortcut.disabled" = true;
-      "browser.shell.checkDefaultBrowser" = false;
       "browser.ssb.enabled" = true;
       "browser.toolbars.bookmarks.visibility" = "never";
       "browser.urlbar.placeholderName" = "DuckDuckGo";
       "browser.urlbar.suggest.openpage" = false;
       "datareporting.policy.dataSubmissionEnable" = false;
       "datareporting.policy.dataSubmissionPolicyAcceptedVersion" = 2;
-      "dom.security.https_only_mode" = true;
       "dom.security.https_only_mode_ever_enabled" = true;
       "extensions.getAddons.showPane" = false;
       "extensions.htmlaboutaddons.recommendations.enabled" = false;
       "extensions.pocket.enabled" = false;
-      "identity.fxaccounts.enabled" = false;
       "privacy.trackingprotection.enabled" = true;
       "privacy.trackingprotection.socialtracking.enabled" = true;
     };
