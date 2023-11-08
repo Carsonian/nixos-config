@@ -5,7 +5,7 @@
 #
 ## Applets : MPD (music)
 
-theme="$HOME/.config/rofi/powermenu.rasi"
+theme="$HOME/.config/rofi/applet.rasi"
 
 status="`mpc status`"
 if [[ -z "$status" ]]; then
@@ -32,16 +32,17 @@ if [[ "$layout" == 'NO' ]]; then
 	option_5="󰑖 Repeat"
 	option_6=" Random"
 else
+    if [[ "$layout" == 'NO' ]]; then
 	if [[ ${status} == *"[playing]"* ]]; then
-		option_1=""
+		option_1="󰏤"
 	else
-		option_1=""
+		option_1=""
 	fi
-	option_2=""
-	option_3=""
-	option_4=""
-	option_5=""
-	option_6=""
+	option_2=""
+	option_3="󰒮"
+	option_4="󰒭"
+	option_5="󰑖"
+	option_6=""
 fi
 
 # Toggle Actions

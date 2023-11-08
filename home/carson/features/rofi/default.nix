@@ -41,5 +41,16 @@
       executable = true;
     };
   };
+  home.file = {
+    "/.config/rofi/applet.rasi" = {
+      source = ./applet.rasi;
+    };
+  };
+  home.file = {
+    "/.config/rofi/mpd-applet.sh" = {
+      source = ./mpd-applet.sh;
+      executable = true;
+    };
+  };
   
 }

@@ -16,7 +16,7 @@
     gruvbox-dark-gray:         #a89984;
 
 /*****----- Colors (Gruvbox) -----*****/
-* {
+
     background:     #282828FF;
     background-alt: #353535FF;
     foreground:     #EBDBB2FF;
