@@ -8,7 +8,7 @@
       mainBar = {
         "position" = "top";
         "layer" = "top";
-        "height" = 16;
+        "height" = 18;
         "margin-top" = 0;
         "margin-bottom" = 0;
         "margin-left" = 0;
@@ -128,7 +128,8 @@
         backlight = {
 		      tooltip = false;
 		      format = "<span>{icon} </span> {}%";
-          "format-icons" = ["" "" "" "" "" "" "" "" "󰖨"];
+          "format-icons" = ["" "" "" "" "" "" "" "" "󰃠"];
+          #"format-icons" = ["󰃞" "󰃝" "󰃟" "󰃠"];
 		      interval =1;
           on-scroll-up = "brightnessctl s +1%";
 		      on-scroll-down = "brightnessctl s 1%-";
@@ -137,7 +138,7 @@
         "custom/launcher" ={
           tooltip = false;
           format = " ";
-          on-click = "fuzzel";
+          on-click = "~/.config/rofi/powermenu.sh";
         };
       };
     };
@@ -160,7 +161,7 @@ window#waybar {
 
 .modules-right {
     /*background-color: transparent;*/
-    background-color: #${config.colorScheme.colors.base01};
+    background-color: #${config.colorScheme.colors.base00};
     color: #${config.colorScheme.colors.base06};
     border-radius: 16px;
     font-size: 12px;
@@ -170,7 +171,7 @@ window#waybar {
 }
 
 #workspaces {
-	background: #${config.colorScheme.colors.base01};
+	background: #${config.colorScheme.colors.base00};
 	margin: 5px 5px 5px 5px;
   padding: 0px 9px 0px 5px;
 	border-radius: 16px;
@@ -194,7 +195,7 @@ window#waybar {
 
 #custom-power {
 	color: #${config.colorScheme.colors.base0B};
-	background-color: #${config.colorScheme.colors.base01};
+	background-color: #${config.colorScheme.colors.base00};
 	border-radius: 5px;
 	margin-right: 10px;
 	margin-top: 5px;
@@ -204,7 +205,7 @@ window#waybar {
 }
 
 #tray {
-    background: #${config.colorScheme.colors.base01};
+    background: #${config.colorScheme.colors.base00};
     margin: 5px 5px 5px 5px;
     border-radius: 16px;
     padding: 0px 5px;
@@ -247,7 +248,7 @@ window#waybar {
 }
 
 #cpu, #memory, #disk {
-    background-color: #${config.colorScheme.colors.base01};
+    background-color: #${config.colorScheme.colors.base00};
     color: #${config.colorScheme.colors.base06};
     border-radius: 16px;
     margin: 5px;

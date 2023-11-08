@@ -33,7 +33,8 @@
     sqlite
     libreoffice
     neofetch
-    
+
+    bluetuith
     multimarkdown
     android-file-transfer
   ];

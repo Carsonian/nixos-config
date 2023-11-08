@@ -4,9 +4,9 @@ configuration {
 	modi:                       "drun,run,filebrowser,ssh,window";
     show-icons:                 false;
     display-drun:               " Apps";
-    display-run:                " Run";
-    display-filebrowser:        " Files";
     display-window:             " Windows";
+    display-filebrowser:        " Files";
+    display-run:                " Run";
 	display-ssh:                " SSH";
 	drun-display-format:        "{name}";
 	window-format:              "{w} · {c} · {t}";

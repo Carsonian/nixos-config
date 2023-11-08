@@ -9,9 +9,9 @@ uptime="`awk '{printf("%d days, %d hours, %02d mins, %02d seconds\n",($1/60/60/2
 host=`hostname`
 
 # Options
-shutdown='⏻'
-reboot=''
-lock=''
+shutdown='󰐥'
+reboot='󰓦'
+lock='󰍁'
 suspend=''
 logout=''
 yes='󰄬'

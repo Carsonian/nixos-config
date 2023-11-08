@@ -3,8 +3,16 @@
 theme="$HOME/.config/rofi/applet.rasi"
 
 # Volume Info
-speaker="`wpctl get-volume @DEFAULT_AUDIO_SINK@`"
-mic="`wpctl get-volume @DEFAULT_AUDIO_SOURCE@`"
+speaker="`wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -c 11-12 | sed 's/$/%/'`"
+mic="`wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | cut -c 11-12 | sed 's/$/%/'`"
+bluetooth_device="`bluetoothctl devices | cut -f2 -d' ' | while read uuid; do bluetoothctl info $uuid; done|grep -e "Connected\|Name"| head -1 | cut -c 8-50 `"
+bluetooth_connected="`bluetoothctl devices | cut -f2 -d' ' | while read uuid; do bluetoothctl info $uuid; done|grep -e "Connected\|Name"| tail -1| cut -c 13-50`"
+
+if [[ ${bluetooth_connected} == "yes" ]]; then
+    bluetooth_connected="Connected"
+else
+    bluetooth_connected="Disconnected"
+fi  
 
 active=""
 urgent=""
@@ -13,67 +21,43 @@ urgent=""
 if wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep '\[MUTED\]'; then
 	active="-a 1"
 	stext='Unmute'
-	sicon=''
+	sicon='󰕾'
 else
 	urgent="-u 1"
 	stext='Mute'
-	sicon=''
+	sicon='󰖁'
 fi
 
 # Microphone Info
 if wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep '\[MUTED\]'; then
     [ -n "$active" ] && active+=",3" || active="-a 3"
-	mtext='Unmute'
-	micon=''
+	mtext='Mute'
+	micon='󰍭'
 else
     [ -n "$urgent" ] && urgent+=",3" || urgent="-u 3"
-	mtext='Mute'
-	micon=''
+	mtext='Unmuted'
+	micon='󰍬'
 fi
 
 # Theme Elements
-prompt="S:$stext, M:$mtext"
-mesg="Speaker: $speaker, Mic: $mic"
-
-if [[ "$theme" == *'type-1'* ]]; then
-	list_col='1'
-	list_row='5'
-	win_width='400px'
-elif [[ "$theme" == *'type-3'* ]]; then
-	list_col='1'
-	list_row='5'
-	win_width='120px'
-elif [[ "$theme" == *'type-5'* ]]; then
-	list_col='1'
-	list_row='5'
-	win_width='520px'
-elif [[ ( "$theme" == *'type-2'* ) || ( "$theme" == *'type-4'* ) ]]; then
-	list_col='5'
-	list_row='1'
-	win_width='670px'
-fi
+prompt="Volume - $speaker"
+mesg="󰂯 $bluetooth_device - $bluetooth_connected"
+list_col='5'
+list_row='1'
+win_width='670px'
 
 # Options
-layout=`cat ${theme} | grep 'USE_ICON' | cut -d'=' -f2`
-if [[ "$layout" == 'NO' ]]; then
-	option_1=" Increase"
-	option_2="$sicon $stext"
-	option_3=" Decrese"
-	option_4="$micon $mtext"
-	option_5=" Settings"
-else
-	option_1=""
-	option_2="$sicon"
-	option_3=""
-	option_4="$micon"
-	option_5=""
-fi
+option_1="󰝝"
+option_2="$sicon"
+option_3="󰝞"
+option_4="$micon"
+option_5="󰂳"
 
 # Rofi CMD
 rofi_cmd() {
 	rofi -theme-str "window {width: $win_width;}" \
 		-theme-str "listview {columns: $list_col; lines: $list_row;}" \
-		-theme-str 'textbox-prompt-colon {str: "";}' \
+		-theme-str 'textbox-prompt-colon {str: "󰕾";}' \
 		-dmenu \
 		-p "$prompt" \
 		-mesg "$mesg" \
@@ -89,16 +73,16 @@ run_rofi() {
 
 # Execute Command
 run_cmd() {
-	if [[ "$1" == '--opt1' ]]; then
-		amixer -Mq set Master,0 5%+ unmute
-	elif [[ "$1" == '--opt2' ]]; then
-		amixer set Master toggle
-	elif [[ "$1" == '--opt3' ]]; then
-		amixer -Mq set Master,0 5%- unmute
-	elif [[ "$1" == '--opt4' ]]; then
-		amixer set Capture toggle
+    if [[ "$1" == '--opt1' ]]; then
+	wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+
+    elif [[ "$1" == '--opt2' ]]; then
+	wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+    elif [[ "$1" == '--opt3' ]]; then
+	wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%-
+    elif [[ "$1" == '--opt4' ]]; then
+	wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 	elif [[ "$1" == '--opt5' ]]; then
-		pavucontrol
+		kitty -e bluetuith
 	fi
 }
 
