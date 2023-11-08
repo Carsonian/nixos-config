@@ -22,7 +22,12 @@
 
   home.file = {
     "/.config/rofi/config.rasi" = {
-      source = ./style-theme2.rasi;
+      source = ./theme.rasi;
+    };
+  };
+  home.file = {
+    "/.config/rofi/colors.rasi" = {
+      source = ./colors.rasi;
     };
   };
   home.file = {
