@@ -1,19 +1,17 @@
 #!/usr/bin/env bash
 
-## Author  : Aditya Shakya (adi1090x)
-## Github  : @adi1090x
-#
-## Applets : MPD (music)
-
 theme="$HOME/.config/rofi/applet.rasi"
 
 status="`mpc status`"
 if [[ -z "$status" ]]; then
-	prompt='Offline'
-	mesg="MPD is Offline"
+    prompt='Offline'
+    mesg="MPD is Offline"
+elif [[ ${status} == *"[playing]"* ]]; then
+    prompt="`mpc -f "%artist%" current`"
+    mesg="`mpc -f "%title%" current` :: `mpc status | grep "#" | awk '{print $3}'`"	
 else
-	prompt="`mpc -f "%artist%" current`"
-	mesg="`mpc -f "%title%" current` :: `mpc status | grep "#" | awk '{print $3}'`"
+    prompt='None'
+    mesg="Nothing is playing"
 fi
 	list_col='6'
 	list_row='1'
@@ -32,17 +30,16 @@ if [[ "$layout" == 'NO' ]]; then
 	option_5="󰑖 Repeat"
 	option_6=" Random"
 else
-    if [[ "$layout" == 'NO' ]]; then
-	if [[ ${status} == *"[playing]"* ]]; then
-		option_1="󰏤"
-	else
-		option_1=""
-	fi
-	option_2=""
-	option_3="󰒮"
-	option_4="󰒭"
-	option_5="󰑖"
-	option_6=""
+    if [[ ${status} == *"[playing]"* ]]; then
+	option_1="󰏤"
+    else
+	option_1="󰐊"
+    fi
+    option_2="󰓛"
+    option_3="󰒮"
+    option_4="󰒭"
+    option_5="󰑖"
+    option_6="󰒟"
 fi
 
 # Toggle Actions
@@ -68,7 +65,7 @@ fi
 # Rofi CMD
 rofi_cmd() {
 	rofi -theme-str "listview {columns: $list_col; lines: $list_row;}" \
-		-theme-str 'textbox-prompt-colon {str: "";}' \
+		-theme-str 'textbox-prompt-colon {str: "󰲸";}' \
 		-dmenu \
 		-p "$prompt" \
 		-mesg "$mesg" \

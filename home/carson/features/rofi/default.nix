@@ -52,5 +52,11 @@
       executable = true;
     };
   };
+  home.file = {
+    "/.config/rofi/volume-applet.sh" = {
+      source = ./volume-applet.sh;
+      executable = true;
+    };
+  };
   
 }
