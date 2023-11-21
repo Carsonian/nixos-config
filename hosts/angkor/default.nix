@@ -76,7 +76,7 @@
   # Setup fingerprint login
   #services.fprintd.enable = true;
   #security.pam.services.carson.fprintAuth = config.services.fprintd.enable;
-  
+
   # Create a config user group for users who can edit /nix-config
   # Note: You will have to grant permissions to the config folder to the config group if installing on a new system
   users.groups.config = {};
