@@ -34,6 +34,8 @@
     libreoffice
     neofetch
 
+    metabase
+
     bluetuith
     multimarkdown
     android-file-transfer

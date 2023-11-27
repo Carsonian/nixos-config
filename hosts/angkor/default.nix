@@ -9,6 +9,8 @@
     ../common/users/carson.nix
 
     ../common/optional/python
+    ../common/optional/gnome.nix
+    
   ];
 
   # Set hostname
