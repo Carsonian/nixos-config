@@ -91,27 +91,12 @@
       animations = {
         enabled = "yes";
 
-        # bezier=[
-        #   "slow,0,0.85,0.3,1"
-        #   "overshot,0.7,0.6,0.1,1.1"
-        #   "bounce,1,1.6,0.1,0.85"
-        #   "slingshot,1,-2,0.9,1.25"
-        #   "nice,0,6.9,0.5,-4.20"
-        # ];
-
         bezier = [
           "wind, 0.05, 0.9, 0.1, 1.05"
           "winIn, 0.1, 1.1, 0.1, 1.1"
           "winOut, 0.3, -0.3, 0, 1"
           "liner, 1, 1, 1, 1"
         ]; 
-
-        # animation = [
-        #   "windows,1,1,bounce,slide"
-        #   "border,1,20,default"
-        #   "fade,1,5,default"
-        #   "workspaces,1,5,overshot,slide"
-        # ];
 
         animation = [
           "windows, 1, 6, wind, slide"

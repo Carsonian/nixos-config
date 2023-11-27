@@ -10,7 +10,7 @@
 
     ../common/optional/python
     
-    ../common/de-wm/gnome.nix
+    #../common/de-wm/gnome.nix
     ../common/de-wm/hyprland-wm.nix
     
   ];

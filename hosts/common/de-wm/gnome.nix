@@ -25,6 +25,5 @@
   programs.dconf.enable = true;
   environment.systemPackages = with pkgs; [
     gnome.gnome-tweaks
-    gnome.adwaita-icon-theme
   ];
 }

@@ -2,12 +2,13 @@
   imports = [
     ./global
     ./features/cli
-    #./features/display/hyprland
+    ./features/display/hyprland
     ./features/rofi
     ./features/music.nix
     ./features/kitty.nix
     ./features/emacs/default.nix
     ./features/fonts.nix
+    #./features/gnome-conf.nix
     #./features/firefox.nix
     
     inputs.nix-colors.homeManagerModule
@@ -33,6 +34,7 @@
     sqlite
     libreoffice
     neofetch
+    eww
 
     metabase
 
