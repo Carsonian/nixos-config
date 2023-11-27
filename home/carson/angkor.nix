@@ -34,7 +34,6 @@
     sqlite
     libreoffice
     neofetch
-    eww
 
     metabase
 
