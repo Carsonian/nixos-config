@@ -9,7 +9,9 @@
     ../common/users/carson.nix
 
     ../common/optional/python
-    ../common/optional/gnome.nix
+    
+    ../common/de-wm/gnome.nix
+    ../common/de-wm/hyprland-wm.nix
     
   ];
 
@@ -30,19 +32,6 @@
     hyprland.enable = true;
   };
 
-  #Configure pipewire
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    audio.enable = true;
-    wireplumber.enable = true;
-    #alsa.enable = true;
-    #jack.enable = true;
-    #pulse.enable = true;
-  };
-
-  hardware.bluetooth.enable = true;
-
   # Set keyboard layout
   services.xserver = {
     layout = "us";
@@ -54,30 +43,6 @@
 
   security.polkit.enable = true;
 
-  # Setup greetd with tuigreet
-  services.greetd = {
-    enable = true;
-    settings = {
-      # Tuigreet as display manager
-      default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland -r --asterisks";
-        user = "greeter";
-      };
-    };
-  };
-
-  # Use network manager
-  networking.networkmanager.enable = true;
-  # Turn off network wait because it slows down boot
-  systemd.network.wait-online.enable = false;
-  systemd.services.NetworkManager-wait-online.enable = false; 
-
-  # Setup swaylock with pam (otherwise it can't unlock)
-  security.pam.services.swaylock = {};
-
-  # Setup fingerprint login
-  #services.fprintd.enable = true;
-  #security.pam.services.carson.fprintAuth = config.services.fprintd.enable;
 
   # Create a config user group for users who can edit /nix-config
   # Note: You will have to grant permissions to the config folder to the config group if installing on a new system

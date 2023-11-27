@@ -2,7 +2,7 @@
   imports = [
     ./global
     ./features/cli
-    ./features/display/hyprland
+    #./features/display/hyprland
     ./features/rofi
     ./features/music.nix
     ./features/kitty.nix
