@@ -3,7 +3,6 @@
   imports = [
     ./hyprland.nix
     ./waybar.nix
-    ./eww
   ];
   home.packages = with pkgs; [
     # Packages needed for my hyprland setup
@@ -11,7 +10,6 @@
     #rofi wayland
     wpaperd
     dunst
-    eww-wayland
 
     # Boring utilities
     xdg-desktop-portal

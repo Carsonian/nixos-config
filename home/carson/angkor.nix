@@ -36,6 +36,9 @@
     neofetch
 
     metabase
+    freetube
+    lmms
+    pavucontrol
 
     bluetuith
     multimarkdown

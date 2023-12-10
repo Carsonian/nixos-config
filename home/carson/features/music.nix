@@ -12,16 +12,16 @@
   ];
 
   # Configure mpd
-  services.mpd = {
-    enable = true;
-    musicDirectory = "~/Music";
-    extraConfig = ''
-    audio_output {
-      type "pipewire"
-      name "My PipeWire Output"
-    }
-    '';
-  };
+  # services.mpd = {
+  #   enable = true;
+  #   musicDirectory = "~/Music";
+  #   extraConfig = ''
+  #   audio_output {
+  #     type "pipewire"
+  #     name "My PipeWire Output"
+  #   }
+  #   '';
+  # };
 
   # This service allows mpd to be detected by playerctl
   services.mpd-mpris = {

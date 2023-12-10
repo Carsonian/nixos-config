@@ -10,6 +10,8 @@
   ]) ++ (with pkgs.gnome; [
     cheese # webcam tool
     gnome-music
+    gnome-terminal
+    gnome-software
     gedit # text editor
     epiphany # web browser
     geary # email reader
@@ -20,8 +22,11 @@
     atomix # puzzle game
     yelp # Help view
     gnome-contacts
+    simple-scan
+    totem
     gnome-initial-setup
   ]);
+  
   programs.dconf.enable = true;
   environment.systemPackages = with pkgs; [
     gnome.gnome-tweaks
