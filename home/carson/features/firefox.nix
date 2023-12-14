@@ -1,6 +1,5 @@
-{ pkgs, config, ...}:
-
-{
+#{ inputs, outputs, lib, config, pkgs, ... }: {
+{ pkgs, config, ...}: {
   programs.firefox = {
     enable = true;
     profiles.carson = {
@@ -18,7 +17,7 @@
           url = "https://github.com/";
         }
       ];
-      extensions = with pkgs.inputs.firefox-addons; [
+      extensions = with pkgs.input.firefox-addons; [
         ublock-origin
         bitwarden
       ];
@@ -79,35 +78,35 @@
         "browser.safebrowsing.phishing.enabled" = true;
         "browser.safebrowsing.downloads.enabled" = true;
       };
-    };
-    search = {
-      force = true;
-      default = "DuckDuckGo";
-      engines = {
-        # Custom search engines
-        "Nix Packages" = {
-          urls = [{
-            template = "https://search.nixos.org/packages";
-            params = [
-              { name = "type"; value = "packages"; }
-              { name = "query"; value = "{searchTerms}"; }
-            ];
-          }];
+      search = {
+        force = true;
+        default = "DuckDuckGo";
+        engines = {
+          # Custom search engines
+          "Nix Packages" = {
+            urls = [{
+              template = "https://search.nixos.org/packages";
+              params = [
+                { name = "type"; value = "packages"; }
+                { name = "query"; value = "{searchTerms}"; }
+              ];
+            }];
 
-          icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-          definedAliases = [ "@np" ];
+            icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+            definedAliases = [ "@np" ];
+          };
+
+          "My NixOS" = {
+            urls = [{ template = "https://mynixos.com/search?q={searchTerms}"; }];
+            iconUpdateURL = "https://nixos.wiki/favicon.png";
+            updateInterval = 24 * 60 * 60 * 1000; # every day
+            definedAliases = [ "@mn" ];
+          };
+
+          # Remove bing and google
+          "Bing".metaData.hidden = true;
+          "Google".metaData.hidden = true;
         };
-
-        "My NixOS" = {
-          urls = [{ template = "https://mynixos.com/search?q={searchTerms}"; }];
-          iconUpdateURL = "https://nixos.wiki/favicon.png";
-          updateInterval = 24 * 60 * 60 * 1000; # every day
-          definedAliases = [ "@mn" ];
-        };
-
-        # Remove bing and google
-        "Bing".metaData.hidden = true;
-        "Google".metaData.hidden = true;
       };
     };
   };

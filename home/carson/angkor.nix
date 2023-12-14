@@ -8,10 +8,9 @@
     ./features/kitty.nix
     ./features/emacs/default.nix
     ./features/fonts.nix
-    ./features/firefox.nix
+    #./features/firefox.nix
     
     inputs.nix-colors.homeManagerModule
-
   ];
 
   # Or choose a premade colorscheme, here's some I like:
@@ -28,7 +27,7 @@
     # Add programs here to install them for the user
 
     # Programs
-    #firefox
+    firefox
     ledger
     sqlite
     libreoffice

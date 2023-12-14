@@ -14,9 +14,6 @@
       exec-once = ["dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY in hyrpland.conf"
                    "waybar"
                    "wpaperd"
-                   "[workspace 1 silent] firefox"
-                   "[workspace 2 silent] emacsclient -c"
-                   "[workspace 3 silent] kitty"
                   ];
 
       # Source a file (multi-file configs)

@@ -13,15 +13,16 @@ x (B) Run flake update
 x (B) Change versions on system state and home manager
 x (B) Make sure I am running unstable
 
+(A) Update readme
 (B) Merge a somewhat polished setup to main branch 
 
-x (B) Firefox module +homemanager @config
+(B) Firefox module, extensions not working +homemanager @config
 x (B) Ublock origin in firefox module +homemanager @config
 
 (B) Fix zsh alias for rebuild to not have hardcoded path @config
 
-(B) Fix warning messages on rebuild +cleanup @research
+x (B) Learn about warning messages on rebuild +cleanup @research
 
-(C) Change hyprland animations to quick pop in out
+(B) Change hyprland animations to quick pop in out
 
 (C) Setup impermanence @research

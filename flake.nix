@@ -93,19 +93,20 @@
         };
       };
 
+      # Using home manager standalone, not as a module
       # Available through 'home-manager --flake .#username@hostname'
-      homeConfigurations = {
-        # User home manager setups per system
-        "carson@angkor" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/carson/angkor.nix];
-        };
-        "carson@skadi" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/carson/skadi.nix];
-        };
-      };
+      # homeConfigurations = {
+      #   # User home manager setups per system
+      #   "carson@angkor" = home-manager.lib.homeManagerConfiguration {
+      #     pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      #     extraSpecialArgs = { inherit inputs outputs; };
+      #     modules = [ ./home/carson/angkor.nix];
+      #   };
+      #   "carson@skadi" = home-manager.lib.homeManagerConfiguration {
+      #     pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      #     extraSpecialArgs = { inherit inputs outputs; };
+      #     modules = [ ./home/carson/skadi.nix];
+      #   };
+      # };
     };
 }
