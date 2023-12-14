@@ -12,6 +12,7 @@
         sqlalchemy
         plotly
         dash
+        streamlit
         # other python packages
         matplotlib
         tabulate

@@ -1,4 +1,22 @@
-;; My Emacs config (init.el)
+;;; init.el --- Emacs configuration file.
+;;
+;;
+;;; Commentary:
+;;
+;; Requires Emacs 28 or higher.
+;;
+;; Currently running Emacs on:
+;; OpenSUSE Tumbleweed on Asus Zenbook
+;;
+;; Making changes / testing:
+;;
+;; - Use consult line on C-s instead of I-search
+;; - Not sure if I want embark or not
+;;
+
+;;; Code:
+
+;; My Emacs config
 
 ;; Add package archives I want
 (require 'package)
@@ -11,8 +29,8 @@
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 ;;(eval-when-compile
-  (require 'use-package);;)
-;;(require 'use-package)
+;;(require 'use-package))
+(require 'use-package)
 ;; Set use package to always ensure
 ;;(eval-and-compile
 ;;(setq use-package-always-ensure t
@@ -102,6 +120,10 @@
 
 (use-package magit)
 
+(use-package windsize
+  :config
+  (windsize-default-keybindings))
+
 (use-package flycheck
   :init
   (add-hook 'after-init-hook #'global-flycheck-mode))
@@ -160,13 +182,16 @@
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
   (setq dashboard-set-init-info t)
+  (setq dashboard-projects-backend 'project-el)
+  ;; Make it open dashboard in client mode too
+  (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
   )
 
-(use-package projectile
-  :config
-  (projectile-mode +1)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  )
+;; (use-package projectile
+;;   :config
+;;   (projectile-mode +1)
+;;   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+;;   )
 
 ;; Install vertico & friends packages #########################
 (use-package vertico
@@ -195,18 +220,18 @@
   )
 
 ;; Use C-. to perform actions on things
-(use-package embark
-  :bind
-  (("C-." . embark-act))
-  ;;("C-;" . embark-dwim)        ;; good alternative: M-.
-  
-  :config
-  ;; Hide the mode line of the Embark live/completions buffers
-  (add-to-list 'display-buffer-alist
-	       '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
-		 nil
-		 (window-parameters (mode-line-format . none))))
-  )
+;; (use-package embark
+;;   :bind
+;;   (("C-." . embark-act))
+;;   ;;("C-;" . embark-dwim)        ;; good alternative: M-.
+
+;;   :config
+;;   ;; Hide the mode line of the Embark live/completions buffers
+;;   (add-to-list 'display-buffer-alist
+;; 	       '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+;; 		 nil
+;; 		 (window-parameters (mode-line-format . none))))
+;;   )
 
 ;; A few more useful configurations...
 (use-package emacs

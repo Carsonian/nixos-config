@@ -1,6 +1,12 @@
 { pkgs, config, ...}:
 
 {
+  # Enable the emacs daemon
+  services.emacs = {
+    enable = true;
+    #defaultEditor = true;
+  };
+
   # Configure emacs version & packages, point to init.el
   programs.emacs = {
     enable = true;
@@ -17,6 +23,7 @@
       doom-modeline
       which-key
       magit
+      windsize
       flycheck
       sudo-edit
       beacon
@@ -26,12 +33,12 @@
       speed-type
       aggressive-indent
       dashboard
-      projectile
+      #projectile
       vertico
       orderless
       marginalia
       consult
-      embark
+      #embark
       swiper
       base16-theme
     ];

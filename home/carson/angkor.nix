@@ -2,14 +2,13 @@
   imports = [
     ./global
     ./features/cli
-    ./features/display/hyprland
+    ./features/hyprland
     ./features/rofi
     ./features/music.nix
     ./features/kitty.nix
     ./features/emacs/default.nix
     ./features/fonts.nix
-    #./features/gnome-conf.nix
-    #./features/firefox.nix
+    ./features/firefox.nix
     
     inputs.nix-colors.homeManagerModule
 
@@ -29,16 +28,14 @@
     # Add programs here to install them for the user
 
     # Programs
-    firefox
+    #firefox
     ledger
     sqlite
     libreoffice
     neofetch
 
-    metabase
+    #metabase
     freetube
-    lmms
-    pavucontrol
 
     bluetuith
     multimarkdown
@@ -48,14 +45,10 @@
   # Configure packages with home manager options ##################################
 
   programs = {
-
     git = {
       enable = true;
       userName = "Carson Moore";
       userEmail = "carson2477@live.com";
     };
-
-    
   };
-  
 }
