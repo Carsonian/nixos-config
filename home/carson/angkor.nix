@@ -8,7 +8,7 @@
     ./features/kitty.nix
     ./features/emacs/default.nix
     ./features/fonts.nix
-    #./features/firefox.nix
+    ./features/firefox.nix
     
     inputs.nix-colors.homeManagerModule
   ];
@@ -27,21 +27,16 @@
     # Add programs here to install them for the user
 
     # Programs
-    firefox
     ledger
     sqlite
     libreoffice
     neofetch
-
-    #metabase
-    freetube
-
-    bluetuith
     multimarkdown
+    
+    freetube
+    bluetuith
     android-file-transfer
   ];
-
-  # Configure packages with home manager options ##################################
 
   programs = {
     git = {

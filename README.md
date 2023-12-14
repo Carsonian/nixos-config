@@ -11,7 +11,7 @@
 
 This repository contains my NixOS Linux configuration with the Hyprland window manager. 
 
-I use Nixos with Flakes & Home Manager.
+I use Nixos with Flakes & Home Manager. (Hm as a module, not standalone)
 
 It also includes my config for all my programs, as I use Nix to manage all my config files via home manager.
 
@@ -37,26 +37,20 @@ TODO: Add gif eventually
 | Notification     | Dunst                                |
 | Launcher         | Rofi-Wayland                         |
 | Editor           | Emacs                                |
-| Terminal         | Foot                                 |
-| Night Gamma      | Gammastep - To install               |
+| Terminal         | Kitty                                |
 | Fetch Utility    | Neofetch                             |
-| Theme            | Base16                               |
+| Theming          | Base16                               |
 | Icons            | TBD                                  |
 | Font             | JetBrains Mono + Nerd Font Patch     |
-| Player           | MPD/MPC                              |
 | File Browser     | TBD                                  |
+| Player           | MPD/MPC                              |
 | Internet Browser | Firefox                              |
-| Mimetypes        | MPV, Imv, Zathura  - To install      |
-| Image Editor     | Swappy - To install                  |
-| Screenshot       | Grim + Slurp - To install            |
-| Recorder         | Wf-recorder - To install             |
-| Clipboard        | Wl-clipboard + Cliphist - To install |
 | Idle             | Swayidle - To install                |
 | Lock             | Swaylock - To install                |
-| Logout menu      | Wlogout - To install                 |
 | Wallpaper        | Wpaperd                              |
 | Graphical Boot   | None (No Plymouth)                   |
 | Display Manager  | Greetd + Tuigreet                    |
+| Night Gamma      | Gammastep - To install               |
 
 This is a list of all the noteworthy programs. There are many more utilites and programs installed that aren't listed. Check the home.nix and configuration.nix pkgs to see them all.
 
@@ -64,11 +58,11 @@ This is a list of all the noteworthy programs. There are many more utilites and 
 
 - 🔄 **Reproducible**: Built on NixOS, this configuration can be effortlessly reproduced on other machines, ensuring a consistent setup.
 
-- 🖌️ **Consistent**: Nearly every component has been styled with base16 colors so I can change my base16 theme and all programs are themed in a cohesive way.
+- 🖌️ **Consistent Colors**: Nearly every component has been styled with base16 colors so I can change my base16 theme and all programs are themed in a cohesive way.
 
-- ✅ **Complete**: This system is equipped with a wide range of components and utilities, akin to the completeness of operating systems like MacOS or Windows.
+- ✅ **Complete**: This system is meant to be just as usable as a DE distro, but much more custom built.
 
-- 🪶 **Lightweight**: Using only a window manager and lightweight utilities keeps memory usage low and the system unbloated.
+- 🪶 **Lightweight**: Using only a window manager and lightweight utilities keeps memory usage low, the system unbloated, and makes it feel snappy. <1GB ram use with just emacs and kitty open.
 
 - 🎨 **Customizable**: By changing the base16 theme most programs will update to use that colorscheme. Config wise all programs are and can be configured via home manager in one place. 
 
@@ -80,8 +74,7 @@ This is a list of all the noteworthy programs. There are many more utilites and 
 
 ## Structure 
 
-- `flake.nix`: Entrypoint for hosts and home configurations. Also exposes a
-  devshell for boostrapping (`nix develop` or `nix-shell`).
+- `flake.nix`: Entrypoint for hosts and home configurations. 
 - `hosts`: NixOS Configurations, accessible via `nixos-rebuild --flake`.
   - `common`: Shared configurations imported into the machine specific configs.
     - `global`: Configurations that are globally applied to all my machines.

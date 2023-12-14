@@ -1,28 +1,14 @@
 #{ inputs, outputs, lib, config, pkgs, ... }: {
-{ pkgs, config, ...}: {
+{ pkgs, ...}: {
+
+  # Also add manually...
+  # For proper sizing on laptop: layout.css.devPixelsPerPx 1.2
+  # For ublock origin to block google signin popups: accounts.google.com/gsi/*
   programs.firefox = {
     enable = true;
     profiles.carson = {
-      bookmarks = [
-        {
-          name = "Nixpkgs";
-          url = "https://search.nixos.org/packages";
-        }
-        {
-          name = "My NixOS";
-          url = "https://mynixos.com/";
-        }
-        {
-          name = "GitHub";
-          url = "https://github.com/";
-        }
-      ];
-      extensions = with pkgs.input.firefox-addons; [
-        ublock-origin
-        bitwarden
-      ];
-      # add this for proper sizing on laptop
-      # layout.css.devPixelsPerPx 1.2
+      name = "carson";
+      isDefault = true;
       settings = {
         # Good resource: https://arkenfox.github.io/gui/
         # Don't warn for about:config changes
@@ -43,6 +29,7 @@
         "browser.discovery.enabled" = false;
         "browser.shopping.experience2023.enabled" = false;
         "app.shield.optoutstudies.enabled" = false;
+        "browser.startup.homepage_override.mstone" = "ignore";
 
         # Search bar
         "browser.urlbar.placeholderName" = "DuckDuckGo";
@@ -103,53 +90,12 @@
             definedAliases = [ "@mn" ];
           };
 
-          # Remove bing and google
+          # Remove bad search options
           "Bing".metaData.hidden = true;
           "Google".metaData.hidden = true;
+          "Amazon".metaData.hidden = true;
         };
       };
     };
   };
-
-  # Ublock setup
-  home.file.".mozilla/managed-storage/uBlock0@raymondhill.net.json".text = builtins.toJSON {
-    name = "uBlock0@raymondhill.net";
-    description = "_";
-    type = "storage";
-    data = {
-      adminSettings =
-        { userFilters = ''accounts.google.com/gsi/*''; };
-      userSettings = [
-        [ "advancedUserEnabled" "true" ]
-        [ "autoUpdate" "true" ]
-        [ "colorBlindFriendly" "true" ]
-        [ "contextMenuEnabled" "true" ]
-        [ "dynamicFilteringEnabled" "false" ] ];
-      toOverwrite = {
-        filterLists = [
-          # Builtins
-          "user-filters"
-          "ublock-filters"
-          "ublock-badware"
-          "ublock-privacy"
-          "ublock-quick-fixes"
-          "ublock-abuse"
-          "ublock-unbreak"
-
-          "easylist" # Ads
-          
-          "easyprivacy" # Privacy
-
-          "ublock-annoyances"          
-          
-          "urlhaus-1" # Malware protection, security
-
-          "plowe-0" # Multipurpose
-          
-          "adguard-cookiemonster"
-          "ublock-cookies-adguard"
-          "fanboy-cookiemonster"
-          "ublock-cookies-easylist"
-          "https://raw.githubusercontent.com/liamengland1/miscfilters/master/antipaywall.txt"
-          "https://gitlab.com/magnolia1234/bypass-paywalls-clean-filters/-/raw/main/bpc-paywall-filter.txt"]; }; }; };
 }

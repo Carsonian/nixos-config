@@ -25,11 +25,8 @@
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
     # Home manager
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-    firefox-addons = {
-      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+    home-manager = {
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -41,72 +38,53 @@
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
       inherit (self) outputs;
-      forAllSystems = nixpkgs.lib.genAttrs [
+      # Supported systems for your flake packages, shell, etc.
+      systems = [
         "aarch64-linux"
         "i686-linux"
         "x86_64-linux"
-        # "aarch64-darwin"
-        # "x86_64-darwin"
+        "aarch64-darwin"
+        "x86_64-darwin"
       ];
-    in
-    rec {
+      # This is a function that generates an attribute by calling a function you
+      # pass to it, with each system as an argument
+      forAllSystems = nixpkgs.lib.genAttrs systems;
+    in {
       # Your custom packages
-      # Accessible through 'nix build', 'nix shell', etc
-      packages = forAllSystems (system:
-        let pkgs = nixpkgs.legacyPackages.${system};
-        in import ./custom/pkgs { inherit pkgs; }
-      );
-
-      # Devshell for bootstrapping
-      # Acessible through 'nix develop' or 'nix-shell' (legacy)
-      devShells = forAllSystems (system:
-        let pkgs = nixpkgs.legacyPackages.${system};
-        in import ./shell.nix { inherit pkgs; }
-      );
+      packages = forAllSystems (system: import ./custom/pkgs nixpkgs.legacyPackages.${system});
       
-      # Your custom packages and modifications, exported as overlays
-      overlays = import ./custom/overlays { inherit inputs; };
+      # Formatter for your nix files, available through 'nix fmt'
+      # Other options beside 'alejandra' include 'nixpkgs-fmt'
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
+      # Your custom packages and modifications, exported as overlays
+      overlays = import ./custom/overlays {inherit inputs;};
+      
       # Reusable nixos modules you might want to export
       # These are usually stuff you would upstream into nixpkgs
       nixosModules = import ./custom/modules/nixos;
+      
       # Reusable home-manager modules you might want to export
       # These are usually stuff you would upstream into home-manager
       homeManagerModules = import ./custom/modules/home-manager;
 
-      # Availbale through 'nixos-rebuild --flake .#hostname'
+      # Available through 'nixos-rebuild --flake .#hostname'
       nixosConfigurations = {
         # Personal Laptop
         angkor = nixpkgs.lib.nixosSystem {
           modules = [./hosts/angkor];
           specialArgs = { inherit inputs outputs; };
         };
-        # Gaming Desktop
+        # Future Gaming Desktop
         skadi = nixpkgs.lib.nixosSystem {
           modules = [./hosts/skadi];
           specialArgs = { inherit inputs outputs; };
         };
-        # Server
+        # Future Server
         bastet = nixpkgs.lib.nixosSystem {
           modules = [./hosts/bastet];
           specialArgs = { inherit inputs outputs; };
         };
       };
-
-      # Using home manager standalone, not as a module
-      # Available through 'home-manager --flake .#username@hostname'
-      # homeConfigurations = {
-      #   # User home manager setups per system
-      #   "carson@angkor" = home-manager.lib.homeManagerConfiguration {
-      #     pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      #     extraSpecialArgs = { inherit inputs outputs; };
-      #     modules = [ ./home/carson/angkor.nix];
-      #   };
-      #   "carson@skadi" = home-manager.lib.homeManagerConfiguration {
-      #     pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      #     extraSpecialArgs = { inherit inputs outputs; };
-      #     modules = [ ./home/carson/skadi.nix];
-      #   };
-      # };
     };
 }
