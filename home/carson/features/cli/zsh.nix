@@ -7,8 +7,8 @@
     syntaxHighlighting.enable = true;
     shellAliases = {
       ll = "ls -l";
-      update = "(cd /nix-config && sudo nixos-rebuild switch --flake .#angkor)";
-      test = "(cd /nix-config && sudo nixos-rebuild test --flake .#angkor)";
+      update = "(cd /home/carson/Projects/nixos-config && sudo nixos-rebuild switch --flake .#angkor)";
+      test = "(cd /home/carson/Projects/nixos-config && sudo nixos-rebuild test --flake .#angkor)";
     };
     # History settings
     history = {

@@ -10,8 +10,8 @@
 
     ../common/optional/python
     
-    ../common/de-wm/gnome.nix
-    #../common/de-wm/hyprland-wm.nix
+    #../common/de-wm/gnome.nix
+    ../common/de-wm/hyprland-wm.nix
     
   ];
 
@@ -42,6 +42,9 @@
   console.useXkbConfig = true;
 
   security.polkit.enable = true;
+
+  # Set timezone automatically
+  services.automatic-timezoned.enable = true;
 
 
   # Create a config user group for users who can edit /nix-config

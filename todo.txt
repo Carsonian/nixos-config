@@ -1,0 +1,22 @@
+x (A) Fix systemd error message on switch
+
+(A) setup github ssh
+(A) get ledger tools project from github
+(A) setup python environment for working on project, venv?
+(A) Add changes from emacs on opensuse +emacs @config
+
+(B) Cleanup gnome files
+(B) Cleanup directory nicely
+
+(B) Run flake update
+(B) Change versions on system state and home manager
+(B) Make sure I am running unstable
+
+(B) Firefox module +homemanager @config
+(B) Ublock origin in firefox module +homemanager @config
+
+(B) Fix zsh alias for rebuild to not have hardcoded path @config
+
+(B) Fix warning messages on rebuild +cleanup @research
+
+(C) Setup impermanence @research
