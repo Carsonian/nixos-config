@@ -27,30 +27,30 @@ TODO: Add gif eventually
 
 ## 🔧 Components
 
-| Component        | Version/Name                         |
-|------------------|--------------------------------------|
-| Distro           | NixOS                                |
-| Shell            | Zsh                                  |
-| Display Server   | Wayland                              |
-| WM (Compositor)  | Hyprland                             |
-| Bar              | Waybar                               |
-| Notification     | Dunst                                |
-| Launcher         | Rofi-Wayland                         |
-| Editor           | Emacs                                |
-| Terminal         | Kitty                                |
-| Fetch Utility    | Neofetch                             |
-| Theming          | Base16                               |
-| Icons            | TBD                                  |
-| Font             | JetBrains Mono + Nerd Font Patch     |
-| File Browser     | TBD                                  |
-| Player           | MPD/MPC                              |
-| Internet Browser | Firefox                              |
-| Idle             | Swayidle - To install                |
-| Lock             | Swaylock - To install                |
-| Wallpaper        | Wpaperd                              |
-| Graphical Boot   | None (No Plymouth)                   |
-| Display Manager  | Greetd + Tuigreet                    |
-| Night Gamma      | Gammastep - To install               |
+| Component        | Version/Name                     |
+|------------------|----------------------------------|
+| Distro           | NixOS                            |
+| Shell            | Zsh                              |
+| Display Server   | Wayland                          |
+| WM (Compositor)  | Hyprland                         |
+| Bar              | Waybar                           |
+| Notification     | Dunst                            |
+| Launcher         | Rofi-Wayland                     |
+| Editor           | Emacs                            |
+| Terminal         | Kitty                            |
+| Fetch Utility    | Neofetch                         |
+| Theming          | Base16                           |
+| Icons            | TBD                              |
+| Font             | JetBrains Mono + Nerd Font Patch |
+| File Browser     | TBD                              |
+| Player           | MPD/MPC                          |
+| Internet Browser | Firefox                          |
+| Idle             | Swayidle                         |
+| Lock             | Swaylock                         |
+| Wallpaper        | Wpaperd                          |
+| Graphical Boot   | None (No Plymouth)               |
+| Display Manager  | Greetd + Tuigreet                |
+| Night Gamma      | Gammastep - To install           |
 
 This is a list of all the noteworthy programs. There are many more utilites and programs installed that aren't listed. Check the home.nix and configuration.nix pkgs to see them all.
 
@@ -97,7 +97,7 @@ This is a list of all the noteworthy programs. There are many more utilites and 
 
 ## ⌨️ Keybindings
 
-I try to use Emacs keys as much as possible as it is my favorite software :)
+I try to use Emacs keys as much as possible since it's my favorite software :)
 
 ### Main
 TODO: Fill in my keybinds

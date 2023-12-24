@@ -1,5 +1,6 @@
 (B) Change hyprland animations to quick pop in out
 (B) Fix zsh alias for rebuild to not have hardcoded path @config
+(B) Get dunst working or mako
 
 (B) Update readme
 (B) Merge a somewhat polished setup to main branch 

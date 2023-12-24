@@ -6,7 +6,8 @@
     ./features/rofi
     ./features/music.nix
     ./features/kitty.nix
-    ./features/emacs/default.nix
+    ./features/emacs
+    ./features/neovim
     ./features/fonts.nix
     ./features/firefox.nix
     

@@ -22,6 +22,7 @@
 
   environment.systemPackages = [
     pkgs.unzip
+    pkgs.zip
   ];
 
   # Configure pipewire
