@@ -24,6 +24,12 @@
   # Setup swaylock with pam (otherwise it can't unlock)
   security.pam.services.swaylock = {};
 
+  # Packages I want installed on all systems running hyprland 
+  environment.systemPackages = [
+    pkgs.wl-clipboard
+  ];
+
+
   # Setup fingerprint login
   #services.fprintd.enable = true;
   #security.pam.services.carson.fprintAuth = config.services.fprintd.enable;
