@@ -22,7 +22,7 @@ in
   };
 
   # Import my home manager config
-  home-manager.users.carson = import ../../../home/carson/${config.networking.hostName}.nix;
+  home-manager.users.carson = import ../../../home-manager/carson/${config.networking.hostName}.nix;
 
   # Set default shell to zsh
   users.defaultUserShell = pkgs.zsh;

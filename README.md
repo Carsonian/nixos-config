@@ -15,7 +15,7 @@ I use Nixos with Flakes & Home Manager. (Hm as a module, not standalone)
 
 It also includes my config for all my programs, as I use Nix to manage all my config files via home manager.
 
-This includes my Emacs, Firefox, Zsh, and foot terminal configs, as well as configs for programs adjacent to Hyprland such as Waybar, Rofi, dunst, etc. All wrapped up neatly in one NixOS config!
+This includes my Neovim, Firefox, Zsh, and foot terminal configs, as well as configs for programs adjacent to Hyprland such as Waybar, Rofi, dunst, etc. All wrapped up neatly in one NixOS config!
 
 ## 🌟 Showcase
 
@@ -36,7 +36,7 @@ TODO: Add gif eventually
 | Bar              | Waybar                           |
 | Notification     | Dunst                            |
 | Launcher         | Rofi-Wayland                     |
-| Editor           | Emacs                            |
+| Editor           | Neovim                           |
 | Terminal         | Kitty                            |
 | Fetch Utility    | Neofetch                         |
 | Theming          | Base16                           |
@@ -62,7 +62,7 @@ This is a list of all the noteworthy programs. There are many more utilites and 
 
 - ✅ **Complete**: This system is meant to be just as usable as a DE distro, but much more custom built.
 
-- 🪶 **Lightweight**: Using only a window manager and lightweight utilities keeps memory usage low, the system unbloated, and makes it feel snappy. <1GB ram use with just emacs and kitty open.
+- 🪶 **Lightweight**: Using only a window manager and lightweight utilities keeps memory usage low, the system unbloated, and makes it feel snappy. <1GB ram use with just neovim and kitty open.
 
 - 🎨 **Customizable**: By changing the base16 theme most programs will update to use that colorscheme. Config wise all programs are and can be configured via home manager in one place. 
 
@@ -96,8 +96,6 @@ This is a list of all the noteworthy programs. There are many more utilites and 
 
 
 ## ⌨️ Keybindings
-
-I try to use Emacs keys as much as possible since it's my favorite software :)
 
 ### Main
 TODO: Fill in my keybinds
@@ -140,7 +138,7 @@ TODO: Fill in my keybinds
 | SUPER + ]            | Player next track                                 |
 | SUPER + [            | Player previous track                             |
 
-All other keybindings are in `/home/.config/hypr/hyprland.conf` in the bind section. 
+All other keybindings are in `/home-manager/carson/features/hyprland/hyprland.nix` in the bind section. 
 All system zsh scripts are located in the TBD directory.
 
 ## 📜 License

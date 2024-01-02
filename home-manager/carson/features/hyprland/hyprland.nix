@@ -156,14 +156,14 @@
         # Exec programs
         "$mainMod, return, exec, kitty"
         "$mainMod, F, exec, firefox"
-        "$mainMod, E, exec, emacsclient -c"
+        "$mainMod, E, exec, neovide"
         "$mainMod, L, exec, swaylock -fF --screenshots --effect-vignette 0.8:0.8 --effect-greyscale --effect-blur 3x3 --clock --indicator --ring-ver-color 00cc0080 --inside-ver-color ${config.colorScheme.colors.base0B}"
         "$mainMod, R, exec, rofi -show"
         "$mainMod, P, exec, ~/.config/rofi/powermenu.sh"
         "$mainMod, V, exec, ~/.config/rofi/volume-applet.sh"
         "$mainMod, M, exec, ~/.config/rofi/mpd-applet.sh"
         
-        # Cycle focus with n & p (emacs keys) 
+        # Cycle focus with n & p 
         "$mainMod, N, cyclenext"
         "$mainMod, P, cyclenext, prev"
 

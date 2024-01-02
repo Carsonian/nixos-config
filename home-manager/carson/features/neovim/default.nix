@@ -1,7 +1,7 @@
 { pkgs, config, ...}:
 
 {
-  # Configure emacs version & packages, point to init.el
+  # Configure neovim and plugins, point to init.lua
   programs.neovim = {
     enable = true;
     extraLuaConfig = builtins.readFile ./init.lua;

@@ -33,7 +33,7 @@ in
 
   home = {
     username = lib.mkDefault "carson";
-    homeDirectory = lib.mkDefault "/home/${config.home.username}";
+    homeDirectory = lib.mkDefault "/home-manager/${config.home.username}";
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
