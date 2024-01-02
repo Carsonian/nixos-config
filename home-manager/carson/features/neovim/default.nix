@@ -35,6 +35,12 @@
       cmp-spell
       friendly-snippets
       indent-blankline-nvim
+      vim-ledger
+      dashboard-nvim
+      nvim-web-devicons
+      vim-commentary
+      telescope-project-nvim
+      project-nvim
 
       # neogit
       # maybes...

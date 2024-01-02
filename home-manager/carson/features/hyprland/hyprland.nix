@@ -126,7 +126,7 @@
 
       
       windowrule=["opacity 1.0 override 0.9 override,^(firefox)$"
-                  "opacity 0.9 override 0.8 override,^(emacs)$"];
+                  "opacity 0.9 override 0.8 override,^(neovide)$"];
       # Example windowrule v1
       # windowrule = float, ^(kitty)$
       # Example windowrule v2

@@ -20,6 +20,12 @@ vim.wo.number = true
 
 vim.o.clipboard = 'unnamedplus'
 
+if vim.g.neovide then
+    -- Put anything you want to happen only in Neovide here
+  vim.o.guifont = "JetBrains Mono Nerd Font:h14"
+  --vim.g.neovide_hide_mouse_when_typing = true
+end
+
 -- Setup gruvbox colorscheme
 require("gruvbox").setup({
   terminal_colors = true,})
@@ -28,14 +34,9 @@ vim.cmd([[colorscheme gruvbox]])
 
 -- Setup lualine 
   require('lualine').setup {
-   options = {
-        icons_enabled = false,
-        theme = 'gruvbox',
-        component_separators = '|',
-        section_separators = '',
-      },
+   options = {theme = 'gruvbox',},
     }
- 
+
 -- gitsigns basic setup 
   require('gitsigns').setup {
       signs = {
@@ -48,8 +49,44 @@ vim.cmd([[colorscheme gruvbox]])
   }
 
 -- Add indentation guides even on blank lines
-require("ibl").setup()
+require("indent_blankline").setup {
+  buftype_exclude = { "terminal" },
+  filetype_exclude = { "dashboard" },
+  use_treesitter = true,
+}
 
+require("project_nvim").setup {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    }
+
+-- Dashboard Config
+require('dashboard').setup {
+    theme = 'hyper',
+    config = {
+      packages = { enable = false },
+      week_header = {
+       enable = true,
+      },
+      shortcut = {
+        {
+          icon = ' ',
+          icon_hl = '@variable',
+          desc = 'Files',
+          group = 'Label',
+          action = 'Telescope find_files',
+          key = 'f',
+        },
+        {
+          desc = ' Projects',
+          group = 'Label',
+          action = 'Telescope projects',
+          key = 'p',
+        },
+       },
+      },
+    }
 
 -- BEGIN KICKSTART NVIM CONFIG
 -- [[ Configure plugins ]]
@@ -63,9 +100,6 @@ vim.o.hlsearch = false
 
 -- Make line numbers default
 vim.wo.number = true
-
--- Enable mouse mode
-vim.o.mouse = 'a'
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -137,6 +171,9 @@ require('telescope').setup {
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
+
+require('telescope').load_extension('projects')
+require'telescope'.extensions.projects.projects{}
 
 -- Telescope live_grep in git root
 -- Function to find the git root directory based on the current buffer's path
