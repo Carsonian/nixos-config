@@ -23,6 +23,7 @@
   environment.systemPackages = [
     pkgs.unzip
     pkgs.zip
+    pkgs.pavucontrol
   ];
 
   # Configure pipewire

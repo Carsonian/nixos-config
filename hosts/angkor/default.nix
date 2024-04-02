@@ -30,11 +30,13 @@
     hyprland.enable = true;
   };
 
+ programs.steam.enable = true; 
+
   # Set keyboard layout
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "us";
-    xkbVariant = "colemak";
-    xkbOptions = "ctrl:nocaps";
+    variant = "colemak";
+    options = "ctrl:nocaps";
   };
   # Use same config for ttyl console
   console.useXkbConfig = true;

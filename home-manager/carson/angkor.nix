@@ -33,7 +33,9 @@
     libreoffice
     neofetch
     multimarkdown
-    
+
+    appflowy
+
     freetube
     bluetuith
     android-file-transfer

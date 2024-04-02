@@ -67,7 +67,7 @@
       # Ripgrep for telescope
       ripgrep
       # Language servers
-      rnix-lsp
+      nil
     ];
   };
 
