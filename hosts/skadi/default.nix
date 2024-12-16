@@ -14,7 +14,7 @@
   ];
 
   # Set hostname
-  networking.hostName = "angkor";
+  networking.hostName = "skadi";
 
   # Set the bootloader & boot options
   boot = {
