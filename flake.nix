@@ -30,12 +30,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
+
     # nix-colors
     nix-colors.url = "github:misterio77/nix-colors";
 
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, disko, ... }@inputs:
     let
       inherit (self) outputs;
       # Supported systems for your flake packages, shell, etc.
@@ -77,7 +80,10 @@
         };
         # Future Gaming Desktop
         skadi = nixpkgs.lib.nixosSystem {
-          modules = [./hosts/skadi];
+          modules = [
+            ./hosts/skadi
+            disko.nixosModules.disko
+          ];
           specialArgs = { inherit inputs outputs; };
         };
         # Future Server
