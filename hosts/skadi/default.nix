@@ -5,6 +5,7 @@
   imports = [
     ./hardware-configuration.nix
     ./disk-config.nix
+    ./nvidia.nix
 
     ../common/global
     ../common/users/carson.nix
