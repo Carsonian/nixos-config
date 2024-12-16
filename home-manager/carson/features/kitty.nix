@@ -25,7 +25,7 @@
       
       selection_background =  "#${config.colorScheme.colors.base05}";
       selection_foreground =  "#${config.colorScheme.colors.base00}";
-      background_opacity =  "0.5";
+      background_opacity =  "0.8";
 
       # The color for highlighting URLs on mouse-over;
       url_color = "#${config.colorScheme.colors.base04}";

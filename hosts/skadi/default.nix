@@ -7,11 +7,13 @@
     ./disk-config.nix
     ./nvidia.nix
 
+    ./kde.nix
+
     ../common/global
     ../common/users/carson.nix
 
     #../common/optional/python.nix
-    ../common/hyprland-wm.nix
+    #../common/hyprland-wm.nix
     
   ];
 
@@ -27,9 +29,9 @@
     };
   };
 
-  # Programs installed at a system level for angkor
+  # Programs installed at a system level for skadi
   programs = {
-    hyprland.enable = true;
+    #hyprland.enable = true;
   };
 
  programs.steam.enable = true; 
@@ -45,8 +47,9 @@
 
   security.polkit.enable = true;
 
-  # Set timezone automatically
-  services.automatic-timezoned.enable = true;
+  # Set timezone
+  #services.automatic-timezoned.enable = false; #Doesn't work
+  time.timeZone = lib.mkDefault "America/Edmonton";
 
 
   # Create a config user group for users who can edit /nix-config
