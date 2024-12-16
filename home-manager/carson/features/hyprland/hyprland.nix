@@ -8,7 +8,10 @@
       # Put hyprland config here in nixos form
 
       # See https://wiki.hyprland.org/Configuring/Monitors/
-      monitor= "eDP-1,1920x1080@60,0x0,1";
+      monitor = [
+        "DP-3,1920x1080@120,0x0,1"
+        "HDMI-A-1,1920x1080@60,1920x0,1"
+      ];
 
       # Execute apps at launch
       exec-once = ["dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY in hyrpland.conf"
@@ -31,12 +34,9 @@
 
         follow_mouse = 1;
 
-        touchpad = {
-          natural_scroll = "yes";
-          clickfinger_behavior = 1;
-        };
+        accel_profile = "flat";
 
-        sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
+        sensitivity = -0.3; # -1.0 - 1.0, 0 means no modification.
       };
 
       general = {
@@ -77,12 +77,14 @@
           ignore_opacity = true;
         };
 
-        drop_shadow = "no";
-        shadow_ignore_window = true;
-        shadow_offset = "1 2";
-        shadow_range = 10;
-        shadow_render_power = 5;
-        "col.shadow" = "0x66404040";
+        shadow = {
+          enabled = false;
+          ignore_window = true;
+          offset = "1 2";
+          range = 10;
+          render_power = 5;
+          color = "0x66404040";
+        };
       };
 
       animations = {

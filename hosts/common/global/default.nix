@@ -24,6 +24,7 @@
     pkgs.unzip
     pkgs.zip
     pkgs.pavucontrol
+    pkgs.linuxPackages_latest.perf
   ];
 
   # Configure pipewire

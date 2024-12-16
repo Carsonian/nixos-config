@@ -7,6 +7,6 @@
 home.packages = with pkgs; [
   
   # Install nerdfonts
-  (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+  nerd-fonts.jetbrains-mono
 ];
 }
