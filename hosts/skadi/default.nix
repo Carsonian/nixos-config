@@ -36,6 +36,17 @@
 
  programs.steam.enable = true; 
 
+ # Syncthing Setup
+ services = {
+    syncthing = {
+        enable = true;
+        group = "users";
+        user = "carson";
+        dataDir = "/home/carson/Sync";    # Default folder for new synced folders
+        configDir = "/home/carson/Sync/.config/syncthing";   # Folder for Syncthing's settings and keys
+    };
+};
+
   # Set keyboard layout
   services.xserver.xkb = {
     layout = "us";

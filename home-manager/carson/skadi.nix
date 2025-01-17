@@ -2,8 +2,8 @@
   imports = [
     ./global
     ./features/cli
-    ./features/hyprland
-    ./features/rofi
+    #./features/hyprland
+    #./features/rofi
     #./features/music.nix
     ./features/kitty.nix
     ./features/vscode.nix
@@ -35,12 +35,28 @@
     neofetch
     #multimarkdown
 
-    #appflowy
+    appflowy
+    logseq
 
     #freetube
     #bluetuith
     #android-file-transfer
   ];
+
+  nixpkgs.config.permittedInsecurePackages = [
+                "electron-27.3.11"
+              ];
+
+
+  xdg.mimeApps = {
+    enable = true;
+    associations.added = {
+      "x-scheme-handler/appflowy-flutter" = [ "appflowy.desktop" ];
+    };
+    defaultApplications = {
+      "x-scheme-handler/appflowy-flutter" = [ "appflowy.desktop" ];
+    };
+  };
 
   programs = {
     git = {
